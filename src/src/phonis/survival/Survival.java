@@ -19,8 +19,6 @@ import src.phonis.survival.events.GamemodeEvent;
 import src.phonis.survival.events.InventoryLock;
 import src.phonis.survival.events.JoinEvent;
 import src.phonis.survival.events.SuffocateEvent;
-//import src.phonis.survival.events.SleepEvent;
-//import src.phonis.survival.events.TeleportEvent;
 import src.phonis.survival.packets.IgnoreTypes;
 import src.phonis.survival.packets.RedstoneListener;
 import src.phonis.survival.serializable.DeathMessage;
@@ -51,8 +49,6 @@ public class Survival extends JavaPlugin {
 		new InventoryLock(this);
 		new JoinEvent(this);
 		new SuffocateEvent(this);
-//      new SleepEvent(this);
-//      new TeleportEvent(this);
 		
 		this.log.info("Initializing waypoints.");
 		SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
