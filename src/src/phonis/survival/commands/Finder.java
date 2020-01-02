@@ -84,6 +84,7 @@ public class Finder implements CommandExecutor {
 					);
 				}
 			}
+
 			return true;
 		}
 		

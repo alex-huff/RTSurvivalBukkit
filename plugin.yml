@@ -48,3 +48,5 @@ commands:
         description: Remove item from todo list
     updateposwaypoint:
         description: Update the position of a waypoint
+    spectp:
+        description: Tp while in spectator mode to players and waypoints
