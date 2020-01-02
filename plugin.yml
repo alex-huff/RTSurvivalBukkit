@@ -1,0 +1,50 @@
+name: Survival
+api-version: 1.15
+depend: [ProtocolLib]
+version: 3.1
+description: Gerneral survival plugin
+author: phonis
+main: src.phonis.survival.Survival
+commands:
+    loadradius:
+        description: Keeps chunks within radius loaded forever
+    unloadradius:
+        description: Allows chunks within radius to be unloaded
+    removechunks:
+        description: Removes all the chunks added to the chunk loader
+    showchunks:
+        description: Shows all loaded chunks
+    getcraft:
+        description: Shows crafting recipee for item
+    find:
+        description: Finds a player by name
+    bl:
+        description: Broadcast your location
+    setwaypoint:
+        description: Set waypoint for later finding
+    listwaypoints:
+        description: List all current waypoints
+    removewaypoint:
+        description: Removes waypoint
+    slimemap:
+        description: Shows nearby slime chunks
+    inspect:
+        description: Inspect somebodies inventory
+    sleep:
+        description: Request a global sleep
+    sleepdeny:
+        description: Deny a global sleep request
+    spectog:
+        description: Toggle spectator mode
+    togglepiston:
+        description: Toggle piston updates
+    yawsnap:
+        description: Snap yaw to closest cardinal direction
+    todoadd:
+        description: Add item to todo list
+    todo:
+        description: List todo list items
+    todoremove:
+        description: Remove item from todo list
+    updateposwaypoint:
+        description: Update the position of a waypoint
