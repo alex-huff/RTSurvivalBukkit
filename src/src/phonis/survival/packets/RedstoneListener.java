@@ -15,7 +15,7 @@ import com.comphenix.protocol.wrappers.MultiBlockChangeInfo;
 import src.phonis.survival.Survival;
 
 /**
- * PacketAdapter that filter piston animations/updates
+ * PacketAdapter that filters piston animations/updates
  */
 public class RedstoneListener extends PacketAdapter {
 	public volatile boolean handlePackets = true;

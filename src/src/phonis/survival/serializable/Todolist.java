@@ -3,7 +3,7 @@ package src.phonis.survival.serializable;
 import java.io.Serializable;
 
 /**
- * Serializable data representing to-do list entry
+ * Serializable data representing to-do list entry;
  * TODO add to-do item editor plugin command
  */
 public class Todolist implements Serializable {

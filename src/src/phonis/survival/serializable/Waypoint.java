@@ -35,8 +35,9 @@ public class Waypoint implements Serializable {
 
 	/**
 	 * Gets waypoint autocompletion from String
-	 * @param start String start of parameter
-	 * @return List<String>
+	 *
+	 * @param start String that contains what user has typed for far for argument
+	 * @return List
 	 */
 	public static List<String> getAutoComplete(String start){
 		Set<String> names = Waypoint.pd.data.keySet();
@@ -126,7 +127,7 @@ public class Waypoint implements Serializable {
 	}
 
 	/**
-	 *
+	 * Get name of waypoint
 	 * @return String
 	 */
 	public String getName() {

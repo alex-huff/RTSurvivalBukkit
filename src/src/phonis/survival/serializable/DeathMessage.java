@@ -3,8 +3,8 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * Serializable class that represents the custom DeathMessages for each user
- * TODO implement runtime plugin command for setting of these DeathMessage, as they can no longer be configured in JSON since move to serialization
+ * Serializable data that represents the custom DeathMessages for each user;
+ * TODO implement runtime plugin command for setting of these DeathMessages, as they can no longer be configured in JSON since the move to serialization
  */
 public class DeathMessage implements Serializable {
 	private static final long serialVersionUID = -6202886297832941695L;

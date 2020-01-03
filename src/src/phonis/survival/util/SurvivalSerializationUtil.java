@@ -14,7 +14,7 @@ import src.phonis.survival.serializable.ArrayListData;
 import src.phonis.survival.serializable.HashMapData;
 
 /**
- * Utility class for Serializing various plugin data
+ * Utility class for serializing various plugin data
  */
 public class SurvivalSerializationUtil {
 	/**

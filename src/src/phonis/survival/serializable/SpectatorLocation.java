@@ -8,7 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
- * Serializable data that represents SpectatorLocations from that /spectog use
+ * Serializable data that represents SpectatorLocations from /spectog use
  */
 public class SpectatorLocation implements Serializable {
 	private static final long serialVersionUID = -6523678654819956267L;

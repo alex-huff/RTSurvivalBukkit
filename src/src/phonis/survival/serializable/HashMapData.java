@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * Serializable collection used to HashMap like plugin data
+ * Serializable collection used to Map like plugin data;
  * Example: Spectator locations, Waypoints, DeathMessages
- * @param <K>
- * @param <V>
+ *
+ * @param <K> Key for HashMap
+ * @param <V> Serializable type for value of HashMap
  */
 public class HashMapData<K, V extends Serializable> {
 	public HashMap<K, V> data = new HashMap<>();

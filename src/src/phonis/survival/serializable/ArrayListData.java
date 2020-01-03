@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Serializable collection for storing list like plugin data for serialization
+ * Serializable collection for storing List like plugin data for serialization;
  * Example: to-do list
- * @param <T>
+ *
+ * @param <T> Serializable type stored in the ArrayList
  */
 public class ArrayListData<T extends Serializable> {
 	public List<T> data = new ArrayList<>();
