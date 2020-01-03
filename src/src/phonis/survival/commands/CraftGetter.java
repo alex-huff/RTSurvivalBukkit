@@ -21,8 +21,22 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /getcraft (Material) command
+ */
 public class CraftGetter implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {
 			Player player = (Player) sender;
 			Material mat = Material.matchMaterial(args[0]);
@@ -46,7 +60,7 @@ public class CraftGetter implements CommandExecutor {
 
 							for(int w = 0; w < shape.length; w++) {
 								for(int i = 0; i < shape[w].length(); i++) {
-									inventory.setItem(i + w * 3 + 1, map.get(new Character(shape[w].charAt(i))));
+									inventory.setItem(i + w * 3 + 1, map.get(shape[w].charAt(i)));
 								}
 							}
 							

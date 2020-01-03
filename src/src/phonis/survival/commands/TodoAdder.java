@@ -8,16 +8,30 @@ import org.bukkit.command.CommandSender;
 import net.md_5.bungee.api.ChatColor;
 import src.phonis.survival.serializable.Todolist;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor for handling the /todoadd (item) command
+ */
 public class TodoAdder implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {
-			String item = "";
+			StringBuilder item = new StringBuilder();
 			
 			for (int i = 0; i < args.length - 1; i++) {
-				item += args[i] + " ";
-			} item += args[args.length - 1];
+				item.append(args[i]).append(" ");
+			} item.append(args[args.length - 1]);
 			
-			Todolist.addTodo(item);
+			Todolist.addTodo(item.toString());
 			
 			Bukkit.broadcastMessage(
 				ChatColor.DARK_GREEN +

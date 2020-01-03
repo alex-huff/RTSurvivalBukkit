@@ -7,8 +7,22 @@ import org.bukkit.command.CommandSender;
 
 import src.phonis.survival.serializable.Waypoint;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /updateposwaypoint (Waypoint) (int) (int) (int) command
+ */
 public class WaypointPosUpdater implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length >= 4) {
 			if (Waypoint.pd.data.containsKey(args[0])) {
 				int xPos, yPos, zPos;
@@ -43,9 +57,9 @@ public class WaypointPosUpdater implements CommandExecutor {
 		        sender.sendMessage(
 		        	ChatColor.GREEN +
 		        	"Position updated to: " +
-		        	Integer.toString(xPos) + ", " +
-		        	Integer.toString(yPos) + ", " +
-		        	Integer.toString(zPos)
+		        	xPos + ", " +
+		        	yPos + ", " +
+		        	zPos
 		        );
 			}else {
 				sender.sendMessage(

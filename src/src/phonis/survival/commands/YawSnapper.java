@@ -9,13 +9,29 @@ import org.bukkit.entity.Player;
 
 import src.phonis.survival.util.DirectionUtil;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /yawsnap command
+ */
 public class YawSnapper implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		Player player = (Player) sender;
 		Location newLoc = player.getLocation();
 		String direction = DirectionUtil.getCardinalAbsoluteDirection(player);
-        
-        switch(direction){
+
+		if (direction == null) return false;
+
+		switch(direction){
         	case "N":
         		newLoc.setYaw(180);
         		sender.sendMessage(ChatColor.AQUA + "Snapping north");

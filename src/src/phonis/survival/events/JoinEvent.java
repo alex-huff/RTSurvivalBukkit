@@ -9,11 +9,22 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import net.md_5.bungee.api.ChatColor;
 import src.phonis.survival.Survival;
 
+/**
+ * Listener that handles PlayerJoinEvent
+ */
 public class JoinEvent implements Listener {
+	/**
+	 * JoinEvent constructor that takes in Survival plugin
+	 * @param plugin Survival plugin
+	 */
 	public JoinEvent(Survival plugin) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
+	/**
+	 * Method decorated by EventHandler that handles PlayerJoinEvent
+	 * @param event PlayerJoinEvent
+	 */
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();

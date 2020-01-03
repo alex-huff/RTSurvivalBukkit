@@ -1,5 +1,6 @@
 package src.phonis.survival;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.bukkit.command.PluginCommand;
@@ -7,41 +8,46 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketAdapter;
 
 import src.phonis.survival.commands.*;
-import src.phonis.survival.completers.FindCompleter;
-import src.phonis.survival.completers.ItemTabCompleter;
-import src.phonis.survival.completers.WaypointCompleter;
-import src.phonis.survival.events.DeathEvent;
-import src.phonis.survival.events.FireSpreadEvent;
-import src.phonis.survival.events.GamemodeEvent;
-import src.phonis.survival.events.InventoryLock;
-import src.phonis.survival.events.JoinEvent;
-import src.phonis.survival.events.SuffocateEvent;
-import src.phonis.survival.packets.IgnoreTypes;
-import src.phonis.survival.packets.RedstoneListener;
+import src.phonis.survival.completers.*;
+import src.phonis.survival.events.*;
+import src.phonis.survival.packets.*;
 import src.phonis.survival.serializable.DeathMessage;
 import src.phonis.survival.serializable.SpectatorLocation;
 import src.phonis.survival.serializable.Todolist;
 import src.phonis.survival.serializable.Waypoint;
 import src.phonis.survival.util.SurvivalSerializationUtil;
 
+/**
+ * Main plugin class
+ */
 public class Survival extends JavaPlugin {
 	private Logger log;
 	private Sleeper sleeper;
-    private ProtocolManager protocolManager;
-	
+	public RedstoneListener redstoneListener;
+
+	/**
+	 * Gets Sleeper command, used for denying of global sleep by SleepDenier
+	 * @return Sleeper
+	 */
 	public Sleeper getSleeper() {
 		return this.sleeper;
 	}
-	
+
+	/**
+	 * Method extended from JavaPlugin, called on the enabling of the plugin by the server
+	 */
+	@Override
 	public void onEnable() {
-		this.protocolManager = ProtocolLibrary.getProtocolManager();
-		this.protocolManager.addPacketListener(
-			(PacketAdapter) (new RedstoneListener(this, IgnoreTypes.getRedstoneTypes(), getLogger()))
-		);
 		this.log = getLogger();
+
+		ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+		this.redstoneListener = new RedstoneListener(
+			this,
+			IgnoreTypes.getRedstoneTypes()
+		);
+		protocolManager.addPacketListener(this.redstoneListener);
 		
 		new FireSpreadEvent(this);
 		new DeathEvent(this);
@@ -61,42 +67,45 @@ public class Survival extends JavaPlugin {
 		SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
 		
 		this.sleeper = new Sleeper(this);
-		getCommand("listwaypoints").setExecutor(new WaypointLister());
-		getCommand("unloadradius").setExecutor(new RadiusUnloader());
-		getCommand("removechunks").setExecutor(new ChunkRemover());
-		getCommand("togglepiston").setExecutor(new TogglePistonAnimations());
-		getCommand("setwaypoint").setExecutor(new WaypointSetter());
-		getCommand("loadradius").setExecutor(new RadiusLoader());
-		getCommand("todoremove").setExecutor(new TodoRemover());
-		getCommand("showchunks").setExecutor(new ChunkShower());
-		getCommand("sleepdeny").setExecutor(new SleepDenier(this));
-		getCommand("slimemap").setExecutor(new SlimemapShower());
-		getCommand("todoadd").setExecutor(new TodoAdder());
-		getCommand("yawsnap").setExecutor(new YawSnapper());
-		getCommand("spectog").setExecutor(new SpectatorToggler());
-		getCommand("inspect").setExecutor(new Inspector());
-		getCommand("sleep").setExecutor(this.sleeper);
-		getCommand("todo").setExecutor(new TodoLister());
-		getCommand("bl").setExecutor(new LocationBroadcaster());
+		Objects.requireNonNull(getCommand("listwaypoints")).setExecutor(new WaypointLister());
+		Objects.requireNonNull(getCommand("unloadradius")).setExecutor(new RadiusUnloader());
+		Objects.requireNonNull(getCommand("removechunks")).setExecutor(new ChunkRemover());
+		Objects.requireNonNull(getCommand("togglepiston")).setExecutor(new TogglePistonAnimations(this));
+		Objects.requireNonNull(getCommand("setwaypoint")).setExecutor(new WaypointSetter());
+		Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
+		Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
+		Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
+		Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
+		Objects.requireNonNull(getCommand("slimemap")).setExecutor(new SlimemapShower());
+		Objects.requireNonNull(getCommand("todoadd")).setExecutor(new TodoAdder());
+		Objects.requireNonNull(getCommand("yawsnap")).setExecutor(new YawSnapper());
+		Objects.requireNonNull(getCommand("spectog")).setExecutor(new SpectatorToggler());
+		Objects.requireNonNull(getCommand("inspect")).setExecutor(new Inspector());
+		Objects.requireNonNull(getCommand("sleep")).setExecutor(this.sleeper);
+		Objects.requireNonNull(getCommand("todo")).setExecutor(new TodoLister());
+		Objects.requireNonNull(getCommand("bl")).setExecutor(new LocationBroadcaster());
 		PluginCommand waypointPosUpdater = getCommand("updateposwaypoint");
-		waypointPosUpdater.setExecutor(new WaypointPosUpdater());
+		Objects.requireNonNull(waypointPosUpdater).setExecutor(new WaypointPosUpdater());
 		waypointPosUpdater.setTabCompleter(new WaypointCompleter());
 		PluginCommand removeWaypointCommand = getCommand("removewaypoint");
-		removeWaypointCommand.setExecutor(new WaypointRemover());
+		Objects.requireNonNull(removeWaypointCommand).setExecutor(new WaypointRemover());
 		removeWaypointCommand.setTabCompleter(new WaypointCompleter());
 		PluginCommand craftCommand = getCommand("getcraft");
-		craftCommand.setExecutor(new CraftGetter());
+		Objects.requireNonNull(craftCommand).setExecutor(new CraftGetter());
 		craftCommand.setTabCompleter(new ItemTabCompleter(1));
 		PluginCommand specTpCommand = getCommand("spectp");
-		specTpCommand.setExecutor(new SpecTper());
+		Objects.requireNonNull(specTpCommand).setExecutor(new SpecTper());
 		specTpCommand.setTabCompleter(new FindCompleter());
 		PluginCommand findCommand = getCommand("find");
-		findCommand.setExecutor(new Finder());
+		Objects.requireNonNull(findCommand).setExecutor(new Finder());
 		findCommand.setTabCompleter(new FindCompleter());
 		
-		this.log.info("Survial enable finished.");
+		this.log.info("Survival enable finished.");
 	}
-	
+
+	/**
+	 * Method extended from JavaPlugin, called on the disabling of the plugin from the server
+	 */
 	public void onDisable() {
 		this.log.info("Saving waypoints.");
 		SurvivalSerializationUtil.serialize(Waypoint.pd, this.log);

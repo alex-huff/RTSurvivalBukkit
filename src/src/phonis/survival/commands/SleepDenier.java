@@ -8,14 +8,32 @@ import org.bukkit.command.CommandSender;
 import net.md_5.bungee.api.ChatColor;
 import src.phonis.survival.Survival;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /sleepdeny command
+ */
 public class SleepDenier implements CommandExecutor {
 	Survival plugin;
-	
+
+	/**
+	 * Constructor for SleepDenier that takes in Survival plugin
+	 * @param plugin Survival plugin
+	 */
 	public SleepDenier(Survival plugin) {
 		this.plugin = plugin;
 	}
-	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		Sleeper sleeper = this.plugin.getSleeper();
 		
 		if(sleeper.task != null && !sleeper.task.isCancelled()) {

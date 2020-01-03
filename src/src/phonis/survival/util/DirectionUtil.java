@@ -11,10 +11,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.util.Vector;
 
+/**
+ * Utility class for all things direction based
+ */
 public class DirectionUtil {
+    /**
+     * Faces Player in direction of Location
+     * @param player Player player to be moved
+     * @param target Location target player will be faced to
+     */
 	public static void faceDirection(Player player, Location target) {
         if (player.isInsideVehicle()){
             Vehicle v = (Vehicle) player.getVehicle();
+
+            if (v == null) return;
+
             List<Entity> passengers = v.getPassengers();
             
             DirectionUtil.face(player, target);
@@ -26,13 +37,23 @@ public class DirectionUtil {
         	DirectionUtil.face(player, target);
         }
     }
-	
+
+    /**
+     * Faces Player in direction of Location, utility for faceDirection
+     * @param player Player player to be moved
+     * @param target Location target player will be faced to
+     */
 	private static void face(Player player, Location target) {
         Vector direction = target.clone().subtract(player.getEyeLocation()).toVector();
         Location location = player.getLocation().setDirection(direction);
         player.teleport(location);
 	}
-	
+
+    /**
+     * Gets cardinal N S E W direction from player
+     * @param player Player to get direction of
+     * @return String
+     */
 	public static String getCardinalAbsoluteDirection(Player player) {
         double rotation = (player.getLocation().getYaw() + 180) % 360;
         
@@ -54,7 +75,12 @@ public class DirectionUtil {
             return null;
         }
 	}
-	
+
+    /**
+     * Gets cardinal N NE NW S SE SW E W direction from player
+     * @param player Player to get direction of
+     * @return String
+     */
 	public static String getCardinalDirection(Player player) {
         double rotation = (player.getLocation().getYaw() + 180) % 360;
         
@@ -84,7 +110,11 @@ public class DirectionUtil {
             return null;
         }
     }
-	
+
+    /**
+     * Prints slimemap for player
+     * @param player Player to print slimemap to
+     */
 	public static void printSlimeMap(Player player) {
         Chunk chunk = player.getLocation().getChunk();
         World world = chunk.getWorld();
@@ -96,14 +126,17 @@ public class DirectionUtil {
         
         for (int z = chunkZ - heightRadius; z <= chunkZ + heightRadius; z++) {
         	for (int x = chunkX - widthRadius; x <= chunkX + widthRadius; x++) {
+        	    int row = z + -1 * (chunkZ - heightRadius - 1);
+        	    int col = x + -1 * (chunkX - widthRadius - 1);
+
         		if (world.isChunkLoaded(x, z)){
     				if (world.getChunkAt(x, z).isSlimeChunk()) {
-    					map[z + -1 * (chunkZ - heightRadius - 1)][x + -1 * (chunkX - widthRadius - 1)] = ChatColor.GREEN + "Y";
+    					map[row][col] = ChatColor.GREEN + "Y";
     				}else {
-    					map[z + -1 * (chunkZ - heightRadius - 1)][x + -1 * (chunkX - widthRadius - 1)] = ChatColor.RED + "N";
+    					map[row][col] = ChatColor.RED + "N";
     				}
         		}else {
-        			map[z + -1 * (chunkZ - heightRadius - 1)][x + -1 * (chunkX - widthRadius - 1)] = ChatColor.GRAY + "-";
+        			map[row][col] = ChatColor.GRAY + "-";
         		}
         	}
         }
@@ -120,7 +153,9 @@ public class DirectionUtil {
         map[heightRadius + 1][widthRadius + 1] = ChatColor.YELLOW + ChatColor.stripColor(map[heightRadius + 1][widthRadius + 1]);
         
         String direction = DirectionUtil.getCardinalDirection(player);
-        
+
+        if (direction == null) return;
+
         switch(direction){
         	case "N":
         		map[0][1] = ChatColor.BLUE + "N";
@@ -158,18 +193,18 @@ public class DirectionUtil {
         		break;
         }
         
-        String message = "";
+        StringBuilder message = new StringBuilder();
         
         for (int row = 0; row < (heightRadius * 2) + 3; row++) {
         	for (int col = 0; col < (widthRadius * 2) + 3; col++) {
         		if (map[row][col] == null) {
-        			message += ChatColor.DARK_GRAY + "&";
+                    message.append(ChatColor.DARK_GRAY).append("&");
         		}else {
-        			message += map[row][col];
+        			message.append(map[row][col]);
         		}
         	}
         	
-        	message += "\n";
+        	message.append("\n");
         }
         
         player.sendMessage("" + message);

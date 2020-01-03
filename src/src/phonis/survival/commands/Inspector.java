@@ -10,8 +10,22 @@ import org.bukkit.inventory.Inventory;
 
 import net.md_5.bungee.api.ChatColor;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /inspect (Player) command
+ */
 public class Inspector implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {
 			Player player = (Player) sender;
 			Player playerFind = Bukkit.getServer().getPlayer(args[0]);

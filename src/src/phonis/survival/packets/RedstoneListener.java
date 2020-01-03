@@ -2,7 +2,6 @@ package src.phonis.survival.packets;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.bukkit.Material;
 
@@ -15,19 +14,28 @@ import com.comphenix.protocol.wrappers.MultiBlockChangeInfo;
 
 import src.phonis.survival.Survival;
 
+/**
+ * PacketAdapter that filter piston animations/updates
+ */
 public class RedstoneListener extends PacketAdapter {
-	public static boolean handlePackets = true;
-	@SuppressWarnings("unused")
-	private Logger log;
-	
-	public RedstoneListener(Survival plugin, Iterable<PacketType> types, Logger log) {
+	public volatile boolean handlePackets = true;
+
+	/**
+	 * RedstoneListener constructor that calls the super constructor for PacketAdapter
+	 * @param plugin Survival plugin
+	 * @param types Iterable of PacketType
+	 */
+	public RedstoneListener(Survival plugin, Iterable<PacketType> types) {
 		super(plugin, ListenerPriority.NORMAL, types);
-		this.log = log;
 	}
 
+	/**
+	 * Method extended from PacketAdapter that handles packets
+	 * @param event PacketEvent
+	 */
 	@Override
 	public void onPacketSending(PacketEvent event) {
-		if (RedstoneListener.handlePackets) {
+		if (this.handlePackets) {
 		    if (event.getPacketType() == PacketType.Play.Server.BLOCK_ACTION) {
 		    	Material mat = event.getPacket().getBlocks().getValues().get(0);
 	    		

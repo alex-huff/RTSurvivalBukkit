@@ -6,16 +6,42 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import net.md_5.bungee.api.ChatColor;
-import src.phonis.survival.packets.RedstoneListener;
+import src.phonis.survival.Survival;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /togglepiston command
+ */
 public class TogglePistonAnimations implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		RedstoneListener.handlePackets = !RedstoneListener.handlePackets;
-		
+	private Survival plugin;
+
+	/**
+	 * TogglePistonAnimations constructor that takes in the Survival plugin
+	 * @param plugin Survival plugin
+	 */
+	public TogglePistonAnimations(Survival plugin) {
+		this.plugin = plugin;
+	}
+
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
+		synchronized (this) {
+			this.plugin.redstoneListener.handlePackets = !this.plugin.redstoneListener.handlePackets;
+		}
+
 		Bukkit.broadcastMessage(
 			ChatColor.DARK_GREEN + 
 			"Piston animations are now: " +
-			Boolean.toString(!RedstoneListener.handlePackets)
+			!this.plugin.redstoneListener.handlePackets
 		);
 		
 		return true;

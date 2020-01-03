@@ -8,8 +8,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import javax.annotation.Nonnull;
+
+/**
+ * CommandExecutor that handles the /showchunks command
+ */
 public class ChunkShower implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		sender.sendMessage(
 			ChatColor.BLUE +
 			"Chunks force loaded:"

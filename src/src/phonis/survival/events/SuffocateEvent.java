@@ -9,11 +9,22 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import src.phonis.survival.Survival;
 
+/**
+ * Listener that handles EntityDamageEvent
+ */
 public class SuffocateEvent implements Listener {
+	/**
+	 * SuffocatedEvent constructor that takes in Survival plugin
+	 * @param plugin Survival plugin
+	 */
 	public SuffocateEvent(Survival plugin) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
+	/**
+	 * Method decorated by EventHandler that handles EntityDamageEvent
+	 * @param event EntityDamageEvent
+	 */
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (event.getCause() == DamageCause.SUFFOCATION) {

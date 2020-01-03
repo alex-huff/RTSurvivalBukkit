@@ -12,8 +12,23 @@ import org.bukkit.entity.Player;
 import src.phonis.survival.serializable.Waypoint;
 import src.phonis.survival.util.DirectionUtil;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
+/**
+ * CommandExecutor that handles the /find (Player or Waypoint) command
+ */
 public class Finder implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {
 			Player player = (Player) sender;
 			Player playerFind = Bukkit.getServer().getPlayer(args[0]);
@@ -38,7 +53,7 @@ public class Finder implements CommandExecutor {
 				sender.sendMessage(
 					ChatColor.GREEN +
 					playerFind.getName() + " is at: " +
-					location.getWorld().getName() + " " +
+					Objects.requireNonNull(location.getWorld()).getName() + " " +
 					location.getBlockX() + " " +
 					location.getBlockY() + " " +
 					location.getBlockZ()
@@ -50,10 +65,10 @@ public class Finder implements CommandExecutor {
 					
 					if (world == player.getWorld()) {
 						Location target = new Location(
-							world, 
-							(double) waypoint.getXPos(), 
-							(double) waypoint.getYPos(),
-							(double) waypoint.getZPos()
+							world,
+							waypoint.getXPos(),
+							waypoint.getYPos(),
+							waypoint.getZPos()
 						);
 						
 						DirectionUtil.faceDirection(player, target);
@@ -68,7 +83,9 @@ public class Finder implements CommandExecutor {
 							args[0] + " is in a different world then you."
 						);
 					}
-					
+
+					if (world == null) return false;
+
 					sender.sendMessage(
 						ChatColor.GREEN +
 						args[0] + " is at: " +

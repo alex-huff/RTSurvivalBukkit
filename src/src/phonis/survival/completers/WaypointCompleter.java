@@ -9,8 +9,22 @@ import org.bukkit.command.TabCompleter;
 
 import src.phonis.survival.serializable.Waypoint;
 
+import javax.annotation.Nonnull;
+
+/**
+ * TabCompleter that handles tab completion for commands like /removewaypoint and /updateposwaypoint that take in a Waypoint
+ */
 public class WaypointCompleter implements TabCompleter {
-	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+	/**
+	 * Method implemented from the TabCompleter interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param alias String representing alias
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String alias, @Nonnull String[] args) {
 		if(args.length == 1) {
 			return Waypoint.getAutoComplete(args[0]);
 		}

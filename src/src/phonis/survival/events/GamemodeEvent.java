@@ -13,11 +13,22 @@ import org.bukkit.event.Event.Result;
 
 import src.phonis.survival.Survival;
 
+/**
+ * Listener that handles PlayerInteractEvent
+ */
 public class GamemodeEvent implements Listener {
+	/**
+	 * GamemodeEvent constructor that takes in Survival Plugin
+	 * @param plugin Survival plugin
+	 */
 	public GamemodeEvent(Survival plugin) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
+	/**
+	 * Method decorated by EventHandler that handles PlayerInteractEvent
+	 * @param event PlayerInteractEvent
+	 */
 	@EventHandler
 	public void onFermSpiderEyeUse(PlayerInteractEvent event) {
         EquipmentSlot e = event.getHand();

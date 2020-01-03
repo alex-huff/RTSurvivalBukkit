@@ -9,8 +9,23 @@ import org.bukkit.entity.Player;
 
 import src.phonis.survival.serializable.Waypoint;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
+/**
+ * CommandExecutor that handles the /setwaypoint (name) command
+ */
 public class WaypointSetter implements CommandExecutor {
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+	/**
+	 * Method implemented from CommandExecutor interface
+	 * @param sender CommandSender object
+	 * @param cmd Command object
+	 * @param label String representing label
+	 * @param args String[] containing command arguments
+	 * @return boolean
+	 */
+	@Override
+	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {
 			Player player = (Player) sender;
 			Location location = player.getLocation();
@@ -20,7 +35,7 @@ public class WaypointSetter implements CommandExecutor {
 			sender.sendMessage(
 				ChatColor.GREEN +
 				"Waypoint '" + args[0] + "' set at: " +
-				location.getWorld().getName() + " " +
+				Objects.requireNonNull(location.getWorld()).getName() + " " +
 				location.getBlockX() + " " +
 				location.getBlockY() + " " +
 				location.getBlockZ()
