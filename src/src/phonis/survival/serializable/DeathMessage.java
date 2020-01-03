@@ -4,7 +4,6 @@ import java.util.UUID;
 
 /**
  * Serializable data that represents the custom DeathMessages for each user;
- * TODO implement runtime plugin command for setting of these DeathMessages, as they can no longer be configured in JSON since the move to serialization
  */
 public class DeathMessage implements Serializable {
 	private static final long serialVersionUID = -6202886297832941695L;
@@ -16,6 +15,7 @@ public class DeathMessage implements Serializable {
 
 	/**
 	 * DeathMessage constructor that takes in player name
+	 *
 	 * @param name String player name
 	 */
 	public DeathMessage(String name) {
@@ -24,7 +24,32 @@ public class DeathMessage implements Serializable {
 	}
 
 	/**
+	 * DeathMessage constructor that takes in a player name and death message
+	 *
+	 * @param name         String player name
+	 * @param deathMessage String death message
+	 */
+	public DeathMessage(String name, String deathMessage) {
+		this.name = name;
+		this.deathMessage = deathMessage;
+	}
+
+	/**
+	 * Updates or adds DeathMessage to HashMapData
+	 *
+	 * @param uuid Player UUID
+	 * @param dm   DeathMessage to be assigned to Player
+	 */
+	public static void update(UUID uuid, DeathMessage dm) {
+		DeathMessage.pd.data.put(
+			uuid,
+			dm
+		);
+	}
+
+	/**
 	 * Gets player name
+	 *
 	 * @return String
 	 */
 	public String getName() {

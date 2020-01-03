@@ -57,26 +57,27 @@ public class Survival extends JavaPlugin {
 		new SuffocateEvent(this);
 		
 		this.log.info("Initializing waypoints.");
-		SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
-		this.log.info("Initializing player messages.");
-		SurvivalSerializationUtil.deserialize(DeathMessage.pd, this.log);
-		this.log.info("Initializing spectator locations.");
-		SurvivalSerializationUtil.deserialize(SpectatorLocation.pd, this.log);
-		
-		this.log.info("Initializing todo list.");
-		SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
-		
-		this.sleeper = new Sleeper(this);
-		Objects.requireNonNull(getCommand("listwaypoints")).setExecutor(new WaypointLister());
-		Objects.requireNonNull(getCommand("unloadradius")).setExecutor(new RadiusUnloader());
-		Objects.requireNonNull(getCommand("removechunks")).setExecutor(new ChunkRemover());
-		Objects.requireNonNull(getCommand("togglepiston")).setExecutor(new TogglePistonAnimations(this));
-		Objects.requireNonNull(getCommand("setwaypoint")).setExecutor(new WaypointSetter());
-		Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
-		Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
-		Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
-		Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
-		Objects.requireNonNull(getCommand("slimemap")).setExecutor(new SlimemapShower());
+        SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
+        this.log.info("Initializing player messages.");
+        SurvivalSerializationUtil.deserialize(DeathMessage.pd, this.log);
+        this.log.info("Initializing spectator locations.");
+        SurvivalSerializationUtil.deserialize(SpectatorLocation.pd, this.log);
+
+        this.log.info("Initializing todo list.");
+        SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
+
+        this.sleeper = new Sleeper(this);
+        Objects.requireNonNull(getCommand("setdeathmessage")).setExecutor(new DeathMessageUpdater());
+        Objects.requireNonNull(getCommand("listwaypoints")).setExecutor(new WaypointLister());
+        Objects.requireNonNull(getCommand("unloadradius")).setExecutor(new RadiusUnloader());
+        Objects.requireNonNull(getCommand("removechunks")).setExecutor(new ChunkRemover());
+        Objects.requireNonNull(getCommand("togglepiston")).setExecutor(new TogglePistonAnimations(this));
+        Objects.requireNonNull(getCommand("setwaypoint")).setExecutor(new WaypointSetter());
+        Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
+        Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
+        Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
+        Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
+        Objects.requireNonNull(getCommand("slimemap")).setExecutor(new SlimemapShower());
 		Objects.requireNonNull(getCommand("todoadd")).setExecutor(new TodoAdder());
 		Objects.requireNonNull(getCommand("yawsnap")).setExecutor(new YawSnapper());
 		Objects.requireNonNull(getCommand("spectog")).setExecutor(new SpectatorToggler());

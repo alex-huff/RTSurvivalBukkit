@@ -50,3 +50,5 @@ commands:
         description: Update the position of a waypoint
     spectp:
         description: Tp while in spectator mode to players and waypoints
+    setdeathmessage:
+        description: Set the deathmessage for a player
