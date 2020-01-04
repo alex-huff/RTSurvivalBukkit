@@ -47,15 +47,25 @@ public class Todolist implements Serializable {
 			
 			i++;
 		}
-		
+
 		return ret.toString();
 	}
 
 	/**
 	 * Gets to-do item
+	 *
 	 * @return String
 	 */
 	public String getItem() {
 		return item;
+	}
+
+	/**
+	 * Sets to-do item
+	 *
+	 * @param item String item to replace current
+	 */
+	public void setItem(String item) {
+		this.item = item;
 	}
 }

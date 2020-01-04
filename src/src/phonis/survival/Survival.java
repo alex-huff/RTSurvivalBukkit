@@ -76,7 +76,8 @@ public class Survival extends JavaPlugin {
         Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
         Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
         Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
-        Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
+		Objects.requireNonNull(getCommand("todoupdate")).setExecutor(new TodoUpdater());
+		Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
         Objects.requireNonNull(getCommand("slimemap")).setExecutor(new SlimemapShower());
 		Objects.requireNonNull(getCommand("todoadd")).setExecutor(new TodoAdder());
 		Objects.requireNonNull(getCommand("yawsnap")).setExecutor(new YawSnapper());

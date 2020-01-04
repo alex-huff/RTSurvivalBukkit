@@ -52,3 +52,5 @@ commands:
         description: Tp while in spectator mode to players and waypoints
     setdeathmessage:
         description: Set the deathmessage for a player
+    todoupdate:
+        description: Update todo item
