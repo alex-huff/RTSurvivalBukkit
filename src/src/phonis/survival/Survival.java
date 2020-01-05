@@ -1,23 +1,26 @@
 package src.phonis.survival;
 
-import java.util.Objects;
-import java.util.logging.Logger;
-
-import org.bukkit.command.PluginCommand;
-import org.bukkit.plugin.java.JavaPlugin;
-
+import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-
+import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.java.JavaPlugin;
 import src.phonis.survival.commands.*;
-import src.phonis.survival.completers.*;
+import src.phonis.survival.completers.FindCompleter;
+import src.phonis.survival.completers.ItemTabCompleter;
+import src.phonis.survival.completers.WaypointCompleter;
 import src.phonis.survival.events.*;
-import src.phonis.survival.packets.*;
+import src.phonis.survival.packets.RedstoneListener;
 import src.phonis.survival.serializable.DeathMessage;
 import src.phonis.survival.serializable.SpectatorLocation;
 import src.phonis.survival.serializable.Todolist;
 import src.phonis.survival.serializable.Waypoint;
 import src.phonis.survival.util.SurvivalSerializationUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * Main plugin class
@@ -25,14 +28,24 @@ import src.phonis.survival.util.SurvivalSerializationUtil;
 public class Survival extends JavaPlugin {
 	private Logger log;
 	private Sleeper sleeper;
-	public RedstoneListener redstoneListener;
+	private RedstoneListener redstoneListener;
 
 	/**
 	 * Gets Sleeper command, used for denying of global sleep by SleepDenier
+	 *
 	 * @return Sleeper
 	 */
 	public Sleeper getSleeper() {
 		return this.sleeper;
+	}
+
+	/**
+	 * Gets RedstoneListener for toggling of packet handling
+	 *
+	 * @return RedstoneListener
+	 */
+	public RedstoneListener getRedstoneListener() {
+		return this.redstoneListener;
 	}
 
 	/**
@@ -43,38 +56,47 @@ public class Survival extends JavaPlugin {
 		this.log = getLogger();
 
 		ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+
+		//start listeners
+		List<PacketType> rTypes = new ArrayList<>();
+
+		rTypes.add(PacketType.Play.Server.BLOCK_ACTION);
+		rTypes.add(PacketType.Play.Server.MULTI_BLOCK_CHANGE);
+
 		this.redstoneListener = new RedstoneListener(
 			this,
-			IgnoreTypes.getRedstoneTypes()
+			rTypes
 		);
+		//end listeners
+
 		protocolManager.addPacketListener(this.redstoneListener);
-		
+
 		new FireSpreadEvent(this);
 		new DeathEvent(this);
 		new GamemodeEvent(this);
 		new InventoryLock(this);
 		new JoinEvent(this);
 		new SuffocateEvent(this);
-		
+
 		this.log.info("Initializing waypoints.");
-        SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
-        this.log.info("Initializing player messages.");
-        SurvivalSerializationUtil.deserialize(DeathMessage.pd, this.log);
-        this.log.info("Initializing spectator locations.");
-        SurvivalSerializationUtil.deserialize(SpectatorLocation.pd, this.log);
+		SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
+		this.log.info("Initializing player messages.");
+		SurvivalSerializationUtil.deserialize(DeathMessage.pd, this.log);
+		this.log.info("Initializing spectator locations.");
+		SurvivalSerializationUtil.deserialize(SpectatorLocation.pd, this.log);
 
-        this.log.info("Initializing todo list.");
-        SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
+		this.log.info("Initializing todo list.");
+		SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
 
-        this.sleeper = new Sleeper(this);
-        Objects.requireNonNull(getCommand("setdeathmessage")).setExecutor(new DeathMessageUpdater());
-        Objects.requireNonNull(getCommand("listwaypoints")).setExecutor(new WaypointLister());
-        Objects.requireNonNull(getCommand("unloadradius")).setExecutor(new RadiusUnloader());
-        Objects.requireNonNull(getCommand("removechunks")).setExecutor(new ChunkRemover());
-        Objects.requireNonNull(getCommand("togglepiston")).setExecutor(new TogglePistonAnimations(this));
-        Objects.requireNonNull(getCommand("setwaypoint")).setExecutor(new WaypointSetter());
-        Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
-        Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
+		this.sleeper = new Sleeper(this);
+		Objects.requireNonNull(getCommand("setdeathmessage")).setExecutor(new DeathMessageUpdater());
+		Objects.requireNonNull(getCommand("listwaypoints")).setExecutor(new WaypointLister());
+		Objects.requireNonNull(getCommand("unloadradius")).setExecutor(new RadiusUnloader());
+		Objects.requireNonNull(getCommand("removechunks")).setExecutor(new ChunkRemover());
+		Objects.requireNonNull(getCommand("togglepiston")).setExecutor(new TogglePistonAnimations(this));
+		Objects.requireNonNull(getCommand("setwaypoint")).setExecutor(new WaypointSetter());
+		Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
+		Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
         Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
 		Objects.requireNonNull(getCommand("todoupdate")).setExecutor(new TodoUpdater());
 		Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
@@ -108,6 +130,7 @@ public class Survival extends JavaPlugin {
 	/**
 	 * Method extended from JavaPlugin, called on the disabling of the plugin from the server
 	 */
+	@Override
 	public void onDisable() {
 		this.log.info("Saving waypoints.");
 		SurvivalSerializationUtil.serialize(Waypoint.pd, this.log);
@@ -115,7 +138,7 @@ public class Survival extends JavaPlugin {
 		SurvivalSerializationUtil.serialize(DeathMessage.pd, this.log);
 		this.log.info("Saving spectator locations.");
 		SurvivalSerializationUtil.serialize(SpectatorLocation.pd, this.log);
-		
+
 		this.log.info("Saving todolist.");
 		SurvivalSerializationUtil.serialize(Todolist.gd, this.log);
 		

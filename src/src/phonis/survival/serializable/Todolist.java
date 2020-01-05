@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Serializable data representing to-do list entry;
- * TODO add to-do item editor plugin command
  */
 public class Todolist implements Serializable {
 	private static final long serialVersionUID = 3956145446424494880L;

@@ -1,43 +1,59 @@
 package src.phonis.survival.packets;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Material;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.MultiBlockChangeInfo;
-
+import org.bukkit.Material;
 import src.phonis.survival.Survival;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * PacketAdapter that filters piston animations/updates
  */
 public class RedstoneListener extends PacketAdapter {
-	public volatile boolean handlePackets = true;
+	private volatile boolean handlePackets = true;
 
 	/**
 	 * RedstoneListener constructor that calls the super constructor for PacketAdapter
+	 *
 	 * @param plugin Survival plugin
-	 * @param types Iterable of PacketType
+	 * @param types  Iterable of PacketType
 	 */
 	public RedstoneListener(Survival plugin, Iterable<PacketType> types) {
 		super(plugin, ListenerPriority.NORMAL, types);
 	}
 
 	/**
+	 * Gets whether packets are being handled or not
+	 *
+	 * @return boolean
+	 */
+	public boolean getHandlePackets() {
+		return this.handlePackets;
+	}
+
+	/**
+	 * Toggles packet handling in thread-safe way
+	 */
+	public synchronized void toggle() {
+		this.handlePackets = !this.handlePackets;
+	}
+
+	/**
 	 * Method extended from PacketAdapter that handles packets
+	 *
 	 * @param event PacketEvent
 	 */
 	@Override
 	public void onPacketSending(PacketEvent event) {
 		if (this.handlePackets) {
-		    if (event.getPacketType() == PacketType.Play.Server.BLOCK_ACTION) {
-		    	Material mat = event.getPacket().getBlocks().getValues().get(0);
+			if (event.getPacketType() == PacketType.Play.Server.BLOCK_ACTION) {
+				Material mat = event.getPacket().getBlocks().getValues().get(0);
 	    		
 	    		if (mat == Material.PISTON || mat == Material.STICKY_PISTON) {
 			    	event.setCancelled(true);
