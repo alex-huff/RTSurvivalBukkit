@@ -45,12 +45,16 @@ commands:
     todo:
         description: List todo list items
     todoremove:
-        description: Remove item from todo list
+      description: Remove item from todo list
     updateposwaypoint:
-        description: Update the position of a waypoint
+      description: Update the position of a waypoint
     spectp:
-        description: Tp while in spectator mode to players and waypoints
+      description: Tp while in spectator mode to players and waypoints
     setdeathmessage:
-        description: Set the deathmessage for a player
+      description: Set the deathmessage for a player
     todoupdate:
-        description: Update todo item
+      description: Update todo item
+    togglekeepinventory:
+      description: Toggles inventory keeping
+    gettrades:
+      description: Gets trades of villager

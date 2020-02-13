@@ -1,8 +1,5 @@
 package src.phonis.survival.commands;
 
-import java.util.List;
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,26 +12,13 @@ import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftFurnaceRecipe;
 import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftSmokingRecipe;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.inventory.*;
 
 import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Map;
 
-/**
- * CommandExecutor that handles the /getcraft (Material) command
- */
 public class CraftGetter implements CommandExecutor {
-	/**
-	 * Method implemented from CommandExecutor interface
-	 * @param sender CommandSender object
-	 * @param cmd Command object
-	 * @param label String representing label
-	 * @param args String[] containing command arguments
-	 * @return boolean
-	 */
 	@Override
 	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {
@@ -121,8 +105,6 @@ public class CraftGetter implements CommandExecutor {
 					    	
 					    	break found;
 					    }
-						
-						//player.sendMessage(ChatColor.DARK_GREEN + recipe.getClass().toString());
 					}
 					
 					player.sendMessage(ChatColor.RED + "Recipe not found");

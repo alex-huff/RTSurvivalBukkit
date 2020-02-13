@@ -5,23 +5,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
 import src.phonis.survival.serializable.Todolist;
 
 import javax.annotation.Nonnull;
 
-/**
- * CommandExecutor that handles the /todoremove (int) command
- */
 public class TodoRemover implements CommandExecutor {
-	/**
-	 * Method implemented from CommandExecutor interface
-	 * @param sender CommandSender object
-	 * @param cmd Command object
-	 * @param label String representing label
-	 * @param args String[] containing command arguments
-	 * @return boolean
-	 */
 	@Override
 	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {

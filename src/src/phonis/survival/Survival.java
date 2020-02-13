@@ -22,35 +22,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-/**
- * Main plugin class
- */
 public class Survival extends JavaPlugin {
+	public static boolean keepInventory = false;
+
 	private Logger log;
 	private Sleeper sleeper;
 	private RedstoneListener redstoneListener;
 
-	/**
-	 * Gets Sleeper command, used for denying of global sleep by SleepDenier
-	 *
-	 * @return Sleeper
-	 */
 	public Sleeper getSleeper() {
 		return this.sleeper;
 	}
 
-	/**
-	 * Gets RedstoneListener for toggling of packet handling
-	 *
-	 * @return RedstoneListener
-	 */
 	public RedstoneListener getRedstoneListener() {
 		return this.redstoneListener;
 	}
 
-	/**
-	 * Method extended from JavaPlugin, called on the enabling of the plugin by the server
-	 */
 	@Override
 	public void onEnable() {
 		this.log = getLogger();
@@ -89,6 +75,7 @@ public class Survival extends JavaPlugin {
 		SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
 
 		this.sleeper = new Sleeper(this);
+		Objects.requireNonNull(getCommand("togglekeepinventory")).setExecutor(new ToggleKeepInventory());
 		Objects.requireNonNull(getCommand("setdeathmessage")).setExecutor(new DeathMessageUpdater());
 		Objects.requireNonNull(getCommand("listwaypoints")).setExecutor(new WaypointLister());
 		Objects.requireNonNull(getCommand("unloadradius")).setExecutor(new RadiusUnloader());
@@ -97,10 +84,11 @@ public class Survival extends JavaPlugin {
 		Objects.requireNonNull(getCommand("setwaypoint")).setExecutor(new WaypointSetter());
 		Objects.requireNonNull(getCommand("loadradius")).setExecutor(new RadiusLoader());
 		Objects.requireNonNull(getCommand("todoremove")).setExecutor(new TodoRemover());
-        Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
+		Objects.requireNonNull(getCommand("showchunks")).setExecutor(new ChunkShower());
 		Objects.requireNonNull(getCommand("todoupdate")).setExecutor(new TodoUpdater());
 		Objects.requireNonNull(getCommand("sleepdeny")).setExecutor(new SleepDenier(this));
-        Objects.requireNonNull(getCommand("slimemap")).setExecutor(new SlimemapShower());
+		Objects.requireNonNull(getCommand("gettrades")).setExecutor(new TradeGetter());
+		Objects.requireNonNull(getCommand("slimemap")).setExecutor(new SlimemapShower());
 		Objects.requireNonNull(getCommand("todoadd")).setExecutor(new TodoAdder());
 		Objects.requireNonNull(getCommand("yawsnap")).setExecutor(new YawSnapper());
 		Objects.requireNonNull(getCommand("spectog")).setExecutor(new SpectatorToggler());
@@ -127,9 +115,6 @@ public class Survival extends JavaPlugin {
 		this.log.info("Survival enable finished.");
 	}
 
-	/**
-	 * Method extended from JavaPlugin, called on the disabling of the plugin from the server
-	 */
 	@Override
 	public void onDisable() {
 		this.log.info("Saving waypoints.");

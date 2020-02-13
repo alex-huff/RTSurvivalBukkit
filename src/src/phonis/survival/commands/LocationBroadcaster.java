@@ -11,18 +11,7 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-/**
- * CommandExecutor that handles the /bl command
- */
 public class LocationBroadcaster implements CommandExecutor {
-	/**
-	 * Method implemented from CommandExecutor interface
-	 * @param sender CommandSender object
-	 * @param cmd Command object
-	 * @param label String representing label
-	 * @param args String[] containing command arguments
-	 * @return boolean
-	 */
 	@Override
 	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		Player player = (Player) sender;

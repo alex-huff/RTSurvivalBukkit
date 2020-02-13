@@ -12,43 +12,21 @@ import src.phonis.survival.Survival;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * PacketAdapter that filters piston animations/updates
- */
 public class RedstoneListener extends PacketAdapter {
 	private volatile boolean handlePackets = true;
 
-	/**
-	 * RedstoneListener constructor that calls the super constructor for PacketAdapter
-	 *
-	 * @param plugin Survival plugin
-	 * @param types  Iterable of PacketType
-	 */
 	public RedstoneListener(Survival plugin, Iterable<PacketType> types) {
 		super(plugin, ListenerPriority.NORMAL, types);
 	}
 
-	/**
-	 * Gets whether packets are being handled or not
-	 *
-	 * @return boolean
-	 */
 	public boolean getHandlePackets() {
 		return this.handlePackets;
 	}
 
-	/**
-	 * Toggles packet handling in thread-safe way
-	 */
 	public synchronized void toggle() {
 		this.handlePackets = !this.handlePackets;
 	}
 
-	/**
-	 * Method extended from PacketAdapter that handles packets
-	 *
-	 * @param event PacketEvent
-	 */
 	@Override
 	public void onPacketSending(PacketEvent event) {
 		if (this.handlePackets) {

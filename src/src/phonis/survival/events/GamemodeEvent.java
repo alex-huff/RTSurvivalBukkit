@@ -4,31 +4,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.event.Event.Result;
-
 import src.phonis.survival.Survival;
 
-/**
- * Listener that handles PlayerInteractEvent
- */
 public class GamemodeEvent implements Listener {
-	/**
-	 * GamemodeEvent constructor that takes in Survival Plugin
-	 * @param plugin Survival plugin
-	 */
 	public GamemodeEvent(Survival plugin) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	/**
-	 * Method decorated by EventHandler that handles PlayerInteractEvent
-	 * @param event PlayerInteractEvent
-	 */
 	@EventHandler
 	public void onFermSpiderEyeUse(PlayerInteractEvent event) {
         EquipmentSlot e = event.getHand();

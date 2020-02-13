@@ -1,28 +1,14 @@
 package src.phonis.survival.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import src.phonis.survival.serializable.ArrayListData;
+import src.phonis.survival.serializable.HashMapData;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import src.phonis.survival.serializable.ArrayListData;
-import src.phonis.survival.serializable.HashMapData;
-
-/**
- * Utility class for serializing various plugin data
- */
 public class SurvivalSerializationUtil {
-	/**
-	 * Serializes ArrayList data
-	 * @param gd ArrayListData to be serialized
-	 * @param log Logger to log the process
-	 * @param <T> Serializable object ArrayList contains
-	 */
 	public static <T extends Serializable> void serialize(ArrayListData<T> gd, Logger log) {
 		try {
 			FileOutputStream file = new FileOutputStream(gd.filename);
@@ -37,13 +23,6 @@ public class SurvivalSerializationUtil {
 		}
 	}
 
-	/**
-	 * Serializes HashMap data
-	 * @param pd HashMapData to be serialized
-	 * @param log Logger to log the process
-	 * @param <K> Key type
-	 * @param <V> Serializable type for value of HashMapData
-	 */
 	public static <K, V extends Serializable> void serialize(HashMapData<K, V> pd, Logger log) {
 		try {
 			FileOutputStream file = new FileOutputStream(pd.filename);
@@ -58,12 +37,6 @@ public class SurvivalSerializationUtil {
 		}
 	}
 
-	/**
-	 * Deserializes ArrayList data
-	 * @param gd ArrayListData to be deserialized
-	 * @param log Logger to log the process
-	 * @param <T> Serializable object ArrayList contains
-	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> void deserialize(ArrayListData<T> gd, Logger log) {
 		try {
@@ -83,13 +56,6 @@ public class SurvivalSerializationUtil {
 		}
 	}
 
-	/**
-	 * Deserializes HashMap data
-	 * @param pd HashMapData to be deserialized
-	 * @param log Logger to log the process
-	 * @param <K> Key type
-	 * @param <V> Serializable type for value of HashMapData
-	 */
 	@SuppressWarnings("unchecked")
 	public static <K, V extends Serializable> void deserialize(HashMapData<K, V> pd, Logger log) {
 		try {

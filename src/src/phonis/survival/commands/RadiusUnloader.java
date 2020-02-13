@@ -10,18 +10,7 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
-/**
- * CommandExecutor that handles the /unloadradius (int) command
- */
 public class RadiusUnloader implements CommandExecutor {
-	/**
-	 * Method implemented from CommandExecutor interface
-	 * @param sender CommandSender object
-	 * @param cmd Command object
-	 * @param label String representing label
-	 * @param args String[] containing command arguments
-	 * @return boolean
-	 */
 	@Override
 	public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
 		if (args.length > 0) {

@@ -1,7 +1,5 @@
 package src.phonis.survival.util;
 
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -11,17 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.util.Vector;
 
-/**
- * Utility class for all things direction based
- */
+import java.util.List;
+
 public class DirectionUtil {
-    /**
-     * Faces Player in direction of Location
-     * @param player Player player to be moved
-     * @param target Location target player will be faced to
-     */
-	public static void faceDirection(Player player, Location target) {
-        if (player.isInsideVehicle()){
+    public static void faceDirection(Player player, Location target) {
+        if (player.isInsideVehicle()) {
             Vehicle v = (Vehicle) player.getVehicle();
 
             if (v == null) return;
@@ -38,22 +30,12 @@ public class DirectionUtil {
         }
     }
 
-    /**
-     * Faces Player in direction of Location, utility for faceDirection
-     * @param player Player player to be moved
-     * @param target Location target player will be faced to
-     */
 	private static void face(Player player, Location target) {
         Vector direction = target.clone().subtract(player.getEyeLocation()).toVector();
         Location location = player.getLocation().setDirection(direction);
         player.teleport(location);
 	}
 
-    /**
-     * Gets cardinal N S E W direction from player
-     * @param player Player to get direction of
-     * @return String
-     */
 	public static String getCardinalAbsoluteDirection(Player player) {
         double rotation = (player.getLocation().getYaw() + 180) % 360;
         
@@ -76,11 +58,6 @@ public class DirectionUtil {
         }
 	}
 
-    /**
-     * Gets cardinal N NE NW S SE SW E W direction from player
-     * @param player Player to get direction of
-     * @return String
-     */
 	public static String getCardinalDirection(Player player) {
         double rotation = (player.getLocation().getYaw() + 180) % 360;
         
@@ -111,10 +88,6 @@ public class DirectionUtil {
         }
     }
 
-    /**
-     * Prints slimemap for player
-     * @param player Player to print slimemap to
-     */
 	public static void printSlimeMap(Player player) {
         Chunk chunk = player.getLocation().getChunk();
         World world = chunk.getWorld();

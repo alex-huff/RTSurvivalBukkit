@@ -1,9 +1,5 @@
 package src.phonis.survival.events;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,30 +8,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
-
 import src.phonis.survival.Survival;
 import src.phonis.survival.serializable.DeathMessage;
 
-/**
- * Listener that handles PlayerDeathEvent
- */
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 public class DeathEvent implements Listener {
-	/**
-	 * DeathEvent constructor that takes in Survival plugin
-	 * @param plugin Survival plugin
-	 */
 	public DeathEvent(Survival plugin) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	/**
-	 * Generates drop list from an ItemStack list with specified CharColor cc
-	 * @param drops List of ItemStacks representing the player's dropped items
-	 * @return String
-	 */
 	private String generateDropList(List<ItemStack> drops) {
 		StringBuilder list = new StringBuilder();
-		
+
 		for (ItemStack is : drops) {
 			if (!(list.toString().equals(""))) {
 				list.append(", ").append(ChatColor.BLUE);
@@ -55,11 +42,6 @@ public class DeathEvent implements Listener {
 		return list.toString();
 	}
 
-	/**
-	 * Method decorated by EventHandler that takes in PlayerDeathEvent
-	 * @param event PlayerDeathEvent event
-	 */
-
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent event) {
 		Player player = event.getEntity();
@@ -67,16 +49,23 @@ public class DeathEvent implements Listener {
 		String originalName = player.getName();
 		DeathMessage deathMessage;
 		UUID uuid = player.getUniqueId();
-		
+
+		if (Survival.keepInventory) {
+			event.setKeepInventory(true);
+			event.getDrops().clear();
+			event.setKeepLevel(true);
+			event.setDroppedExp(0);
+		}
+
 		if (!DeathMessage.pd.data.containsKey(uuid)) {
 			DeathMessage.pd.data.put(uuid, new DeathMessage(originalName));
 		}
-		
+
 		deathMessage = DeathMessage.pd.data.get(uuid);
-		
+
 		Bukkit.getServer().broadcastMessage(
-			"" + 
-			ChatColor.DARK_RED +
+			"" +
+				ChatColor.DARK_RED +
 			ChatColor.BOLD +
 			deathMessage.getName() + ChatColor.RESET + ChatColor.GOLD +
 			Objects.requireNonNull(event.getDeathMessage()).replace(originalName, "") + "\n" +
