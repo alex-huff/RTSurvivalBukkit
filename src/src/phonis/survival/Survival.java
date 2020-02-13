@@ -6,6 +6,7 @@ import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import src.phonis.survival.commands.*;
+import src.phonis.survival.completers.EnchantmentCompleter;
 import src.phonis.survival.completers.FindCompleter;
 import src.phonis.survival.completers.ItemTabCompleter;
 import src.phonis.survival.completers.WaypointCompleter;
@@ -102,6 +103,9 @@ public class Survival extends JavaPlugin {
 		PluginCommand removeWaypointCommand = getCommand("removewaypoint");
 		Objects.requireNonNull(removeWaypointCommand).setExecutor(new WaypointRemover());
 		removeWaypointCommand.setTabCompleter(new WaypointCompleter());
+		PluginCommand tradeFindCommand = getCommand("findtrade");
+		Objects.requireNonNull(tradeFindCommand).setExecutor(new TradeFinder());
+		tradeFindCommand.setTabCompleter(new EnchantmentCompleter(1));
 		PluginCommand craftCommand = getCommand("getcraft");
 		Objects.requireNonNull(craftCommand).setExecutor(new CraftGetter());
 		craftCommand.setTabCompleter(new ItemTabCompleter(1));

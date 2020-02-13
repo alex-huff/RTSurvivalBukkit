@@ -19,11 +19,8 @@ public class JoinEvent implements Listener {
 
 		player.sendMessage(
 			ChatColor.AQUA + "New:\n" +
-				ChatColor.WHITE + ChatColor.BOLD + "/spectog; " + ChatColor.RESET + ChatColor.AQUA + "Use to toggle between spectator mode and survival" + "\n" + ChatColor.RESET +
-				ChatColor.WHITE + ChatColor.BOLD + "/todo; " + ChatColor.RESET + ChatColor.AQUA + "View the todo list" + "\n" + ChatColor.RESET +
-				ChatColor.WHITE + ChatColor.BOLD + "/todoadd (item); " + ChatColor.RESET + ChatColor.AQUA + "Add an item to the todo list" + "\n" + ChatColor.RESET +
-				ChatColor.WHITE + ChatColor.BOLD + "/todoremove (number); " + ChatColor.RESET + ChatColor.AQUA + "Remove an item from the todo list" + "\n" + ChatColor.RESET +
-				ChatColor.WHITE + ChatColor.BOLD + "/spectp (Player or Waypoint); " + ChatColor.RESET + ChatColor.AQUA + "Teleport to place while in spectator mode"
+                ChatColor.WHITE + ChatColor.BOLD + "/gettrades; " + ChatColor.RESET + ChatColor.AQUA + "Get trades of villager you are looking at" + "\n" + ChatColor.RESET +
+                ChatColor.WHITE + ChatColor.BOLD + "/findtrade; " + ChatColor.RESET + ChatColor.AQUA + "Point to location of villager with selected trade within 100 block bounding box"
 		);
 	}
 }

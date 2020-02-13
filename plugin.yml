@@ -58,3 +58,5 @@ commands:
       description: Toggles inventory keeping
     gettrades:
       description: Gets trades of villager
+    findtrade:
+      description: Find trade within 100 block radius

@@ -1,6 +1,7 @@
 package src.phonis.survival.commands;
 
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -9,14 +10,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -27,28 +27,29 @@ public class TradeGetter implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
         Player player = (Player) sender;
         Location location = player.getEyeLocation();
-        Vector direction = location.getDirection();
         double closest = Double.MAX_VALUE;
-        Villager villager = null;
+        Merchant merchant = null;
 
         for (Entity entity : player.getNearbyEntities(100, 100, 100)) {
-            if (entity instanceof Villager) {
+            if (entity instanceof Merchant) {
                 BoundingBox bb = entity.getBoundingBox();
-                RayTraceResult rtr = bb.rayTrace(location.toVector(), direction.normalize(), 100);
+                RayTraceResult rtr = bb.rayTrace(location.toVector(), location.getDirection().normalize(), 100);
 
                 if (rtr != null) {
                     double distance = location.distance(new Location(entity.getWorld(), rtr.getHitPosition().getX(), rtr.getHitPosition().getY(), rtr.getHitPosition().getZ()));
 
                     if (distance < closest) {
                         closest = distance;
-                        villager = (Villager) entity;
+                        merchant = (Merchant) entity;
                     }
                 }
             }
         }
 
-        if (villager != null) {
-            for (MerchantRecipe mr : villager.getRecipes()) {
+        if (merchant != null) {
+            player.sendMessage(ChatColor.AQUA + "Trades:");
+
+            for (MerchantRecipe mr : merchant.getRecipes()) {
                 ItemStack result = mr.getResult();
                 Material resMat = result.getType();
                 StringBuilder message = new StringBuilder();
@@ -92,6 +93,8 @@ public class TradeGetter implements CommandExecutor {
 
                 player.sendMessage(message.toString());
             }
+        } else {
+            player.sendMessage(ChatColor.RED + "You are not looking at a merchant within 100 blocks");
         }
 
         return true;

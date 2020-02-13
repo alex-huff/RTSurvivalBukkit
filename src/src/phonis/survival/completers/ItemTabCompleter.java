@@ -8,17 +8,17 @@ import org.bukkit.command.TabCompleter;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ItemTabCompleter implements TabCompleter {
-	private static List<String> mats = Stream.of(Material.values())
-		.map(Material::name)
-		.collect(Collectors.toList());
 	private int argSize;
+	private List<String> mats = new ArrayList<>();
 
 	public ItemTabCompleter(int argSize) {
 		this.argSize = argSize;
+
+		for (Material material : Material.values()) {
+			mats.add(material.name());
+		}
 	}
 
 	@Override
