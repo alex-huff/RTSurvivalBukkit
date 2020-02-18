@@ -11,6 +11,7 @@ import java.util.List;
 public class CommandWaypointRemove extends SubCommand {
     public CommandWaypointRemove() {
         super("remove");
+        this.addAlias("r");
         this.args.add("(Waypoint)");
     }
 

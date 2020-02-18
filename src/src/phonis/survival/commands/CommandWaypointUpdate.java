@@ -11,6 +11,7 @@ import java.util.List;
 public class CommandWaypointUpdate extends SubCommand {
     public CommandWaypointUpdate() {
         super("update");
+        this.addAlias("u");
         this.args.add("(Waypoint) (X) (Y) (Z)");
     }
 

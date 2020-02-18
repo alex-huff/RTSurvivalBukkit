@@ -6,14 +6,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-public class CommandWaypoint extends SubCommand {
-    public CommandWaypoint(JavaPlugin plugin) {
-        super("waypoint");
-        CommandWaypoint.registerCommand(plugin, this);
-        this.addSubCommand(new CommandWaypointSet());
-        this.addSubCommand(new CommandWaypointRemove());
-        this.addSubCommand(new CommandWaypointList());
-        this.addSubCommand(new CommandWaypointUpdate());
+public class CommandTodo extends SubCommand {
+    public CommandTodo(JavaPlugin plugin) {
+        super("todo");
+        SubCommand.registerCommand(plugin, this);
+        this.addSubCommand(new CommandTodoAdd());
+        this.addSubCommand(new CommandTodoList());
+        this.addSubCommand(new CommandTodoRemove());
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.util.Objects;
 public class CommandWaypointList extends SubCommand {
     public CommandWaypointList() {
         super("list");
+        this.addAlias("l");
     }
 
     @Override
