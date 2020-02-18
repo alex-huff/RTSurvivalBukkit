@@ -13,7 +13,7 @@ import java.util.Set;
 
 public abstract class SubCommand implements CommandExecutor, TabCompleter {
     private final String name;
-    protected Set<String> args = new HashSet<>();
+    private Set<String> args = new HashSet<>();
     private Set<SubCommand> subCommands = new HashSet<>();
     private Set<String> aliases = new HashSet<>();
 
@@ -154,6 +154,10 @@ public abstract class SubCommand implements CommandExecutor, TabCompleter {
 
     public void addAlias(String alias) {
         this.aliases.add(alias.toLowerCase());
+    }
+    
+    public void addArg(String arg) {
+        this.args.add(arg);
     }
 
     private Set<String> getAliases() {
