@@ -1,16 +1,12 @@
 package src.phonis.survival.completers;
 
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.enchantments.Enchantment;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnchantmentCompleter implements TabCompleter {
+public class EnchantmentCompleter {
     private int argSize;
     private List<String> enchants = new ArrayList<>();
     private List<String> mats = new ArrayList<>();
@@ -27,8 +23,7 @@ public class EnchantmentCompleter implements TabCompleter {
         }
     }
 
-    @Override
-    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String alias, @Nonnull String[] args) {
+    public List<String> onTabComplete(String[] args) {
         List<String> ret = new ArrayList<>();
 
         if (args.length <= this.argSize) {

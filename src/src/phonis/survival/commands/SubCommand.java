@@ -13,12 +13,19 @@ import java.util.Set;
 
 public abstract class SubCommand implements CommandExecutor, TabCompleter {
     private final String name;
+    private final String hint;
     private Set<String> args = new HashSet<>();
     private Set<SubCommand> subCommands = new HashSet<>();
     private Set<String> aliases = new HashSet<>();
 
+    public SubCommand(String name, String hint) {
+        this.name = name;
+        this.hint = hint;
+    }
+
     public SubCommand(String name) {
         this.name = name;
+        this.hint = "";
     }
 
     private static String[] truncate(String[] strings) {
@@ -165,7 +172,11 @@ public abstract class SubCommand implements CommandExecutor, TabCompleter {
     }
 
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    public String getHint() {
+        return this.hint;
     }
 
     public String getCommandString(int depth) {
@@ -173,7 +184,7 @@ public abstract class SubCommand implements CommandExecutor, TabCompleter {
 
         for (int i = 0; i < depth; i++) message.append("   ");
 
-        String name = "" + ChatColor.RESET + ChatColor.AQUA + this.getName() + "\n" + ChatColor.GRAY;
+        String name = "" + ChatColor.RESET + ChatColor.AQUA + this.getName() + " " + ChatColor.GRAY + this.getHint() + "\n";
         message.append(name);
 
         depth += 1;

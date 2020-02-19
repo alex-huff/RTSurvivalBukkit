@@ -10,9 +10,8 @@ import java.util.List;
 
 public class CommandTodoAdd extends SubCommand {
     public CommandTodoAdd() {
-        super("add");
+        super("add", "(Todo item)");
         this.addAlias("a");
-        this.addArg("(Todo item)");
     }
 
     @Override

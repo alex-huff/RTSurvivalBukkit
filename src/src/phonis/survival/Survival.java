@@ -56,6 +56,7 @@ public class Survival extends JavaPlugin {
         new CommandTodo(this);
         new CommandCraftGet(this);
         new CommandSleep(this);
+        new CommandSpec(this);
 
         //deserialize
         this.log.info("Initializing waypoints.");

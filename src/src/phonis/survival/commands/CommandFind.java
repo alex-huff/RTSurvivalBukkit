@@ -3,43 +3,28 @@ package src.phonis.survival.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import src.phonis.survival.completers.FindCompleter;
 import src.phonis.survival.serializable.Waypoint;
 import src.phonis.survival.util.DirectionUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class CommandFind extends SubCommand {
+    private FindCompleter completer;
+
     public CommandFind(JavaPlugin plugin) {
-        super("find");
+        super("find", "(Player or waypoint)");
         SubCommand.registerCommand(plugin, this);
-        this.addArg("(Player or waypoint)");
+        this.completer = new FindCompleter(0);
     }
 
     @Override
     public List<String> topTabComplete(String[] args) {
-        List<String> ret = new ArrayList<>();
-
-        if (args.length == 1) {
-            ret.addAll(Waypoint.getAutoComplete(args[0]));
-
-            for (World world : Bukkit.getServer().getWorlds()) {
-                for (Player player : world.getPlayers()) {
-                    String name = player.getName();
-
-                    if (name.toLowerCase().startsWith(args[0].toLowerCase())) {
-                        ret.add(name);
-                    }
-                }
-            }
-        }
-
-        return ret;
+        return this.completer.onTabComplete(args);
     }
 
     @Override

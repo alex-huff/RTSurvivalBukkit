@@ -10,9 +10,8 @@ import java.util.List;
 
 public class CommandWaypointRemove extends SubCommand {
     public CommandWaypointRemove() {
-        super("remove");
+        super("remove", "(Waypoint)");
         this.addAlias("r");
-        this.addArg("(Waypoint)");
     }
 
     @Override

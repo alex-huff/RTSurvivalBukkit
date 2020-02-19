@@ -10,9 +10,8 @@ import java.util.List;
 
 public class CommandWaypointUpdate extends SubCommand {
     public CommandWaypointUpdate() {
-        super("update");
+        super("update", "(Waypoint) (X) (Y) (Z)");
         this.addAlias("u");
-        this.addArg("(Waypoint) (X) (Y) (Z)");
     }
 
     @Override

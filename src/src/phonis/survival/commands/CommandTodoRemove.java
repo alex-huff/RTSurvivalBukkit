@@ -10,9 +10,8 @@ import java.util.List;
 
 public class CommandTodoRemove extends SubCommand {
     public CommandTodoRemove() {
-        super("remove");
+        super("remove", "(Index)");
         this.addAlias("r");
-        this.addArg("(Index)");
     }
 
     @Override

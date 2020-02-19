@@ -12,9 +12,14 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindCompleter implements TabCompleter {
-	@Override
-	public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String alias, @Nonnull String[] args) {
+public class FindCompleter {
+	private int argSize;
+
+	public FindCompleter(int argSize) {
+		this.argSize = argSize;
+	}
+
+	public List<String> onTabComplete(String[] args) {
 		List<String> ret = new ArrayList<>();
 		
 		if(args.length == 1) {

@@ -21,9 +21,8 @@ public class CommandCraftGet extends SubCommand {
     private ItemTabCompleter completer;
 
     public CommandCraftGet(JavaPlugin plugin) {
-        super("getcraft");
+        super("getcraft", "(Material)");
         SubCommand.registerCommand(plugin, this);
-        this.addArg("(Material)");
         this.completer = new ItemTabCompleter(1);
     }
 

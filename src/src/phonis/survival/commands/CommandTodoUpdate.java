@@ -9,9 +9,8 @@ import java.util.List;
 
 public class CommandTodoUpdate extends SubCommand {
     public CommandTodoUpdate() {
-        super("update");
+        super("update", "(Index) (Message)");
         this.addAlias("u");
-        this.addArg("(Index) (Message)");
     }
 
     @Override

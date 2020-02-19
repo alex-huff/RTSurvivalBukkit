@@ -11,9 +11,8 @@ import java.util.Objects;
 
 public class CommandWaypointSet extends SubCommand {
     public CommandWaypointSet() {
-        super("set");
+        super("set", "(Waypoint)");
         this.addAlias("s");
-        this.addArg("(Waypoint)");
     }
 
     @Override
