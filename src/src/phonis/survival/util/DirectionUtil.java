@@ -123,7 +123,7 @@ public class DirectionUtil {
         map[2][0] = ChatColor.WHITE + "/";
         map[2][2] = ChatColor.WHITE + "\\";
         map[1][1] = ChatColor.GRAY + "-";
-        map[heightRadius + 1][widthRadius + 1] = ChatColor.YELLOW + ChatColor.stripColor(map[heightRadius + 1][widthRadius + 1]);
+        map[heightRadius + 1][widthRadius + 1] = ChatColor.GOLD + ChatColor.stripColor(map[heightRadius + 1][widthRadius + 1]);
         
         String direction = DirectionUtil.getCardinalDirection(player);
 
@@ -131,35 +131,35 @@ public class DirectionUtil {
 
         switch(direction){
         	case "N":
-        		map[0][1] = ChatColor.BLUE + "N";
+        		map[0][1] = ChatColor.AQUA + "N";
         		
         		break;
         	case "W":
-        		map[1][0] = ChatColor.BLUE + "W";
+        		map[1][0] = ChatColor.AQUA + "W";
         		
         		break;
         	case "E":
-        		map[1][2] = ChatColor.BLUE + "E";
+        		map[1][2] = ChatColor.AQUA + "E";
         		
         		break;
         	case "S":
-        		map[2][1] = ChatColor.BLUE + "S";
+        		map[2][1] = ChatColor.AQUA + "S";
         		
         		break;
         	case "NE":
-        		map[0][2] = ChatColor.BLUE + "/";
+        		map[0][2] = ChatColor.AQUA + "/";
         		
         		break;
         	case "NW":
-        		map[0][0] = ChatColor.BLUE + "\\";
+        		map[0][0] = ChatColor.AQUA + "\\";
         		
         		break;
         	case "SE":
-        		map[2][2] = ChatColor.BLUE + "\\";
+        		map[2][2] = ChatColor.AQUA + "\\";
         		
         		break;
         	case "SW":
-        		map[2][0] = ChatColor.BLUE + "/";
+        		map[2][0] = ChatColor.AQUA + "/";
         		
         		break;
         	default:
@@ -183,9 +183,9 @@ public class DirectionUtil {
         player.sendMessage("" + message);
         
         player.sendMessage(
-        	ChatColor.GOLD + 
-        	"Current chunk: (" + chunkX + ", " + chunkZ + ") Slime chunk: " + 
-        	chunk.isSlimeChunk()
+        	ChatColor.WHITE +
+                    "Current chunk: (" + ChatColor.GOLD + chunkX + ", " + chunkZ + ChatColor.WHITE + ") Slime chunk" + ChatColor.GRAY + " ➤ " + ChatColor.AQUA +
+                    chunk.isSlimeChunk()
         );
 	}
 }

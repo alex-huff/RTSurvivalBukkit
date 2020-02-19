@@ -37,7 +37,7 @@ public class CommandCraftGet extends SubCommand {
     }
 
     @Override
-    public void execute(Player player, String[] args) {
+    public void execute(Player player, String[] args) throws CommandException {
         if (args.length == 0) {
             player.sendMessage(this.getCommandString(0));
 
@@ -46,92 +46,92 @@ public class CommandCraftGet extends SubCommand {
 
         Material mat = Material.matchMaterial(args[0]);
 
-        if (mat != null) {
-            List<Recipe> recipes = Bukkit.getServer().getRecipesFor(new ItemStack(mat));
+        if (mat == null) {
+            throw new CommandException("Invalid material");
+        }
 
-            if (recipes.size() == 0) {
-                player.sendMessage(ChatColor.RED + "No recipes for material");
-            }
+        List<Recipe> recipes = Bukkit.getServer().getRecipesFor(new ItemStack(mat));
 
-            found:
-            {
-                for (Recipe recipe : recipes) {
-                    if (recipe instanceof ShapedRecipe) {
-                        ShapedRecipe shaped = (ShapedRecipe) recipe;
-                        Inventory inventory = Bukkit.createInventory(null, InventoryType.WORKBENCH);
-                        inventory.setMaxStackSize(Integer.MAX_VALUE);
-                        Map<Character, ItemStack> map = shaped.getIngredientMap();
-                        String[] shape = shaped.getShape();
+        if (recipes.size() == 0) {
+            player.sendMessage(ChatColor.RED + "No recipes for material");
+        }
 
-                        for (int w = 0; w < shape.length; w++) {
-                            for (int i = 0; i < shape[w].length(); i++) {
-                                inventory.setItem(i + w * 3 + 1, map.get(shape[w].charAt(i)));
-                            }
+        found:
+        {
+            for (Recipe recipe : recipes) {
+                if (recipe instanceof ShapedRecipe) {
+                    ShapedRecipe shaped = (ShapedRecipe) recipe;
+                    Inventory inventory = Bukkit.createInventory(null, InventoryType.WORKBENCH);
+                    inventory.setMaxStackSize(Integer.MAX_VALUE);
+                    Map<Character, ItemStack> map = shaped.getIngredientMap();
+                    String[] shape = shaped.getShape();
+
+                    for (int w = 0; w < shape.length; w++) {
+                        for (int i = 0; i < shape[w].length(); i++) {
+                            inventory.setItem(i + w * 3 + 1, map.get(shape[w].charAt(i)));
                         }
-
-                        inventory.setItem(0, shaped.getResult());
-
-                        player.openInventory(inventory);
-                        break found;
-                    } else if (recipe instanceof ShapelessRecipe) {
-                        ShapelessRecipe shapeless = (ShapelessRecipe) recipe;
-                        List<ItemStack> ls = shapeless.getIngredientList();
-                        Inventory inventory = Bukkit.createInventory(null, InventoryType.WORKBENCH);
-                        inventory.setMaxStackSize(Integer.MAX_VALUE);
-                        int count = 1;
-
-                        for (ItemStack is : ls) {
-                            inventory.setItem(count, is);
-                            count++;
-                        }
-
-                        inventory.setItem(0, shapeless.getResult());
-
-                        player.openInventory(inventory);
-                        break found;
-                    } else if (recipe instanceof CraftFurnaceRecipe) {
-                        CraftFurnaceRecipe furnace = (CraftFurnaceRecipe) recipe;
-                        ItemStack is = furnace.getInput();
-                        Inventory inventory = Bukkit.createInventory(null, InventoryType.FURNACE);
-                        inventory.setMaxStackSize(Integer.MAX_VALUE);
-                        inventory.setItem(0, is);
-                        inventory.setItem(1, new ItemStack(Material.COAL));
-                        inventory.setItem(2, furnace.getResult());
-                        player.openInventory(inventory);
-                        break found;
-                    } else if (recipe instanceof CraftSmokingRecipe) {
-                        CraftSmokingRecipe smoker = (CraftSmokingRecipe) recipe;
-                        ItemStack is = smoker.getInput();
-                        Inventory inventory = Bukkit.createInventory(null, InventoryType.SMOKER);
-                        inventory.setMaxStackSize(Integer.MAX_VALUE);
-                        inventory.setItem(0, is);
-                        inventory.setItem(1, new ItemStack(Material.COAL));
-                        inventory.setItem(2, smoker.getResult());
-                        player.openInventory(inventory);
-                        break found;
-                    } else if (recipe instanceof CraftBlastingRecipe) {
-                        CraftBlastingRecipe blaster = (CraftBlastingRecipe) recipe;
-                        ItemStack is = blaster.getInput();
-                        Inventory inventory = Bukkit.createInventory(null, InventoryType.BLAST_FURNACE);
-                        inventory.setMaxStackSize(Integer.MAX_VALUE);
-                        inventory.setItem(0, is);
-                        inventory.setItem(1, new ItemStack(Material.COAL));
-                        inventory.setItem(2, blaster.getResult());
-                        player.openInventory(inventory);
-                        break found;
-                    } else if (recipe instanceof CraftComplexRecipe) {
-                        player.sendMessage(ChatColor.AQUA +
-                                               "This material has a complex recipe. This means that its functionality, or appearance, is a result of its inputs, and it has many. Look it up."
-                        );
-
-                        break found;
                     }
-                }
 
-                player.sendMessage(ChatColor.RED + "Recipe not found");
+                    inventory.setItem(0, shaped.getResult());
+
+                    player.openInventory(inventory);
+                    break found;
+                } else if (recipe instanceof ShapelessRecipe) {
+                    ShapelessRecipe shapeless = (ShapelessRecipe) recipe;
+                    List<ItemStack> ls = shapeless.getIngredientList();
+                    Inventory inventory = Bukkit.createInventory(null, InventoryType.WORKBENCH);
+                    inventory.setMaxStackSize(Integer.MAX_VALUE);
+                    int count = 1;
+
+                    for (ItemStack is : ls) {
+                        inventory.setItem(count, is);
+                        count++;
+                    }
+
+                    inventory.setItem(0, shapeless.getResult());
+
+                    player.openInventory(inventory);
+                    break found;
+                } else if (recipe instanceof CraftFurnaceRecipe) {
+                    CraftFurnaceRecipe furnace = (CraftFurnaceRecipe) recipe;
+                    ItemStack is = furnace.getInput();
+                    Inventory inventory = Bukkit.createInventory(null, InventoryType.FURNACE);
+                    inventory.setMaxStackSize(Integer.MAX_VALUE);
+                    inventory.setItem(0, is);
+                    inventory.setItem(1, new ItemStack(Material.COAL));
+                    inventory.setItem(2, furnace.getResult());
+                    player.openInventory(inventory);
+                    break found;
+                } else if (recipe instanceof CraftSmokingRecipe) {
+                    CraftSmokingRecipe smoker = (CraftSmokingRecipe) recipe;
+                    ItemStack is = smoker.getInput();
+                    Inventory inventory = Bukkit.createInventory(null, InventoryType.SMOKER);
+                    inventory.setMaxStackSize(Integer.MAX_VALUE);
+                    inventory.setItem(0, is);
+                    inventory.setItem(1, new ItemStack(Material.COAL));
+                    inventory.setItem(2, smoker.getResult());
+                    player.openInventory(inventory);
+                    break found;
+                } else if (recipe instanceof CraftBlastingRecipe) {
+                    CraftBlastingRecipe blaster = (CraftBlastingRecipe) recipe;
+                    ItemStack is = blaster.getInput();
+                    Inventory inventory = Bukkit.createInventory(null, InventoryType.BLAST_FURNACE);
+                    inventory.setMaxStackSize(Integer.MAX_VALUE);
+                    inventory.setItem(0, is);
+                    inventory.setItem(1, new ItemStack(Material.COAL));
+                    inventory.setItem(2, blaster.getResult());
+                    player.openInventory(inventory);
+                    break found;
+                } else if (recipe instanceof CraftComplexRecipe) {
+                    player.sendMessage(ChatColor.AQUA +
+                            "This material has a complex recipe. This means that its functionality, or appearance, is a result of its inputs, and it has many. Look it up."
+                    );
+
+                    break found;
+                }
             }
-        } else {
-            player.sendMessage(ChatColor.RED + "Material not found");
+
+            player.sendMessage(ChatColor.RED + "Recipe not found");
         }
     }
 }

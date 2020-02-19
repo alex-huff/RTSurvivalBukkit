@@ -13,19 +13,19 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import src.phonis.survival.completers.ItemTabCompleter;
+import src.phonis.survival.completers.EnchantmentCompleter;
 import src.phonis.survival.util.DirectionUtil;
 
 import java.util.List;
 import java.util.Map;
 
 public class CommandTradeFind extends SubCommand {
-    private ItemTabCompleter completer;
+    private EnchantmentCompleter completer;
 
     public CommandTradeFind() {
         super("find", "(Material)");
         this.addAlias("f");
-        this.completer = new ItemTabCompleter(0);
+        this.completer = new EnchantmentCompleter(0);
     }
 
     @Override

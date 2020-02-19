@@ -59,6 +59,11 @@ public class Survival extends JavaPlugin {
         new CommandSpec(this);
         new CommandToggle(this);
         new CommandTrade(this);
+        new CommandYawSnap(this);
+        new CommandSlimemap(this);
+        new CommandInspect(this);
+        new CommandBrodLoc(this);
+        new CommandDeathMessage(this);
 
         //deserialize
         this.log.info("Initializing waypoints.");
