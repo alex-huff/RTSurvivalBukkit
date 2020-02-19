@@ -16,9 +16,9 @@ public class CommandDeathMessage extends SubCommand {
     private PlayerCompleter completer;
 
     public CommandDeathMessage(JavaPlugin plugin) {
-        super("updatedeathmessage", "(Name or UUID) (Message)");
+        super("setdeathmessage", "(Name or UUID) (Message)");
         SubCommand.registerCommand(plugin, this);
-        this.completer = new PlayerCompleter(0);
+        this.completer = new PlayerCompleter(1);
     }
 
     @Override
@@ -36,8 +36,8 @@ public class CommandDeathMessage extends SubCommand {
 
         if (!sender.isOp()) {
             sender.sendMessage(
-                    ChatColor.RED +
-                            "You must be an operator to use this command"
+                ChatColor.RED +
+                    "You must be an operator to use this command"
             );
 
             return;

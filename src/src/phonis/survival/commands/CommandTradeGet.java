@@ -58,7 +58,7 @@ public class CommandTradeGet extends SubCommand {
         }
 
         if (merchant != null) {
-            player.sendMessage(ChatColor.AQUA + "Trades:");
+            player.sendMessage(ChatColor.WHITE + "Trades:");
 
             for (MerchantRecipe mr : merchant.getRecipes()) {
                 ItemStack result = mr.getResult();
@@ -72,7 +72,7 @@ public class CommandTradeGet extends SubCommand {
 
                     if (!(inMat == Material.AIR)) {
                         if (i != 0) {
-                            message.append("+ ");
+                            message.append(ChatColor.GRAY).append("+ ");
                         }
 
                         message.append(ChatColor.AQUA).append(inMat.toString()).append(ChatColor.GOLD).append(" (x").append(input.getAmount()).append(") ");

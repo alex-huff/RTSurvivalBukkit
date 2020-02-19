@@ -25,7 +25,7 @@ public class CommandTradeFind extends SubCommand {
     public CommandTradeFind() {
         super("find", "(Material)");
         this.addAlias("f");
-        this.completer = new EnchantmentCompleter(0);
+        this.completer = new EnchantmentCompleter(1);
     }
 
     @Override

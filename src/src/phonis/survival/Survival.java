@@ -22,6 +22,7 @@ public class Survival extends JavaPlugin {
     public boolean keepInventory = false;
     public BukkitTask sleeper;
     public RedstoneListener redstoneListener;
+    public List<SubCommand> commands = new ArrayList<>();
     private Logger log;
 
     @Override
@@ -51,19 +52,22 @@ public class Survival extends JavaPlugin {
         new SuffocateEvent(this);
 
         //base commands
-        new CommandWaypoint(this);
-        new CommandFind(this);
-        new CommandTodo(this);
-        new CommandCraftGet(this);
-        new CommandSleep(this);
-        new CommandSpec(this);
-        new CommandToggle(this);
-        new CommandTrade(this);
-        new CommandYawSnap(this);
-        new CommandSlimemap(this);
-        new CommandInspect(this);
-        new CommandBrodLoc(this);
-        new CommandDeathMessage(this);
+        this.commands.add(new CommandWaypoint(this));
+        this.commands.add(new CommandFind(this));
+        this.commands.add(new CommandTodo(this));
+        this.commands.add(new CommandCraftGet(this));
+        this.commands.add(new CommandSleep(this));
+        this.commands.add(new CommandSpec(this));
+        this.commands.add(new CommandToggle(this));
+        this.commands.add(new CommandTrade(this));
+        this.commands.add(new CommandYawSnap(this));
+        this.commands.add(new CommandSlimemap(this));
+        this.commands.add(new CommandInspect(this));
+        this.commands.add(new CommandBrodLoc(this));
+        this.commands.add(new CommandDeathMessage(this));
+        this.commands.add(new CommandFindInChest(this));
+        this.commands.add(new CommandChunk(this));
+        this.commands.add(new CommandHelp(this));
 
         //deserialize
         this.log.info("Initializing waypoints.");

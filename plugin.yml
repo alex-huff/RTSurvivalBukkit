@@ -37,3 +37,5 @@ commands:
   findinchest:
     aliases: [fic]
     description: Find material in chest near you
+  survivalhelp:
+    description: Help with all of the plugin commands

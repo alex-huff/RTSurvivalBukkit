@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CommandSpecToggler extends SubCommand {
     public CommandSpecToggler() {
-        super("spec");
+        super("tog");
     }
 
     @Override
@@ -28,11 +28,11 @@ public class CommandSpecToggler extends SubCommand {
         if (player.getGameMode() != GameMode.SPECTATOR) {
             SpectatorLocation.get(player).updateSpectatorLocation(player.getLocation());
             player.setGameMode(GameMode.SPECTATOR);
-            player.sendMessage(ChatColor.AQUA + "You are now spectating");
+            player.sendMessage(ChatColor.WHITE + "You are now spectating");
         }else {
             player.teleport(SpectatorLocation.get(player).getLocation().add(0, .5, 0));
             player.setGameMode(GameMode.SURVIVAL);
-            player.sendMessage(ChatColor.AQUA + "You are no longer spectating");
+            player.sendMessage(ChatColor.WHITE + "You are no longer spectating");
         }
     }
 }

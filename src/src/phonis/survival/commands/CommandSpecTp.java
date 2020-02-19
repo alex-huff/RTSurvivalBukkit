@@ -16,7 +16,7 @@ public class CommandSpecTp extends SubCommand {
 
     public CommandSpecTp() {
         super("tp", "Player or waypoint");
-        this.completer = new FindCompleter(0);
+        this.completer = new FindCompleter(1);
     }
 
     @Override

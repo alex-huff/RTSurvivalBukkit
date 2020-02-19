@@ -16,7 +16,7 @@ public class CommandInspect extends SubCommand {
     public CommandInspect(JavaPlugin plugin) {
         super("inspect", "(Player)");
         SubCommand.registerCommand(plugin, this);
-        this.completer = new PlayerCompleter(0);
+        this.completer = new PlayerCompleter(1);
     }
 
     @Override

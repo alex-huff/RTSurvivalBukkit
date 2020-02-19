@@ -19,7 +19,7 @@ public class CommandFind extends SubCommand {
     public CommandFind(JavaPlugin plugin) {
         super("find", "(Player or waypoint)");
         SubCommand.registerCommand(plugin, this);
-        this.completer = new FindCompleter(0);
+        this.completer = new FindCompleter(1);
     }
 
     @Override

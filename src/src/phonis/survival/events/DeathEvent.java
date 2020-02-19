@@ -16,14 +16,17 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class DeathEvent implements Listener {
-	public DeathEvent(Survival plugin) {
-		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
-	}
+    private Survival plugin;
 
-	private String generateDropList(List<ItemStack> drops) {
-		StringBuilder list = new StringBuilder();
+    public DeathEvent(Survival plugin) {
+        this.plugin = plugin;
+        Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+    }
 
-		for (ItemStack is : drops) {
+    private String generateDropList(List<ItemStack> drops) {
+        StringBuilder list = new StringBuilder();
+
+        for (ItemStack is : drops) {
 			if (!(list.toString().equals(""))) {
 				list.append(", ").append(ChatColor.BLUE);
 			}else {
@@ -44,22 +47,22 @@ public class DeathEvent implements Listener {
 
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent event) {
-		Player player = event.getEntity();
-		Location location = player.getLocation();
-		String originalName = player.getName();
-		DeathMessage deathMessage;
-		UUID uuid = player.getUniqueId();
+        Player player = event.getEntity();
+        Location location = player.getLocation();
+        String originalName = player.getName();
+        DeathMessage deathMessage;
+        UUID uuid = player.getUniqueId();
 
-		if (Survival.keepInventory) {
-			event.setKeepInventory(true);
-			event.getDrops().clear();
-			event.setKeepLevel(true);
-			event.setDroppedExp(0);
-		}
+        if (this.plugin.keepInventory) {
+            event.setKeepInventory(true);
+            event.getDrops().clear();
+            event.setKeepLevel(true);
+            event.setDroppedExp(0);
+        }
 
-		if (!DeathMessage.pd.data.containsKey(uuid)) {
-			DeathMessage.pd.data.put(uuid, new DeathMessage(originalName));
-		}
+        if (!DeathMessage.pd.data.containsKey(uuid)) {
+            DeathMessage.pd.data.put(uuid, new DeathMessage(originalName));
+        }
 
 		deathMessage = DeathMessage.pd.data.get(uuid);
 
