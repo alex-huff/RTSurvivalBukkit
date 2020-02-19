@@ -12,7 +12,7 @@ public class CommandTodoAdd extends SubCommand {
     public CommandTodoAdd() {
         super("add");
         this.addAlias("a");
-        this.args.add("(Todo item)");
+        this.addArg("(Todo item)");
     }
 
     @Override
@@ -38,10 +38,10 @@ public class CommandTodoAdd extends SubCommand {
         Todolist.addTodo(item.toString());
 
         Bukkit.broadcastMessage(
-            ChatColor.DARK_GREEN +
-                sender.getName() +
-                " added '" +
-                item +
+            ChatColor.GOLD +
+                sender.getName() + ChatColor.WHITE +
+                " added '" + ChatColor.AQUA +
+                item + ChatColor.WHITE +
                 "' to the todo list"
         );
     }

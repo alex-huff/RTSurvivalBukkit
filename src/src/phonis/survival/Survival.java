@@ -5,9 +5,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import src.phonis.survival.commands.CommandFind;
-import src.phonis.survival.commands.CommandTodo;
-import src.phonis.survival.commands.CommandWaypoint;
+import src.phonis.survival.commands.*;
 import src.phonis.survival.events.*;
 import src.phonis.survival.packets.RedstoneListener;
 import src.phonis.survival.serializable.DeathMessage;
@@ -56,6 +54,8 @@ public class Survival extends JavaPlugin {
         new CommandWaypoint(this);
         new CommandFind(this);
         new CommandTodo(this);
+        new CommandCraftGet(this);
+        new CommandSleep(this);
 
         //deserialize
         this.log.info("Initializing waypoints.");

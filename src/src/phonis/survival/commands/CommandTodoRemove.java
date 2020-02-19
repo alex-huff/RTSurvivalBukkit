@@ -12,7 +12,7 @@ public class CommandTodoRemove extends SubCommand {
     public CommandTodoRemove() {
         super("remove");
         this.addAlias("r");
-        this.args.add("(Index of item to remove)");
+        this.addArg("(Index)");
     }
 
     @Override

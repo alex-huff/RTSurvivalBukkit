@@ -18,7 +18,7 @@ public class CommandFind extends SubCommand {
     public CommandFind(JavaPlugin plugin) {
         super("find");
         SubCommand.registerCommand(plugin, this);
-        this.args.add("(Player or waypoint)");
+        this.addArg("(Player or waypoint)");
     }
 
     @Override

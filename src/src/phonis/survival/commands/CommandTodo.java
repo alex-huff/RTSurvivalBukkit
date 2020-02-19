@@ -13,6 +13,7 @@ public class CommandTodo extends SubCommand {
         this.addSubCommand(new CommandTodoAdd());
         this.addSubCommand(new CommandTodoList());
         this.addSubCommand(new CommandTodoRemove());
+        this.addSubCommand(new CommandTodoUpdate());
     }
 
     @Override

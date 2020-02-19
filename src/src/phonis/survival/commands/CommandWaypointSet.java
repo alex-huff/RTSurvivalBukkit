@@ -13,7 +13,7 @@ public class CommandWaypointSet extends SubCommand {
     public CommandWaypointSet() {
         super("set");
         this.addAlias("s");
-        this.args.add("(Waypoint)");
+        this.addArg("(Waypoint)");
     }
 
     @Override
