@@ -6,12 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-public class CommandSpec extends SubCommand {
-    public CommandSpec(JavaPlugin plugin) {
-        super("spec");
+public class CommandTrade extends SubCommand {
+    public CommandTrade(JavaPlugin plugin) {
+        super("trade");
         SubCommand.registerCommand(plugin, this);
-        this.addSubCommand(new CommandSpecToggler());
-        this.addSubCommand(new CommandSpecTp());
+        this.addSubCommand(new CommandTradeFind());
+        this.addSubCommand(new CommandTradeGet());
     }
 
     @Override

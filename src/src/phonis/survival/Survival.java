@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Survival extends JavaPlugin {
-    public static boolean keepInventory = false;
+    public boolean keepInventory = false;
     public BukkitTask sleeper;
     public RedstoneListener redstoneListener;
     private Logger log;
@@ -57,6 +57,8 @@ public class Survival extends JavaPlugin {
         new CommandCraftGet(this);
         new CommandSleep(this);
         new CommandSpec(this);
+        new CommandToggle(this);
+        new CommandTrade(this);
 
         //deserialize
         this.log.info("Initializing waypoints.");
