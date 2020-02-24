@@ -18,10 +18,7 @@ public class JoinEvent implements Listener {
 		Player player = event.getPlayer();
 
 		player.sendMessage(
-			ChatColor.AQUA + "New:\n" +
-				ChatColor.WHITE + ChatColor.BOLD + "/gettrades (Point at merchant); " + ChatColor.RESET + ChatColor.AQUA + "Get trades of villager you are looking at" + "\n" + ChatColor.RESET +
-				ChatColor.WHITE + ChatColor.BOLD + "/findtrade (Material or enchantment); " + ChatColor.RESET + ChatColor.AQUA + "Point to location of villager with selected trade within 100 block bounding box" + "\n" + ChatColor.RESET +
-				ChatColor.WHITE + ChatColor.BOLD + "/findinchest (Material); " + ChatColor.RESET + ChatColor.AQUA + "Find material in chest nearby"
-		);
+            ChatColor.WHITE + "/survivalhelp"
+        );
 	}
 }

@@ -52,28 +52,34 @@ public class CommandFindInChest extends SubCommand {
         int chunkZ = pChunk.getZ();
         double closest = Double.MAX_VALUE;
         Location closestLoc = null;
+        int amount = 0;
+        int locations = 0;
+        int radius = 8;
 
-        for (int i = -2; i <= 2; i++) {
-            for (int j = -2; j <= 2; j++) {
+        for (int i = -1 * radius; i <= radius; i++) {
+            for (int j = -1 * radius; j <= radius; j++) {
                 Chunk chunk = world.getChunkAt(chunkX + i, chunkZ + j);
 
                 for (BlockState bs : chunk.getTileEntities()) {
                     if (bs instanceof CraftChest) {
                         Location location = bs.getLocation();
                         double distance = playerLoc.distance(location);
-
-                        if (distance > closest) {
-                            continue;
-                        }
-
                         CraftChest cc = (CraftChest) bs;
+                        boolean found = false;
 
                         for (ItemStack is : cc.getBlockInventory().getContents()) {
                             if (is != null && is.getType() == mat) {
-                                closestLoc = location;
-                                closest = distance;
+                                if (!found) {
+                                    found = true;
+                                    locations += 1;
 
-                                break;
+                                    if (distance < closest) {
+                                        closestLoc = location;
+                                        closest = distance;
+                                    }
+                                }
+
+                                amount += is.getAmount();
                             }
                         }
                     }
@@ -83,8 +89,17 @@ public class CommandFindInChest extends SubCommand {
 
         if (closestLoc != null) {
             DirectionUtil.faceDirection(player, closestLoc.clone().add(.5, .5, .5));
+
+            player.sendMessage(
+                ChatColor.GOLD + "" + amount + " " +
+                    ChatColor.AQUA + mat.name() +
+                    ChatColor.WHITE + " found in " +
+                    ChatColor.GOLD + locations +
+                    ChatColor.WHITE + " chests in " +
+                    ChatColor.GOLD + radius +
+                    ChatColor.WHITE + " chunk radius");
         } else {
-            player.sendMessage(ChatColor.RED + mat.name() + " not found in 2 chunk radius");
+            player.sendMessage(ChatColor.RED + mat.name() + " not found in " + radius + " chunk radius");
         }
     }
 }

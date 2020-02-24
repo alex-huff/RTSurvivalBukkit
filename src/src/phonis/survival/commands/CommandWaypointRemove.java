@@ -37,9 +37,9 @@ public class CommandWaypointRemove extends SubCommand {
 
         sender.sendMessage(
             ChatColor.WHITE +
-                "Waypoint " +
-                ChatColor.AQUA + "'" + args[0] + "'" +
-                ChatColor.WHITE + " removed."
+                "Waypoint '" +
+                ChatColor.AQUA + args[0] + ChatColor.WHITE +
+                "' removed."
         );
     }
 

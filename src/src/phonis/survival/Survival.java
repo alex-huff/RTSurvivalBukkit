@@ -58,6 +58,7 @@ public class Survival extends JavaPlugin {
         this.commands.add(new CommandCraftGet(this));
         this.commands.add(new CommandSleep(this));
         this.commands.add(new CommandSpec(this));
+        this.commands.add(new CommandSpecTog(this));
         this.commands.add(new CommandToggle(this));
         this.commands.add(new CommandTrade(this));
         this.commands.add(new CommandYawSnap(this));

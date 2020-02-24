@@ -11,10 +11,12 @@ commands:
   getcraft:
     description: Shows crafting recipee for item
   find:
+    aliases: [f]
     description: Finds a player by name
   bl:
     description: Broadcast your location
   waypoint:
+    aliases: [w]
     description: Handle waypoints
   slimemap:
     description: Shows nearby slime chunks
@@ -23,7 +25,11 @@ commands:
   sleep:
     description: Handle global sleeping
   spec:
+    aliases: [s]
     description: Spectator mode interactions
+  spectog:
+    aliases: [st]
+    description: Shortcut for /spec tog
   toggle:
     description: Toggle various server states
   yawsnap:

@@ -26,7 +26,7 @@ public class CommandHelp extends SubCommand {
         sender.sendMessage(ChatColor.WHITE + "Commands" + ChatColor.GRAY + " ➤");
 
         for (SubCommand sub : this.plugin.commands) {
-            sender.sendMessage("\n" + sub.getCommandString(0));
+            sender.sendMessage("\n" + sub.getCommandString(1));
         }
     }
 
