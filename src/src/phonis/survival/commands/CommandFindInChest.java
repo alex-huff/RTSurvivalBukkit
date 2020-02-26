@@ -8,8 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import src.phonis.survival.completers.ItemTabCompleter;
+import src.phonis.survival.misc.ChestFindLocation;
 import src.phonis.survival.util.DirectionUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandFindInChest extends SubCommand {
@@ -50,11 +52,9 @@ public class CommandFindInChest extends SubCommand {
         Chunk pChunk = playerLoc.getChunk();
         int chunkX = pChunk.getX();
         int chunkZ = pChunk.getZ();
-        double farthest = Double.MIN_VALUE;
-        Location farthestLoc = null;
         int amount = 0;
-        int locations = 0;
         int radius = 8;
+        List<ChestFindLocation> cflList = new ArrayList<>();
 
         for (int i = -1 * radius; i <= radius; i++) {
             for (int j = -1 * radius; j <= radius; j++) {
@@ -65,43 +65,50 @@ public class CommandFindInChest extends SubCommand {
                         Location location = bs.getLocation();
                         double distance = playerLoc.distance(location);
                         CraftChest cc = (CraftChest) bs;
-                        boolean found = false;
+                        ChestFindLocation cfl = null;
 
                         for (ItemStack is : cc.getBlockInventory().getContents()) {
                             if (is != null && is.getType() == mat) {
-                                if (!found) {
-                                    found = true;
-                                    locations += 1;
-
-                                    if (distance > farthest) {
-                                        farthestLoc = location;
-                                        farthest = distance;
-                                    }
+                                if (cfl == null) {
+                                    cfl = new ChestFindLocation(location, 0);
                                 }
 
                                 amount += is.getAmount();
+                                cfl.addAmount(is.getAmount());
                             }
+                        }
+
+                        if (cfl != null) {
+                            cflList.add(cfl);
                         }
                     }
                 }
             }
         }
 
-        if (farthestLoc != null) {
-            DirectionUtil.faceDirection(player, farthestLoc.clone().add(.5, .5, .5));
-
+        if (!cflList.isEmpty()) {
             player.sendMessage(
                 ChatColor.GOLD + "" + amount + " " +
                     ChatColor.AQUA + mat.name() +
                     ChatColor.WHITE + " found in " +
-                    ChatColor.GOLD + locations +
+                    ChatColor.GOLD + cflList.size() +
                     ChatColor.WHITE + " chests in " +
                     ChatColor.GOLD + radius +
                     ChatColor.WHITE + " chunk radius"
             );
-            player.sendMessage(
-                ChatColor.AQUA + "I have pointed you to the FARTHEST location away."
-            );
+
+            double best = Double.MIN_VALUE;
+            ChestFindLocation bestCfl;
+
+            for (ChestFindLocation cfl : cflList) {
+                double distance = cfl.getLocation().distance(player.getLocation());
+                double heuristic = (1.0 / distance) * cfl.getNumItems();
+
+                if (heuristic > best) {
+                    best = heuristic;
+                    bestCfl = cfl;
+                }
+            }
         } else {
             player.sendMessage(ChatColor.RED + mat.name() + " not found in " + radius + " chunk radius");
         }
