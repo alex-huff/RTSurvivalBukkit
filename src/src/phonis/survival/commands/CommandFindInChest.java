@@ -50,8 +50,8 @@ public class CommandFindInChest extends SubCommand {
         Chunk pChunk = playerLoc.getChunk();
         int chunkX = pChunk.getX();
         int chunkZ = pChunk.getZ();
-        double closest = Double.MAX_VALUE;
-        Location closestLoc = null;
+        double farthest = Double.MIN_VALUE;
+        Location farthestLoc = null;
         int amount = 0;
         int locations = 0;
         int radius = 8;
@@ -73,9 +73,9 @@ public class CommandFindInChest extends SubCommand {
                                     found = true;
                                     locations += 1;
 
-                                    if (distance < closest) {
-                                        closestLoc = location;
-                                        closest = distance;
+                                    if (distance > farthest) {
+                                        farthestLoc = location;
+                                        farthest = distance;
                                     }
                                 }
 
@@ -87,8 +87,8 @@ public class CommandFindInChest extends SubCommand {
             }
         }
 
-        if (closestLoc != null) {
-            DirectionUtil.faceDirection(player, closestLoc.clone().add(.5, .5, .5));
+        if (farthestLoc != null) {
+            DirectionUtil.faceDirection(player, farthestLoc.clone().add(.5, .5, .5));
 
             player.sendMessage(
                 ChatColor.GOLD + "" + amount + " " +
@@ -97,7 +97,11 @@ public class CommandFindInChest extends SubCommand {
                     ChatColor.GOLD + locations +
                     ChatColor.WHITE + " chests in " +
                     ChatColor.GOLD + radius +
-                    ChatColor.WHITE + " chunk radius");
+                    ChatColor.WHITE + " chunk radius"
+            );
+            player.sendMessage(
+                ChatColor.AQUA + "I have pointed you to the FARTHEST location away."
+            );
         } else {
             player.sendMessage(ChatColor.RED + mat.name() + " not found in " + radius + " chunk radius");
         }

@@ -6,7 +6,7 @@ description: Gerneral survival plugin
 author: phonis
 main: src.phonis.survival.Survival
 commands:
-  chunk:
+  force:
     description: Handle force loading of chunks
   getcraft:
     description: Shows crafting recipee for item

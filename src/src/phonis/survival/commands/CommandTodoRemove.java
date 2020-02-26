@@ -23,6 +23,8 @@ public class CommandTodoRemove extends SubCommand {
     public void execute(CommandSender sender, String[] args) throws CommandException {
         if (args.length == 0) {
             sender.sendMessage(this.getCommandString(0));
+
+            return;
         }
 
         int num = SubCommand.parseInt(args[0]);

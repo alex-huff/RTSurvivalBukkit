@@ -28,6 +28,8 @@ public class CommandChunkLoad extends SubCommand {
     public void execute(Player player, String[] args) throws CommandException {
         if (args.length == 0) {
             player.sendMessage(this.getCommandString(0));
+
+            return;
         }
 
         int radius = SubCommand.parseInt(args[0]);
