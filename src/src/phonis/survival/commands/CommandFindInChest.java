@@ -1,25 +1,27 @@
 package src.phonis.survival.commands;
 
 import org.bukkit.*;
-import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_15_R1.block.CraftChest;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
+import src.phonis.survival.Survival;
 import src.phonis.survival.completers.ItemTabCompleter;
 import src.phonis.survival.misc.ChestFindLocation;
-import src.phonis.survival.util.DirectionUtil;
+import src.phonis.survival.misc.ChestFindSession;
+import src.phonis.survival.misc.ChunkLocation;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CommandFindInChest extends SubCommand {
+    private Survival survival;
     private ItemTabCompleter completer;
 
-    public CommandFindInChest(JavaPlugin plugin) {
+    public CommandFindInChest(Survival survival) {
         super("findinchest", "(Material)");
-        SubCommand.registerCommand(plugin, this);
+        this.survival = survival;
+        SubCommand.registerCommand(this.survival, this);
+        this.addSubCommand(new CommandFindInChestClear(this.survival));
         this.completer = new ItemTabCompleter(1);
     }
 
@@ -53,64 +55,73 @@ public class CommandFindInChest extends SubCommand {
         int chunkX = pChunk.getX();
         int chunkZ = pChunk.getZ();
         int amount = 0;
+        int numLocations = 0;
         int radius = 8;
-        List<ChestFindLocation> cflList = new ArrayList<>();
+
+        this.survival.particleMap.put(player.getUniqueId(), new ChestFindSession(
+                world.getUID(),
+                mat,
+                new ChunkLocation(pChunk),
+                new HashMap<>()
+            )
+        );
+
+        ChestFindSession cfs = this.survival.particleMap.get(player.getUniqueId());
+        Map<ChunkLocation, List<ChestFindLocation>> cflMap = cfs.getCflMap();
 
         for (int i = -1 * radius; i <= radius; i++) {
             for (int j = -1 * radius; j <= radius; j++) {
                 Chunk chunk = world.getChunkAt(chunkX + i, chunkZ + j);
+                ChunkLocation chunkLoc = new ChunkLocation(chunk);
 
-                for (BlockState bs : chunk.getTileEntities()) {
-                    if (bs instanceof CraftChest) {
-                        Location location = bs.getLocation();
-                        double distance = playerLoc.distance(location);
-                        CraftChest cc = (CraftChest) bs;
-                        ChestFindLocation cfl = null;
-
-                        for (ItemStack is : cc.getBlockInventory().getContents()) {
-                            if (is != null && is.getType() == mat) {
-                                if (cfl == null) {
-                                    cfl = new ChestFindLocation(location, 0);
-                                }
-
-                                amount += is.getAmount();
-                                cfl.addAmount(is.getAmount());
-                            }
-                        }
-
-                        if (cfl != null) {
-                            cflList.add(cfl);
-                        }
-                    }
-                }
+                cflMap.put(chunkLoc, ChestFindLocation.getCfls(chunk, mat));
             }
         }
 
-        if (!cflList.isEmpty()) {
-            player.sendMessage(
-                ChatColor.GOLD + "" + amount + " " +
-                    ChatColor.AQUA + mat.name() +
-                    ChatColor.WHITE + " found in " +
-                    ChatColor.GOLD + cflList.size() +
-                    ChatColor.WHITE + " chests in " +
-                    ChatColor.GOLD + radius +
-                    ChatColor.WHITE + " chunk radius"
-            );
+        double best = Double.MIN_VALUE;
+        double bestDistance = Double.NaN;
+        ChestFindLocation bestCfl = null;
 
-            double best = Double.MIN_VALUE;
-            ChestFindLocation bestCfl;
+        for (Map.Entry<ChunkLocation, List<ChestFindLocation>> entry : cflMap.entrySet()) {
+            List<ChestFindLocation> cflList = entry.getValue();
 
             for (ChestFindLocation cfl : cflList) {
-                double distance = cfl.getLocation().distance(player.getLocation());
-                double heuristic = (1.0 / distance) * cfl.getNumItems();
+                amount += cfl.getNumItems();
+                numLocations++;
+                double distance = playerLoc.distance(cfl.getCenterLocation());
+                double heuristic = (1.0 / Math.pow(Math.max(distance, 10.0), 1.5)) * cfl.getNumItems();
 
                 if (heuristic > best) {
                     best = heuristic;
                     bestCfl = cfl;
+                    bestDistance = distance;
                 }
             }
-        } else {
-            player.sendMessage(ChatColor.RED + mat.name() + " not found in " + radius + " chunk radius");
         }
+
+        if (bestCfl == null) {
+            player.sendMessage(ChatColor.RED + mat.name() + " not found in " + radius + " chunk radius");
+
+            return;
+        }
+
+        player.sendMessage(
+            ChatColor.GOLD + "" + amount + " " +
+                ChatColor.AQUA + mat.name() +
+                ChatColor.WHITE + " found in " +
+                ChatColor.GOLD + numLocations +
+                ChatColor.WHITE + " chests in " +
+                ChatColor.GOLD + radius +
+                ChatColor.WHITE + " chunk radius"
+        );
+
+        player.sendMessage(
+            ChatColor.WHITE + "Best location calculated to be " + ChatColor.GOLD + bestDistance + ChatColor.WHITE + " blocks away with " + ChatColor.GOLD +
+                bestCfl.getNumItems() + ChatColor.AQUA + " " + mat.name() + "\n" +
+                ChatColor.RED + "Red: " + ChatColor.WHITE + "Most items\n" +
+                ChatColor.BLUE + "Blue: " + ChatColor.WHITE + "Best in terms of distance and number of items\n" +
+                ChatColor.YELLOW + "Yellow: " + ChatColor.WHITE + "Closest\n" +
+                ChatColor.WHITE + ChatColor.BOLD + "/findinchest clear" + ChatColor.RESET + ChatColor.WHITE + " to clear particles"
+        );
     }
 }

@@ -3,19 +3,21 @@ package src.phonis.survival;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import src.phonis.survival.commands.*;
 import src.phonis.survival.events.*;
+import src.phonis.survival.misc.ChestFindSession;
 import src.phonis.survival.packets.RedstoneListener;
 import src.phonis.survival.serializable.DeathMessage;
 import src.phonis.survival.serializable.SpectatorLocation;
 import src.phonis.survival.serializable.Todolist;
 import src.phonis.survival.serializable.Waypoint;
+import src.phonis.survival.tasks.Tick;
 import src.phonis.survival.util.SurvivalSerializationUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class Survival extends JavaPlugin {
@@ -23,6 +25,8 @@ public class Survival extends JavaPlugin {
     public BukkitTask sleeper;
     public RedstoneListener redstoneListener;
     public List<SubCommand> commands = new ArrayList<>();
+    public Map<UUID, ChestFindSession> particleMap = new HashMap<>();
+    public Set<Location> updateQueue = new HashSet<>();
     private Logger log;
 
     @Override
@@ -50,6 +54,7 @@ public class Survival extends JavaPlugin {
         new InventoryLock(this);
         new JoinEvent(this);
         new SuffocateEvent(this);
+        new BlockEvent(this);
 
         //base commands
         this.commands.add(new CommandWaypoint(this));
@@ -69,6 +74,8 @@ public class Survival extends JavaPlugin {
         this.commands.add(new CommandFindInChest(this));
         this.commands.add(new CommandChunk(this));
         this.commands.add(new CommandHelp(this));
+
+        new Tick(this).start();
 
         //deserialize
         this.log.info("Initializing waypoints.");
