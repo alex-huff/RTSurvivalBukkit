@@ -24,6 +24,11 @@ public class InventoryLock implements Listener {
 	public void LockInventory(InventoryClickEvent event) {
 		if (event.getInventory().getMaxStackSize() == Integer.MAX_VALUE) {
 			if (!event.isCancelled()) {
+//				if (event.getWhoClicked() != null && event.getWhoClicked() instanceof Player) {
+//					if (event.getWhoClicked().isOp())
+//						return;
+//				}
+
 				event.setCancelled(true);
 			}
 		} else if (!event.isCancelled()) {

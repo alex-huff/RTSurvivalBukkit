@@ -55,6 +55,7 @@ public class Survival extends JavaPlugin {
         new JoinEvent(this);
         new SuffocateEvent(this);
         new BlockEvent(this);
+        new FishEvent(this);
 
         //base commands
         this.commands.add(new CommandWaypoint(this));
@@ -74,6 +75,7 @@ public class Survival extends JavaPlugin {
         this.commands.add(new CommandFindInChest(this));
         this.commands.add(new CommandChunk(this));
         this.commands.add(new CommandHelp(this));
+        this.commands.add(new CommandDrawImage(this));
 
         new Tick(this).start();
 

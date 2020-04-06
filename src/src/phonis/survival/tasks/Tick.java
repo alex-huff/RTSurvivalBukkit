@@ -159,19 +159,6 @@ public class Tick implements Runnable {
             this.drawCflLine(start, closest, connection, ParticleType.SAND);
         if (biggest != null)
             this.drawCflLine(start, biggest, connection, ParticleType.TNT);
-
-//        if (playerLoc.distance(closest.getCenterLocation()) < 2) {
-//            player.setHealth(0);
-//            player.setVelocity(new Vector(0, 0, 0));
-//
-//            return;
-//        }
-//
-//        player.setVelocity(
-//            player.getVelocity().clone().add(
-//                closest.getCenterLocation().clone().subtract(playerLoc).toVector().normalize().multiply(Math.min(1000 / Math.pow(playerLoc.distance(closest.getCenterLocation()), 2), 5))
-//            )
-//        );
     }
 
     private void drawCflLine(Location start, ChestFindLocation cfl, PlayerConnection connection, ParticleType pType) {

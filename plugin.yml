@@ -1,6 +1,6 @@
 name: Survival
 api-version: "1.15"
-depend: [ProtocolLib]
+depend: [ProtocolLib, WorldEdit]
 version: "3.1"
 description: Gerneral survival plugin
 author: phonis
@@ -45,3 +45,5 @@ commands:
     description: Find material in chest near you
   survivalhelp:
     description: Help with all of the plugin commands
+  drawimage:
+    description: Draw a dithered representation of an image in blocks
