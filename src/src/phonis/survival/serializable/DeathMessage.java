@@ -1,4 +1,5 @@
 package src.phonis.survival.serializable;
+
 import java.io.Serializable;
 import java.util.UUID;
 

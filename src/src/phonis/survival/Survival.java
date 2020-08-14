@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitTask;
 import src.phonis.survival.commands.*;
 import src.phonis.survival.events.*;
 import src.phonis.survival.misc.ChestFindSession;
+import src.phonis.survival.misc.TetherSession;
 import src.phonis.survival.packets.RedstoneListener;
 import src.phonis.survival.serializable.DeathMessage;
 import src.phonis.survival.serializable.SpectatorLocation;
@@ -17,15 +18,18 @@ import src.phonis.survival.serializable.Waypoint;
 import src.phonis.survival.tasks.Tick;
 import src.phonis.survival.util.SurvivalSerializationUtil;
 
+import java.io.File;
 import java.util.*;
 import java.util.logging.Logger;
 
 public class Survival extends JavaPlugin {
+    public static final String path = "plugins/Survival/";
     public boolean keepInventory = false;
     public BukkitTask sleeper;
     public RedstoneListener redstoneListener;
     public List<SubCommand> commands = new ArrayList<>();
     public Map<UUID, ChestFindSession> particleMap = new HashMap<>();
+    public Map<UUID, TetherSession> tetherSessionMap = new HashMap<>();
     public Set<Location> updateQueue = new HashSet<>();
     private Logger log;
 
@@ -75,19 +79,28 @@ public class Survival extends JavaPlugin {
         this.commands.add(new CommandFindInChest(this));
         this.commands.add(new CommandChunk(this));
         this.commands.add(new CommandHelp(this));
+        this.commands.add(new CommandTether(this));
         this.commands.add(new CommandDrawImage(this));
 
         new Tick(this).start();
 
-        //deserialize
-        this.log.info("Initializing waypoints.");
-        SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
-        this.log.info("Initializing player messages.");
-        SurvivalSerializationUtil.deserialize(DeathMessage.pd, this.log);
-        this.log.info("Initializing spectator locations.");
-        SurvivalSerializationUtil.deserialize(SpectatorLocation.pd, this.log);
-        this.log.info("Initializing todo list.");
-        SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
+        File f = new File(Survival.path);
+
+        if (!f.exists()) {
+            if (f.mkdirs()) {
+                this.log.info("Creating directory: " + path);
+            }
+        } else {
+            //deserialize
+            this.log.info("Initializing waypoints.");
+            SurvivalSerializationUtil.deserialize(Waypoint.pd, this.log);
+            this.log.info("Initializing player messages.");
+            SurvivalSerializationUtil.deserialize(DeathMessage.pd, this.log);
+            this.log.info("Initializing spectator locations.");
+            SurvivalSerializationUtil.deserialize(SpectatorLocation.pd, this.log);
+            this.log.info("Initializing todo list.");
+            SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
+        }
 
         this.log.info("Survival enable finished.");
     }

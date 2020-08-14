@@ -28,10 +28,12 @@ public class CommandSpecToggler extends SubCommand {
         if (player.getGameMode() != GameMode.SPECTATOR) {
             SpectatorLocation.get(player).updateSpectatorLocation(player.getLocation());
             player.setGameMode(GameMode.SPECTATOR);
+            player.setFlySpeed(1f);
             player.sendMessage(ChatColor.WHITE + "You are now spectating");
         }else {
             player.teleport(SpectatorLocation.get(player).getLocation().add(0, .5, 0));
             player.setGameMode(GameMode.SURVIVAL);
+            player.setFlySpeed(.1f);
             player.sendMessage(ChatColor.WHITE + "You are no longer spectating");
         }
     }

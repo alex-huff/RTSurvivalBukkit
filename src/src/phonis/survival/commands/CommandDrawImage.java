@@ -23,26 +23,27 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class CommandDrawImage extends SubCommand {
     private int[][] palette = new int[][]{
-        {Material.WHITE_TERRACOTTA.ordinal(), 210, 178, 161},
-        {Material.ORANGE_TERRACOTTA.ordinal(), 162, 84, 38},
-        {Material.MAGENTA_TERRACOTTA.ordinal(), 150, 88, 109},
-        {Material.LIGHT_BLUE_TERRACOTTA.ordinal(), 113, 109, 138},
-        {Material.YELLOW_TERRACOTTA.ordinal(), 186, 133, 35},
-        {Material.LIME_TERRACOTTA.ordinal(), 104, 118, 53},
-        {Material.PINK_TERRACOTTA.ordinal(), 162, 78, 79},
-        {Material.GRAY_TERRACOTTA.ordinal(), 58, 42, 36},
-        {Material.LIGHT_GRAY_TERRACOTTA.ordinal(), 135, 107, 98},
-        {Material.CYAN_TERRACOTTA.ordinal(), 87, 91, 91},
-        {Material.PURPLE_TERRACOTTA.ordinal(), 118, 70, 86},
-        {Material.BLUE_TERRACOTTA.ordinal(), 74, 60, 91},
-        {Material.BROWN_TERRACOTTA.ordinal(), 77, 51, 36},
-        {Material.GREEN_TERRACOTTA.ordinal(), 76, 83, 42},
-        {Material.RED_TERRACOTTA.ordinal(), 143, 61, 47},
-        {Material.BLACK_TERRACOTTA.ordinal(), 37, 23, 16},
-        {Material.TERRACOTTA.ordinal(), 152, 94, 68},
+//        {Material.WHITE_TERRACOTTA.ordinal(), 210, 178, 161},
+//        {Material.ORANGE_TERRACOTTA.ordinal(), 162, 84, 38},
+//        {Material.MAGENTA_TERRACOTTA.ordinal(), 150, 88, 109},
+//        {Material.LIGHT_BLUE_TERRACOTTA.ordinal(), 113, 109, 138},
+//        {Material.YELLOW_TERRACOTTA.ordinal(), 186, 133, 35},
+//        {Material.LIME_TERRACOTTA.ordinal(), 104, 118, 53},
+//        {Material.PINK_TERRACOTTA.ordinal(), 162, 78, 79},
+//        {Material.GRAY_TERRACOTTA.ordinal(), 58, 42, 36},
+//        {Material.LIGHT_GRAY_TERRACOTTA.ordinal(), 135, 107, 98},
+//        {Material.CYAN_TERRACOTTA.ordinal(), 87, 91, 91},
+//        {Material.PURPLE_TERRACOTTA.ordinal(), 118, 70, 86},
+//        {Material.BLUE_TERRACOTTA.ordinal(), 74, 60, 91},
+//        {Material.BROWN_TERRACOTTA.ordinal(), 77, 51, 36},
+//        {Material.GREEN_TERRACOTTA.ordinal(), 76, 83, 42},
+//        {Material.RED_TERRACOTTA.ordinal(), 143, 61, 47},
+//        {Material.BLACK_TERRACOTTA.ordinal(), 37, 23, 16},
+//        {Material.TERRACOTTA.ordinal(), 152, 94, 68},
         {Material.WHITE_WOOL.ordinal(), 234, 236, 237},
         {Material.ORANGE_WOOL.ordinal(), 241, 118, 20},
         {Material.MAGENTA_WOOL.ordinal(), 190, 69, 180},
@@ -59,22 +60,22 @@ public class CommandDrawImage extends SubCommand {
         {Material.GREEN_WOOL.ordinal(), 85, 110, 28},
         {Material.RED_WOOL.ordinal(), 161, 39, 35},
         {Material.BLACK_WOOL.ordinal(), 21, 21, 26},
-        {Material.WHITE_CONCRETE.ordinal(), 207, 213, 214},
-        {Material.ORANGE_CONCRETE.ordinal(), 224, 97, 1},
-        {Material.MAGENTA_CONCRETE.ordinal(), 169, 48, 159},
-        {Material.LIGHT_BLUE_CONCRETE.ordinal(), 36, 137, 199},
-        {Material.YELLOW_CONCRETE.ordinal(), 241, 175, 21},
-        {Material.LIME_CONCRETE.ordinal(), 94, 169, 24},
-        {Material.PINK_CONCRETE.ordinal(), 214, 101, 143},
-        {Material.GRAY_CONCRETE.ordinal(), 55, 58, 62},
-        {Material.LIGHT_GRAY_CONCRETE.ordinal(), 125, 125, 115},
-        {Material.CYAN_CONCRETE.ordinal(), 21, 119, 136},
-        {Material.PURPLE_CONCRETE.ordinal(), 100, 32, 156},
-        {Material.BLUE_CONCRETE.ordinal(), 45, 47, 143},
-        {Material.BROWN_CONCRETE.ordinal(), 96, 60, 32},
-        {Material.GREEN_CONCRETE.ordinal(), 73, 91, 36},
-        {Material.RED_CONCRETE.ordinal(), 142, 33, 33},
-        {Material.BLACK_CONCRETE.ordinal(), 8, 10, 15}
+//        {Material.WHITE_CONCRETE.ordinal(), 207, 213, 214},
+//        {Material.ORANGE_CONCRETE.ordinal(), 224, 97, 1},
+//        {Material.MAGENTA_CONCRETE.ordinal(), 169, 48, 159},
+//        {Material.LIGHT_BLUE_CONCRETE.ordinal(), 36, 137, 199},
+//        {Material.YELLOW_CONCRETE.ordinal(), 241, 175, 21},
+//        {Material.LIME_CONCRETE.ordinal(), 94, 169, 24},
+//        {Material.PINK_CONCRETE.ordinal(), 214, 101, 143},
+//        {Material.GRAY_CONCRETE.ordinal(), 55, 58, 62},
+//        {Material.LIGHT_GRAY_CONCRETE.ordinal(), 125, 125, 115},
+//        {Material.CYAN_CONCRETE.ordinal(), 21, 119, 136},
+//        {Material.PURPLE_CONCRETE.ordinal(), 100, 32, 156},
+//        {Material.BLUE_CONCRETE.ordinal(), 45, 47, 143},
+//        {Material.BROWN_CONCRETE.ordinal(), 96, 60, 32},
+//        {Material.GREEN_CONCRETE.ordinal(), 73, 91, 36},
+//        {Material.RED_CONCRETE.ordinal(), 142, 33, 33},
+//        {Material.BLACK_CONCRETE.ordinal(), 8, 10, 15}
     };
 
     public CommandDrawImage(JavaPlugin plugin) {
@@ -95,20 +96,37 @@ public class CommandDrawImage extends SubCommand {
     @Override
     public void execute(Player player, String[] args) throws CommandException {
 //        double xOff = 18.5;
-//        double yOff = 124.5;
+//        double yOff = 125.5;
 //        double zOff = 1197.5;
-//        int r = 64;
-//        double t = 0.70710678118;
-//        Set<Vector> vecSet = new HashSet<>();
+//        double a = 0.93969;
+//        double b = 0.34202;
 //
-//        for (double i = 0; i < Math.PI*2; i += .001) {
-//            double x = xOff + r*(Math.cos(i)*t);
-//            double y = yOff + r*(Math.cos(i)*t);
-//            double z = zOff + r*(Math.sin(i));
+//        for (int r = 64; r <= 95; r += 3) {
+//            Set<Vector> vecSet = new HashSet<>();
 //
-//            vecSet.add(new Vector(Math.floor(x), Math.floor(y), Math.floor(z)));
+//            for (double i = 0; i <= Math.PI*2; i += .0001) {
+//                double x = xOff + r*(Math.cos(i)*a);
+//                double y = yOff + r*(Math.cos(i)*b);
+//                double z = zOff + r*(Math.sin(i));
+//
+//                vecSet.add(new Vector(Math.floor(x), Math.floor(y), Math.floor(z)));
+//            }
+//
+//            Material mat;
+//
+//            if (r % 2 == 0) {
+//                mat = Material.SEA_LANTERN;
+//            }
+//            else {
+//                mat = Material.SMOOTH_QUARTZ;
+//            }
+//
+//            for (Vector vec : vecSet) {
+//                Block block = player.getWorld().getBlockAt((int) vec.getX(), (int) vec.getY(), (int) vec.getZ());
+//                block.setType(mat);
+//            }
 //        }
-//
+
 //        for (double i = 0; i < Math.PI*2; i += .001) {
 //            double x = xOff + r*(Math.cos(i));
 //            double z = zOff + r*(Math.sin(i)*t);
@@ -116,13 +134,7 @@ public class CommandDrawImage extends SubCommand {
 //
 //            vecSet.add(new Vector(Math.floor(x), Math.floor(y), Math.floor(z)));
 //        }
-//
-//        player.sendMessage("" + vecSet.size());
-//
-//        for (Vector vec : vecSet) {
-//            Block block = player.getWorld().getBlockAt((int) vec.getX(), (int) vec.getY(), (int) vec.getZ());
-//            block.setType(Material.SMOOTH_QUARTZ);
-//        }
+
         if (args.length > 2) {
             BufferedImage pic;
 
@@ -150,7 +162,7 @@ public class CommandDrawImage extends SubCommand {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     int p = resized.getRGB(x, y);
-                    // int a = (p>>24) & 0xff;
+                    int a = (p >> 24) & 0xff;
                     int r = (p >> 16) & 0xff;
                     int g = (p >> 8) & 0xff;
                     int b = p & 0xff;
@@ -215,17 +227,23 @@ public class CommandDrawImage extends SubCommand {
                                     0,
                                     y
                                 ),
-                                FuzzyBlockState.builder().type(BukkitAdapter.asBlockType(values[this.palette[dithered[x][y]][0]])).build()
+                                FuzzyBlockState.builder().type(
+                                    Objects.requireNonNull(
+                                        BukkitAdapter.asBlockType(
+                                            values[this.palette[dithered[x][y]][0]]
+                                        )
+                                    )
+                                ).build()
                             );
                         } catch (WorldEditException e) {
                             player.sendMessage("WorldEdit exception");
+
                             return;
                         }
                     }
                 }
 
                 session.setClipboard(new ClipboardHolder(bac));
-
                 player.sendMessage("Image copied to clipboard");
             } else {
                 player.sendMessage("No world edit found");

@@ -4,7 +4,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.v1_15_R1.block.CraftChest;
+import org.bukkit.craftbukkit.v1_16_R1.block.CraftChest;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;

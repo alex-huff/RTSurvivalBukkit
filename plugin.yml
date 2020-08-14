@@ -1,5 +1,5 @@
 name: Survival
-api-version: "1.15"
+api-version: "1.16"
 depend: [ProtocolLib, WorldEdit]
 version: "3.1"
 description: Gerneral survival plugin
@@ -45,5 +45,7 @@ commands:
     description: Find material in chest near you
   survivalhelp:
     description: Help with all of the plugin commands
+  tether:
+    description: Dynamically show direction of player or waypoint
   drawimage:
-    description: Draw a dithered representation of an image in blocks
+    description: Draw image in blocks

@@ -1,15 +1,13 @@
 package src.phonis.survival.tasks;
 
-import net.minecraft.server.v1_15_R1.PacketPlayOutWorldParticles;
-import net.minecraft.server.v1_15_R1.PlayerConnection;
+import net.minecraft.server.v1_16_R1.PacketPlayOutWorldParticles;
+import net.minecraft.server.v1_16_R1.PlayerConnection;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import src.phonis.survival.Survival;
-import src.phonis.survival.misc.ChestFindLocation;
-import src.phonis.survival.misc.ChestFindSession;
-import src.phonis.survival.misc.ChunkLocation;
+import src.phonis.survival.misc.*;
 import src.phonis.survival.trace.ParticleLocation;
 import src.phonis.survival.trace.ParticleType;
 
@@ -111,6 +109,44 @@ public class Tick implements Runnable {
         }
 
         this.survival.updateQueue.clear();
+
+        for (Map.Entry<UUID, TetherSession> entry : this.survival.tetherSessionMap.entrySet()) {
+            UUID uuid = entry.getKey();
+            Player player = Bukkit.getPlayer(uuid);
+
+            if (player == null) {
+                this.survival.tetherSessionMap.put(uuid, null);
+
+                continue;
+            }
+
+            TetherSession tetherSession = entry.getValue();
+
+            if (tetherSession == null) {
+                continue;
+            }
+
+            for (Tether tether : tetherSession.tethers) {
+                Location target = tether.getLocation();
+
+                if (target != null && target.getWorld().equals(player.getWorld())) {
+                    PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+                    Location playerLoc = player.getEyeLocation();
+                    Vector direction = playerLoc.getDirection();
+                    Location start = playerLoc.clone().add(
+                        direction.clone().normalize().multiply(2)
+                    );
+                    List<ParticleLocation> pLocations = this.getLineParticles(
+                        start,
+                        target.clone().subtract(start).toVector(),
+                        Math.min(10, start.distance(target)),
+                        ParticleType.TNT
+                    );
+
+                    this.sendParticleLocations(pLocations, connection);
+                }
+            }
+        }
     }
 
     private void drawCfls(Map<ChunkLocation, List<ChestFindLocation>> cflMap, Player player) {
@@ -169,9 +205,13 @@ public class Tick implements Runnable {
             pType
         );
 
+        this.sendParticleLocations(pLocations, connection);
+    }
+
+    private void sendParticleLocations(List<ParticleLocation> pLocations, PlayerConnection connection) {
         for (ParticleLocation pLocation : pLocations) {
             PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(
-                org.bukkit.craftbukkit.v1_15_R1.CraftParticle.toNMS(
+                org.bukkit.craftbukkit.v1_16_R1.CraftParticle.toNMS(
                     Particle.REDSTONE,
                     new Particle.DustOptions(
                         org.bukkit.Color.fromRGB(
