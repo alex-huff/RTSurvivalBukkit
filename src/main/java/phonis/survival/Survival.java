@@ -1,18 +1,18 @@
-package src.phonis.survival;
+package phonis.survival;
 
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import src.phonis.survival.commands.*;
-import src.phonis.survival.events.*;
-import src.phonis.survival.misc.ChestFindSession;
-import src.phonis.survival.misc.TetherSession;
-import src.phonis.survival.serializable.DeathMessage;
-import src.phonis.survival.serializable.SpectatorLocation;
-import src.phonis.survival.serializable.Todolist;
-import src.phonis.survival.serializable.Waypoint;
-import src.phonis.survival.tasks.Tick;
-import src.phonis.survival.util.SurvivalSerializationUtil;
+import phonis.survival.commands.*;
+import phonis.survival.events.*;
+import phonis.survival.misc.ChestFindSession;
+import phonis.survival.misc.TetherSession;
+import phonis.survival.serializable.DeathMessage;
+import phonis.survival.serializable.SpectatorLocation;
+import phonis.survival.serializable.Todolist;
+import phonis.survival.serializable.Waypoint;
+import phonis.survival.tasks.Tick;
+import phonis.survival.util.SurvivalSerializationUtil;
 
 import java.io.File;
 import java.util.*;
@@ -61,7 +61,6 @@ public class Survival extends JavaPlugin {
         this.commands.add(new CommandChunk(this));
         this.commands.add(new CommandHelp(this));
         this.commands.add(new CommandTether(this));
-        this.commands.add(new CommandDrawImage(this));
 
         new Tick(this).start();
 

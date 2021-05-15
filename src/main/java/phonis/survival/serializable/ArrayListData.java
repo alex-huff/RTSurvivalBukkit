@@ -1,4 +1,4 @@
-package src.phonis.survival.serializable;
+package phonis.survival.serializable;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package src.phonis.survival.trace;
+package phonis.survival.trace;
 
 public enum ParticleType {
     SAND, PLAYER, TNT, TNTENDPOS, SANDENDPOS;

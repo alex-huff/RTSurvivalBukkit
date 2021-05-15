@@ -1,4 +1,4 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

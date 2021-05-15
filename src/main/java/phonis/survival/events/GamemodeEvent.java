@@ -1,4 +1,4 @@
-package src.phonis.survival.events;
+package phonis.survival.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import src.phonis.survival.Survival;
+import phonis.survival.Survival;
 
 public class GamemodeEvent implements Listener {
 	public GamemodeEvent(Survival plugin) {

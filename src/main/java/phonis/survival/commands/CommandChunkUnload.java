@@ -1,4 +1,4 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;

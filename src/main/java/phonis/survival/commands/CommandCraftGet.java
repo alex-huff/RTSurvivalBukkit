@@ -1,7 +1,7 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftBlastingRecipe;
@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import src.phonis.survival.completers.ItemTabCompleter;
+import phonis.survival.completers.ItemTabCompleter;
 
 import java.util.List;
 import java.util.Map;

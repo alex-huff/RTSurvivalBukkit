@@ -1,10 +1,10 @@
-package src.phonis.survival.events;
+package phonis.survival.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
-import src.phonis.survival.Survival;
+import phonis.survival.Survival;
 
 public class FishEvent implements Listener {
     private final Survival survival;

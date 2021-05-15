@@ -1,4 +1,4 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,8 +6,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import src.phonis.survival.completers.FindCompleter;
-import src.phonis.survival.serializable.Waypoint;
+import phonis.survival.completers.FindCompleter;
+import phonis.survival.serializable.Waypoint;
 
 import java.util.List;
 

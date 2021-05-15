@@ -1,10 +1,9 @@
 name: Survival
 api-version: "1.16"
-depend: [ProtocolLib, WorldEdit]
 version: "3.1"
 description: Gerneral survival plugin
 author: phonis
-main: src.phonis.survival.Survival
+main: phonis.survival.Survival
 commands:
   force:
     description: Handle force loading of chunks

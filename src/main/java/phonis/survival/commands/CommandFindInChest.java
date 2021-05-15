@@ -1,13 +1,13 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import src.phonis.survival.Survival;
-import src.phonis.survival.completers.ItemTabCompleter;
-import src.phonis.survival.misc.ChestFindLocation;
-import src.phonis.survival.misc.ChestFindSession;
-import src.phonis.survival.misc.ChunkLocation;
+import phonis.survival.Survival;
+import phonis.survival.completers.ItemTabCompleter;
+import phonis.survival.misc.ChestFindLocation;
+import phonis.survival.misc.ChestFindSession;
+import phonis.survival.misc.ChunkLocation;
 
 import java.util.HashMap;
 import java.util.List;

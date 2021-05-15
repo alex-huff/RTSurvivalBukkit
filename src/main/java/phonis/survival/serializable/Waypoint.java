@@ -1,4 +1,4 @@
-package src.phonis.survival.serializable;
+package phonis.survival.serializable;
 
 import org.bukkit.Location;
 

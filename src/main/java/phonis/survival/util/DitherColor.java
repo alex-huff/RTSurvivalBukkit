@@ -1,4 +1,4 @@
-package src.phonis.survival.util;
+package phonis.survival.util;
 
 public class DitherColor {
     private double r;

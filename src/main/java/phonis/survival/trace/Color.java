@@ -1,4 +1,4 @@
-package src.phonis.survival.trace;
+package phonis.survival.trace;
 
 public class Color {
     private final int r;

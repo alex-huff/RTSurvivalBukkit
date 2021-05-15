@@ -1,4 +1,4 @@
-package src.phonis.survival.events;
+package phonis.survival.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.block.BlockState;
@@ -6,7 +6,7 @@ import org.bukkit.craftbukkit.v1_16_R3.block.CraftChest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import src.phonis.survival.Survival;
+import phonis.survival.Survival;
 
 public class BlockEvent implements Listener {
     private final Survival survival;

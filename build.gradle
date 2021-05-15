@@ -2,14 +2,14 @@ group 'phonis'
 version '1.0'
 
 repositories {
-    mavenCentral()
-    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    // you must run BuildTools.jar for maven to be able to locate the necessary dependencies.
+    mavenLocal()
 }
 
 apply plugin: 'java'
 
 dependencies {
-    compileOnly 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
 }
 
 jar {

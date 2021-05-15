@@ -1,4 +1,4 @@
-package src.phonis.survival.events;
+package phonis.survival.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.block.DoubleChest;
@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftInventoryDoubleChest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import src.phonis.survival.Survival;
+import phonis.survival.Survival;
 
 import java.util.Objects;
 

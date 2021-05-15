@@ -1,4 +1,4 @@
-package src.phonis.survival.completers;
+package phonis.survival.completers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;

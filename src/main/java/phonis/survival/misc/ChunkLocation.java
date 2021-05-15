@@ -1,4 +1,4 @@
-package src.phonis.survival.misc;
+package phonis.survival.misc;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

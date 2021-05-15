@@ -1,9 +1,9 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import src.phonis.survival.util.DirectionUtil;
+import phonis.survival.util.DirectionUtil;
 
 import java.util.List;
 

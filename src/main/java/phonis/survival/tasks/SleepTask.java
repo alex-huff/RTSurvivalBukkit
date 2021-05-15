@@ -1,4 +1,4 @@
-package src.phonis.survival.tasks;
+package phonis.survival.tasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;

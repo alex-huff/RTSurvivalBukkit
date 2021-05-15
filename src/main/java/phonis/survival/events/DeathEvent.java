@@ -1,4 +1,4 @@
-package src.phonis.survival.events;
+package phonis.survival.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,8 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import src.phonis.survival.Survival;
-import src.phonis.survival.serializable.DeathMessage;
+import phonis.survival.Survival;
+import phonis.survival.serializable.DeathMessage;
 
 import java.util.List;
 import java.util.Objects;

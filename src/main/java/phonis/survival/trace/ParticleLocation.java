@@ -1,4 +1,4 @@
-package src.phonis.survival.trace;
+package phonis.survival.trace;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

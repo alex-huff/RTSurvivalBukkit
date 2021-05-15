@@ -1,15 +1,15 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import src.phonis.survival.Survival;
-import src.phonis.survival.completers.FindCompleter;
-import src.phonis.survival.misc.TetherSession;
-import src.phonis.survival.serializable.Waypoint;
-import src.phonis.survival.util.DirectionUtil;
+import phonis.survival.Survival;
+import phonis.survival.completers.FindCompleter;
+import phonis.survival.misc.TetherSession;
+import phonis.survival.serializable.Waypoint;
+import phonis.survival.util.DirectionUtil;
 
 import java.util.List;
 import java.util.Objects;

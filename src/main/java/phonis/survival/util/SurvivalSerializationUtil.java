@@ -1,7 +1,7 @@
-package src.phonis.survival.util;
+package phonis.survival.util;
 
-import src.phonis.survival.serializable.ArrayListData;
-import src.phonis.survival.serializable.HashMapData;
+import phonis.survival.serializable.ArrayListData;
+import phonis.survival.serializable.HashMapData;
 
 import java.io.*;
 import java.util.ArrayList;

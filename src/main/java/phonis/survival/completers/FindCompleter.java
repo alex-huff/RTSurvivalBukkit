@@ -1,9 +1,9 @@
-package src.phonis.survival.completers;
+package phonis.survival.completers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import src.phonis.survival.serializable.Waypoint;
+import phonis.survival.serializable.Waypoint;
 
 import java.util.ArrayList;
 import java.util.List;

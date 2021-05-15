@@ -1,9 +1,9 @@
-package src.phonis.survival.misc;
+package phonis.survival.misc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import src.phonis.survival.serializable.Waypoint;
+import phonis.survival.serializable.Waypoint;
 
 public class Tether {
     private final Object target;

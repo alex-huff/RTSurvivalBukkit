@@ -1,4 +1,4 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,8 +13,8 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import src.phonis.survival.completers.EnchantmentCompleter;
-import src.phonis.survival.util.DirectionUtil;
+import phonis.survival.completers.EnchantmentCompleter;
+import phonis.survival.util.DirectionUtil;
 
 import java.util.List;
 import java.util.Map;

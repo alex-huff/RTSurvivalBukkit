@@ -1,4 +1,4 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
-import src.phonis.survival.completers.PlayerCompleter;
+import phonis.survival.completers.PlayerCompleter;
 
 import java.util.List;
 

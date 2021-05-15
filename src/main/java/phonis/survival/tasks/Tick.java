@@ -1,4 +1,4 @@
-package src.phonis.survival.tasks;
+package phonis.survival.tasks;
 
 import net.minecraft.server.v1_16_R3.PacketPlayOutWorldParticles;
 import net.minecraft.server.v1_16_R3.PlayerConnection;
@@ -6,10 +6,10 @@ import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import src.phonis.survival.Survival;
-import src.phonis.survival.misc.*;
-import src.phonis.survival.trace.ParticleLocation;
-import src.phonis.survival.trace.ParticleType;
+import phonis.survival.Survival;
+import phonis.survival.misc.*;
+import phonis.survival.trace.ParticleLocation;
+import phonis.survival.trace.ParticleType;
 
 import java.util.*;
 

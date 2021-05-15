@@ -1,4 +1,4 @@
-package src.phonis.survival.misc;
+package phonis.survival.misc;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;

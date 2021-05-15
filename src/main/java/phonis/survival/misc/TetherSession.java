@@ -1,4 +1,4 @@
-package src.phonis.survival.misc;
+package phonis.survival.misc;
 
 import java.util.ArrayList;
 import java.util.List;

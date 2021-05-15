@@ -1,4 +1,4 @@
-package src.phonis.survival.commands;
+package phonis.survival.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,12 +31,12 @@ public class CommandBrodLoc extends SubCommand {
         Location location = player.getLocation();
 
         Bukkit.broadcastMessage(
-                ChatColor.GOLD +
-                        player.getName() + ChatColor.WHITE + " ➤ " + ChatColor.GRAY +
-                        Objects.requireNonNull(location.getWorld()).getName() + " " +
-                        location.getBlockX() + " " +
-                        location.getBlockY() + " " +
-                        location.getBlockZ()
+            ChatColor.GOLD +
+                player.getName() + ChatColor.WHITE + " ➤ " + ChatColor.GRAY +
+                Objects.requireNonNull(location.getWorld()).getName() + " " +
+                location.getBlockX() + " " +
+                location.getBlockY() + " " +
+                location.getBlockZ()
         );
     }
 }
