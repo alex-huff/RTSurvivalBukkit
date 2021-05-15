@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandFindInChest extends SubCommand {
-    private Survival survival;
-    private ItemTabCompleter completer;
+    private final Survival survival;
+    private final ItemTabCompleter completer;
 
     public CommandFindInChest(Survival survival) {
         super("findinchest", "(Material)");

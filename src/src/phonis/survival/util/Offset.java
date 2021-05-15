@@ -1,9 +1,9 @@
 package src.phonis.survival.util;
 
 public class Offset {
-    private float xOff;
-    private float yOff;
-    private float zOff;
+    private final float xOff;
+    private final float yOff;
+    private final float zOff;
 
     public Offset(float xOff, float yOff, float zOff) {
         this.xOff = xOff;

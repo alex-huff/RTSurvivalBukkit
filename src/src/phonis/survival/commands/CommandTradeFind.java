@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandTradeFind extends SubCommand {
-    private EnchantmentCompleter completer;
+    private final EnchantmentCompleter completer;
 
     public CommandTradeFind() {
         super("find", "(Material)");

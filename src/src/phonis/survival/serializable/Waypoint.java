@@ -9,8 +9,8 @@ public class Waypoint implements Serializable {
 	private static final long serialVersionUID = 2341287428191016497L;
 	public static HashMapData<String, Waypoint> pd = new HashMapData<>("plugins/Survival/Waypoint.txt");
 
-	private String name;
-	private UUID world;
+	private final String name;
+	private final UUID world;
 	private int xPos;
 	private int yPos;
 	private int zPos;

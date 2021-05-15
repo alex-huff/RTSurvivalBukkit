@@ -7,7 +7,7 @@ import src.phonis.survival.Survival;
 import java.util.List;
 
 public class CommandTetherClear extends SubCommand {
-    private Survival survival;
+    private final Survival survival;
 
     public CommandTetherClear(Survival survival) {
         super("clear");

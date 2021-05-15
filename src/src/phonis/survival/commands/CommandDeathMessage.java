@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CommandDeathMessage extends SubCommand {
-    private PlayerCompleter completer;
+    private final PlayerCompleter completer;
 
     public CommandDeathMessage(JavaPlugin plugin) {
         super("setdeathmessage", "(Name or UUID) (Message)");

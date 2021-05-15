@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class SleepTask extends BukkitRunnable {
-	private World world;
+    private final World world;
 
-	public SleepTask(World world) {
-		this.world = world;
-	}
+    public SleepTask(World world) {
+        this.world = world;
+    }
 
-	@Override
-	public void run() {
+    @Override
+    public void run() {
         this.world.setTime(0L);
         this.world.setStorm(false);
         this.world.setThundering(false);

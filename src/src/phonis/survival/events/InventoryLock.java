@@ -2,9 +2,9 @@ package src.phonis.survival.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.block.DoubleChest;
-import org.bukkit.craftbukkit.v1_16_R1.block.CraftChest;
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftInventory;
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftInventoryDoubleChest;
+import org.bukkit.craftbukkit.v1_16_R3.block.CraftChest;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftInventory;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftInventoryDoubleChest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -13,10 +13,11 @@ import src.phonis.survival.Survival;
 import java.util.Objects;
 
 public class InventoryLock implements Listener {
-	private Survival survival;
+	private final Survival survival;
 
 	public InventoryLock(Survival survival) {
 		this.survival = survival;
+
 		Bukkit.getServer().getPluginManager().registerEvents(this, this.survival);
 	}
 

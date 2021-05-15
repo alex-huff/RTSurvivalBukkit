@@ -10,7 +10,7 @@ import src.phonis.survival.tasks.SleepTask;
 import java.util.List;
 
 public class CommandSleep extends SubCommand {
-    private Survival plugin;
+    private final Survival plugin;
 
     public CommandSleep(Survival plugin) {
         super("sleep");
@@ -44,7 +44,7 @@ public class CommandSleep extends SubCommand {
                         player.getWorld().getName() + ChatColor.WHITE +
                         "\n" +
                         "Sleep will happen in 10 seconds if not denied\n" +
-                        "/sleepdeny to cancel worldwide sleep"
+                        "/sleep deny to cancel worldwide sleep"
                 );
             } else {
                 player.sendMessage(

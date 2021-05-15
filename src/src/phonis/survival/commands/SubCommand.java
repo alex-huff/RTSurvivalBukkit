@@ -14,9 +14,9 @@ import java.util.Set;
 public abstract class SubCommand implements CommandExecutor, TabCompleter {
     private final String name;
     private final String hint;
-    private Set<String> args = new HashSet<>();
-    private Set<SubCommand> subCommands = new HashSet<>();
-    private Set<String> aliases = new HashSet<>();
+    private final Set<String> args = new HashSet<>();
+    private final Set<SubCommand> subCommands = new HashSet<>();
+    private final Set<String> aliases = new HashSet<>();
 
     public SubCommand(String name, String hint) {
         this.name = name;

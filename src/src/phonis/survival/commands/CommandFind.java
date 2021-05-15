@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommandFind extends SubCommand {
-    private FindCompleter completer;
+    private final FindCompleter completer;
 
     public CommandFind(JavaPlugin plugin) {
         super("find", "(Player or waypoint)");

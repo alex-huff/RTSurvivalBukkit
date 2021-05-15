@@ -9,10 +9,11 @@ import src.phonis.survival.Survival;
 import java.util.List;
 
 public class CommandToggleKeepInv extends SubCommand {
-    private Survival plugin;
+    private final Survival plugin;
 
     public CommandToggleKeepInv(Survival plugin) {
         super("keepinventory");
+
         this.plugin = plugin;
         this.addAlias("ki");
     }

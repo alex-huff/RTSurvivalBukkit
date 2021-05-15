@@ -7,9 +7,9 @@ public class DeathMessage implements Serializable {
 	private static final long serialVersionUID = -6202886297832941695L;
 	public static HashMapData<UUID, DeathMessage> pd = new HashMapData<>("plugins/Survival/DeathMessages.txt");
 	public static String defaultMessage = "very sad :(";
-	
-	private String name;
-	private String deathMessage;
+
+	private final String name;
+	private final String deathMessage;
 
 	public DeathMessage(String name) {
 		this.name = name;

@@ -7,10 +7,11 @@ import org.bukkit.event.player.PlayerFishEvent;
 import src.phonis.survival.Survival;
 
 public class FishEvent implements Listener {
-    private Survival survival;
+    private final Survival survival;
 
     public FishEvent(Survival survival) {
         this.survival = survival;
+
         Bukkit.getServer().getPluginManager().registerEvents(this, this.survival);
     }
 

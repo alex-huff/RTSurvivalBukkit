@@ -11,7 +11,6 @@ public class CommandToggle extends SubCommand {
         super("toggle");
         SubCommand.registerCommand(plugin, this);
         this.addSubCommand(new CommandToggleKeepInv(plugin));
-        this.addSubCommand(new CommandTogglePiston(plugin));
     }
 
     @Override

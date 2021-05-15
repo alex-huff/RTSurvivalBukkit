@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommandDrawImage extends SubCommand {
-    private int[][] palette = new int[][]{
+    private final int[][] palette = new int[][]{
 //        {Material.WHITE_TERRACOTTA.ordinal(), 210, 178, 161},
 //        {Material.ORANGE_TERRACOTTA.ordinal(), 162, 84, 38},
 //        {Material.MAGENTA_TERRACOTTA.ordinal(), 150, 88, 109},

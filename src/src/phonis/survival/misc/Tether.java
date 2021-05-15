@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import src.phonis.survival.serializable.Waypoint;
 
 public class Tether {
-    private Object target;
+    private final Object target;
 
     public Tether(Object target) {
         this.target = target;

@@ -4,7 +4,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.v1_16_R1.block.CraftChest;
+import org.bukkit.craftbukkit.v1_16_R3.block.CraftChest;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChestFindLocation {
-    private Location location;
-    private Location centerLocation;
+    private final Location location;
+    private final Location centerLocation;
     private int numItems;
 
     public ChestFindLocation(Location location, int numItems) {

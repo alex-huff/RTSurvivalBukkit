@@ -19,14 +19,14 @@ public class DirectionUtil {
             if (v == null) return;
 
             List<Entity> passengers = v.getPassengers();
-            
+
             DirectionUtil.face(player, target);
-            
-            for(Entity entity : passengers) {
-            	v.addPassenger(entity);
+
+            for (Entity entity : passengers) {
+                v.addPassenger(entity);
             }
-        }else {
-        	DirectionUtil.face(player, target);
+        } else {
+            DirectionUtil.face(player, target);
         }
     }
 

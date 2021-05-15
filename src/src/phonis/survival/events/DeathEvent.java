@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class DeathEvent implements Listener {
-    private Survival plugin;
+    private final Survival plugin;
 
     public DeathEvent(Survival plugin) {
         this.plugin = plugin;

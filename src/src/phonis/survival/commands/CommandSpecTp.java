@@ -12,7 +12,7 @@ import src.phonis.survival.serializable.Waypoint;
 import java.util.List;
 
 public class CommandSpecTp extends SubCommand {
-    private FindCompleter completer;
+    private final FindCompleter completer;
 
     public CommandSpecTp() {
         super("tp", "(Player or waypoint)");

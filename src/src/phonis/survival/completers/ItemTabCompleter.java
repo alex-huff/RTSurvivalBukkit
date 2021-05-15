@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemTabCompleter {
-    private int argSize;
-    private List<String> mats = new ArrayList<>();
+    private final int argSize;
+    private final List<String> mats = new ArrayList<>();
 
     public ItemTabCompleter(int argSize) {
         this.argSize = argSize;

@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ChestFindSession {
-    private UUID world;
-    private Material material;
+    private final UUID world;
+    private final Material material;
     private ChunkLocation lastChunk;
-    private Map<ChunkLocation, List<ChestFindLocation>> cflMap;
+    private final Map<ChunkLocation, List<ChestFindLocation>> cflMap;
 
     public ChestFindSession(UUID world, Material material, ChunkLocation lastChunk, Map<ChunkLocation, List<ChestFindLocation>> cflMap) {
         this.world = world;

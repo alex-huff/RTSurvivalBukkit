@@ -1,9 +1,9 @@
 package src.phonis.survival.tasks;
 
-import net.minecraft.server.v1_16_R1.PacketPlayOutWorldParticles;
-import net.minecraft.server.v1_16_R1.PlayerConnection;
+import net.minecraft.server.v1_16_R3.PacketPlayOutWorldParticles;
+import net.minecraft.server.v1_16_R3.PlayerConnection;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import src.phonis.survival.Survival;
@@ -211,7 +211,7 @@ public class Tick implements Runnable {
     private void sendParticleLocations(List<ParticleLocation> pLocations, PlayerConnection connection) {
         for (ParticleLocation pLocation : pLocations) {
             PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(
-                org.bukkit.craftbukkit.v1_16_R1.CraftParticle.toNMS(
+                org.bukkit.craftbukkit.v1_16_R3.CraftParticle.toNMS(
                     Particle.REDSTONE,
                     new Particle.DustOptions(
                         org.bukkit.Color.fromRGB(

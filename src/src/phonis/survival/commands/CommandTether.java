@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommandTether extends SubCommand {
-    private Survival survival;
-    private FindCompleter completer;
+    private final Survival survival;
+    private final FindCompleter completer;
 
     public CommandTether(Survival survival) {
         super("tether", "(Player or waypoint) or clear");

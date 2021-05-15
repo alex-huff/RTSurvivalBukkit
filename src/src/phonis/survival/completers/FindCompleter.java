@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindCompleter {
-	private int argSize;
+	private final int argSize;
 
 	public FindCompleter(int argSize) {
 		this.argSize = argSize;

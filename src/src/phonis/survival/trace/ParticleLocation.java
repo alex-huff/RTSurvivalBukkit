@@ -5,8 +5,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.bukkit.Location;
 
 public class ParticleLocation {
-    private Location location;
-    private ParticleType type;
+    private final Location location;
+    private final ParticleType type;
 
     public ParticleLocation(Location location, ParticleType type) {
         this.location = location;

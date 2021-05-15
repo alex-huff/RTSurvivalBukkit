@@ -1,6 +1,5 @@
 package src.phonis.survival.events;
 
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,8 +16,8 @@ public class JoinEvent implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 
-		player.sendMessage(
-            ChatColor.WHITE + "/survivalhelp"
-        );
+//		player.sendMessage(
+//            ChatColor.WHITE + "/survivalhelp"
+//        );
 	}
 }

@@ -1,8 +1,5 @@
 package src.phonis.survival;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -10,7 +7,6 @@ import src.phonis.survival.commands.*;
 import src.phonis.survival.events.*;
 import src.phonis.survival.misc.ChestFindSession;
 import src.phonis.survival.misc.TetherSession;
-import src.phonis.survival.packets.RedstoneListener;
 import src.phonis.survival.serializable.DeathMessage;
 import src.phonis.survival.serializable.SpectatorLocation;
 import src.phonis.survival.serializable.Todolist;
@@ -26,7 +22,6 @@ public class Survival extends JavaPlugin {
     public static final String path = "plugins/Survival/";
     public boolean keepInventory = false;
     public BukkitTask sleeper;
-    public RedstoneListener redstoneListener;
     public List<SubCommand> commands = new ArrayList<>();
     public Map<UUID, ChestFindSession> particleMap = new HashMap<>();
     public Map<UUID, TetherSession> tetherSessionMap = new HashMap<>();
@@ -36,20 +31,6 @@ public class Survival extends JavaPlugin {
     @Override
     public void onEnable() {
         this.log = getLogger();
-        ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
-
-        //start listeners
-        List<PacketType> rTypes = new ArrayList<>();
-
-        rTypes.add(PacketType.Play.Server.BLOCK_ACTION);
-        rTypes.add(PacketType.Play.Server.MULTI_BLOCK_CHANGE);
-
-        this.redstoneListener = new RedstoneListener(
-            this,
-            rTypes
-        );
-
-        protocolManager.addPacketListener(this.redstoneListener);
 
         //listeners
         new FireSpreadEvent(this);

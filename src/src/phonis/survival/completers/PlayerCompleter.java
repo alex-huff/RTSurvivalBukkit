@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerCompleter {
-    private int argSize;
+    private final int argSize;
 
     public PlayerCompleter(int argSize) {
         this.argSize = argSize;

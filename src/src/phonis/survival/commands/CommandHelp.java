@@ -8,7 +8,7 @@ import src.phonis.survival.Survival;
 import java.util.List;
 
 public class CommandHelp extends SubCommand {
-    private Survival plugin;
+    private final Survival plugin;
 
     public CommandHelp(Survival plugin) {
         super("survivalhelp");

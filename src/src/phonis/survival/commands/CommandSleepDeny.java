@@ -9,7 +9,7 @@ import src.phonis.survival.Survival;
 import java.util.List;
 
 public class CommandSleepDeny extends SubCommand {
-    private Survival plugin;
+    private final Survival plugin;
 
     public CommandSleepDeny(Survival plugin) {
         super("deny");

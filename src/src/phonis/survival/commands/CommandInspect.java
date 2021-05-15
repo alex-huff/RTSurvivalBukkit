@@ -11,7 +11,7 @@ import src.phonis.survival.completers.PlayerCompleter;
 import java.util.List;
 
 public class CommandInspect extends SubCommand {
-    private PlayerCompleter completer;
+    private final PlayerCompleter completer;
 
     public CommandInspect(JavaPlugin plugin) {
         super("inspect", "(Player)");

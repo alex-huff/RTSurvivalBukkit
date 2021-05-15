@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnchantmentCompleter {
-    private int argSize;
-    private List<String> enchants = new ArrayList<>();
-    private List<String> mats = new ArrayList<>();
+    private final int argSize;
+    private final List<String> enchants = new ArrayList<>();
+    private final List<String> mats = new ArrayList<>();
 
     public EnchantmentCompleter(int argSize) {
         this.argSize = argSize;
