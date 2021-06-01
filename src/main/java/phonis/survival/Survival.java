@@ -12,6 +12,7 @@ import phonis.survival.serializable.SpectatorLocation;
 import phonis.survival.serializable.Todolist;
 import phonis.survival.serializable.Waypoint;
 import phonis.survival.tasks.Tick;
+import phonis.survival.util.DynmapAdapter;
 import phonis.survival.util.SurvivalSerializationUtil;
 
 import java.io.File;
@@ -82,6 +83,7 @@ public class Survival extends JavaPlugin {
             SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
         }
 
+        DynmapAdapter.reloadAllWaypointMarkers();
         this.log.info("Survival enable finished.");
     }
 

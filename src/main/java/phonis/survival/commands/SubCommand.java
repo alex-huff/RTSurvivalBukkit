@@ -148,7 +148,7 @@ public abstract class SubCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String label, @Nonnull String[] args) {
         try {
             this.executeTree(sender, SubCommand.arrayToLower(args));
-        } catch (CommandException e) {
+        } catch (CommandException | RuntimeException e) {
             sender.sendMessage(e.getMessage());
         }
 

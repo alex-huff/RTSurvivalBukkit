@@ -10,6 +10,7 @@ apply plugin: 'java'
 
 dependencies {
     compileOnly 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
+    compileOnly files('libs/Dynmap-spigot.jar')
 }
 
 tasks.withType(JavaCompile) {

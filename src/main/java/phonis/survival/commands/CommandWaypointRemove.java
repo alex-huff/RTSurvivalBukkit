@@ -31,7 +31,7 @@ public class CommandWaypointRemove extends SubCommand {
             return;
         }
 
-        if (Waypoint.pd.data.remove(args[0]) == null) {
+        if (Waypoint.removeWaypoint(args[0]) == null) {
             throw new CommandException("Invalid waypoint for removal");
         }
 

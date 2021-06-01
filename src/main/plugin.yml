@@ -4,6 +4,7 @@ version: "3.1"
 description: Gerneral survival plugin
 author: phonis
 main: phonis.survival.Survival
+depend: [Dynmap]
 commands:
   force:
     description: Handle force loading of chunks
