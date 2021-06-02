@@ -67,6 +67,13 @@ public class DynmapAdapter {
         );
     }
 
+    public static void updateMarker(String name, Waypoint waypoint) {
+        MarkerAPI markerAPI = DynmapAdapter.getAPI().getMarkerAPI();
+        MarkerSet markerSet = markerAPI.getMarkerSet("Waypoints");
+
+        markerSet.findMarker(name).setLocation(Bukkit.getWorld(waypoint.getWorld()).getName(), waypoint.getXPos(), waypoint.getYPos(), waypoint.getZPos());
+    }
+
     public static void deleteMarker(String name) {
         MarkerAPI markerAPI = DynmapAdapter.getAPI().getMarkerAPI();
         MarkerSet markerSet = markerAPI.getMarkerSet("Waypoints");

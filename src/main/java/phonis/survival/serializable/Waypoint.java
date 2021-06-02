@@ -66,6 +66,13 @@ public class Waypoint implements Serializable {
 		DynmapAdapter.createMarker(name, waypoint);
 	}
 
+	public static void updateWaypoint(String name, int x, int y, int z) {
+		Waypoint waypoint = Waypoint.pd.data.get(name);
+
+		waypoint.updateLocation(x, y, z);
+		DynmapAdapter.updateMarker(name, waypoint);
+	}
+
 	public static Waypoint removeWaypoint(String name) {
 		Waypoint removed = Waypoint.pd.data.remove(name);
 

@@ -41,8 +41,7 @@ public class CommandWaypointUpdate extends SubCommand {
         yPos = SubCommand.parseInt(args[2]);
         zPos = SubCommand.parseInt(args[3]);
 
-        Waypoint wp = Waypoint.pd.data.get(args[0]);
-        wp.updateLocation(xPos, yPos, zPos);
+        Waypoint.updateWaypoint(args[0], xPos, yPos, zPos);
 
         sender.sendMessage(
             ChatColor.WHITE +
