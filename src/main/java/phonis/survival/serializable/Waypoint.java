@@ -63,20 +63,28 @@ public class Waypoint implements Serializable {
 			name, 
 			waypoint
 		);
-		DynmapAdapter.createMarker(name, waypoint);
+
+		try {
+			DynmapAdapter.createMarker(name, waypoint);
+		} catch (DynmapAdapter.DynmapNotInitializedException ignored) { }
 	}
 
 	public static void updateWaypoint(String name, int x, int y, int z) {
 		Waypoint waypoint = Waypoint.pd.data.get(name);
 
 		waypoint.updateLocation(x, y, z);
-		DynmapAdapter.updateMarker(name, waypoint);
+
+		try {
+			DynmapAdapter.updateMarker(name, waypoint);
+		} catch (DynmapAdapter.DynmapNotInitializedException ignored) { }
 	}
 
 	public static Waypoint removeWaypoint(String name) {
 		Waypoint removed = Waypoint.pd.data.remove(name);
 
-		DynmapAdapter.deleteMarker(name);
+		try {
+			DynmapAdapter.deleteMarker(name);
+		} catch (DynmapAdapter.DynmapNotInitializedException ignored) { }
 
 		return removed;
 	}
