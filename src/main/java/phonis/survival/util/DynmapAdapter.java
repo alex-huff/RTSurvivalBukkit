@@ -81,7 +81,7 @@ public class DynmapAdapter {
         markerSet.findMarker(name).deleteMarker();
     }
 
-    private static class DynmapNotInitializedException extends RuntimeException {
+    public static class DynmapNotInitializedException extends RuntimeException {
 
         private static final DynmapNotInitializedException instance = new DynmapNotInitializedException();
 

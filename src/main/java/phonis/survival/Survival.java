@@ -83,7 +83,10 @@ public class Survival extends JavaPlugin {
             SurvivalSerializationUtil.deserialize(Todolist.gd, this.log);
         }
 
-        DynmapAdapter.reloadAllWaypointMarkers();
+        try {
+            DynmapAdapter.reloadAllWaypointMarkers();
+        } catch (DynmapAdapter.DynmapNotInitializedException ignored) { }
+
         this.log.info("Survival enable finished.");
     }
 
