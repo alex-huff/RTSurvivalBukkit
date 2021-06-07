@@ -1,14 +1,7 @@
 package phonis.survival.serializable;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.dynmap.DynmapAPI;
-import org.dynmap.DynmapCommonAPI;
-import org.dynmap.markers.MarkerAPI;
-import org.dynmap.markers.MarkerIcon;
-import org.dynmap.markers.MarkerSet;
+
 import phonis.survival.util.DynmapAdapter;
 
 import java.io.Serializable;
