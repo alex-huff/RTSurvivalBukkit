@@ -1,9 +1,9 @@
 package phonis.survival.tasks;
 
-import net.minecraft.server.v1_16_R3.PacketPlayOutWorldParticles;
-import net.minecraft.server.v1_16_R3.PlayerConnection;
+import net.minecraft.network.protocol.game.PacketPlayOutWorldParticles;
+import net.minecraft.server.network.PlayerConnection;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import phonis.survival.Survival;
@@ -130,7 +130,7 @@ public class Tick implements Runnable {
                 Location target = tether.getLocation();
 
                 if (target != null && target.getWorld().equals(player.getWorld())) {
-                    PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+                    PlayerConnection connection = ((CraftPlayer) player).getHandle().b;
                     Location playerLoc = player.getEyeLocation();
                     Vector direction = playerLoc.getDirection();
                     Location start = playerLoc.clone().add(
@@ -150,7 +150,7 @@ public class Tick implements Runnable {
     }
 
     private void drawCfls(Map<ChunkLocation, List<ChestFindLocation>> cflMap, Player player) {
-        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+        PlayerConnection connection = ((CraftPlayer) player).getHandle().b;
         Location playerLoc = player.getEyeLocation();
         Vector direction = playerLoc.getDirection();
         Location start = playerLoc.clone().add(
@@ -211,7 +211,7 @@ public class Tick implements Runnable {
     private void sendParticleLocations(List<ParticleLocation> pLocations, PlayerConnection connection) {
         for (ParticleLocation pLocation : pLocations) {
             PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(
-                org.bukkit.craftbukkit.v1_16_R3.CraftParticle.toNMS(
+                org.bukkit.craftbukkit.v1_17_R1.CraftParticle.toNMS(
                     Particle.REDSTONE,
                     new Particle.DustOptions(
                         org.bukkit.Color.fromRGB(
