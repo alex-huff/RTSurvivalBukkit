@@ -1,5 +1,6 @@
 package phonis.survival;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -7,6 +8,7 @@ import phonis.survival.commands.*;
 import phonis.survival.events.*;
 import phonis.survival.misc.ChestFindSession;
 import phonis.survival.misc.TetherSession;
+import phonis.survival.networking.RTSurvivalListener;
 import phonis.survival.serializable.DeathMessage;
 import phonis.survival.serializable.SpectatorLocation;
 import phonis.survival.serializable.Todolist;
@@ -20,6 +22,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class Survival extends JavaPlugin {
+
     public static final String path = "plugins/Survival/";
     public boolean keepInventory = false;
     public BukkitTask sleeper;
@@ -28,10 +31,13 @@ public class Survival extends JavaPlugin {
     public Map<UUID, TetherSession> tetherSessionMap = new HashMap<>();
     public Set<Location> updateQueue = new HashSet<>();
     private Logger log;
+    private final RTSurvivalListener rtSurvivalListener = new RTSurvivalListener();
+    public static Survival instance;
 
     @Override
     public void onEnable() {
         this.log = getLogger();
+        Survival.instance = this;
 
         //listeners
         new FireSpreadEvent(this);
@@ -65,6 +71,9 @@ public class Survival extends JavaPlugin {
 
         new Tick(this).start();
 
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "rtsurvival:main", this.rtSurvivalListener);
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "rtsurvival:main");
+
         File f = new File(Survival.path);
 
         if (!f.exists()) {
@@ -92,6 +101,9 @@ public class Survival extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+        Bukkit.getMessenger().unregisterIncomingPluginChannel(this, "rtsurvival:main", this.rtSurvivalListener);
+        Bukkit.getMessenger().unregisterOutgoingPluginChannel(this, "rtsurvival:main");
+
         //serialize
         this.log.info("Saving waypoints.");
         SurvivalSerializationUtil.serialize(Waypoint.pd, this.log);
@@ -104,4 +116,5 @@ public class Survival extends JavaPlugin {
 
         this.log.info("Survival disable finished.");
     }
+
 }

@@ -1,19 +1,28 @@
 package phonis.survival.commands;
 
+import com.google.common.base.Preconditions;
+import net.minecraft.network.protocol.game.PacketPlayOutOpenWindow;
+import net.minecraft.server.level.EntityPlayer;
+import net.minecraft.world.IInventory;
+import net.minecraft.world.ITileInventory;
+import net.minecraft.world.inventory.Container;
+import net.minecraft.world.inventory.Containers;
+import net.minecraft.world.level.block.entity.TileEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftBlastingRecipe;
-import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftComplexRecipe;
-import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftFurnaceRecipe;
-import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftSmokingRecipe;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftHumanEntity;
+import org.bukkit.craftbukkit.v1_17_R1.event.CraftEventFactory;
+import org.bukkit.craftbukkit.v1_17_R1.inventory.*;
+import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import phonis.survival.completers.ItemTabCompleter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -137,28 +146,64 @@ public class CommandCraftGet extends SubCommand {
 //                    ItemStack result = smither.getResult();
 //                    RecipeChoice base = smither.getBase();
 //                    RecipeChoice addition = smither.getAddition();
+////                    Inventory inventory = Bukkit.createInventory(null, InventoryType.SMITHING);
+////                    IInventory iInventory = ((CraftInventoryCustom) inventory).getInventory();
+////
+////                    System.out.println(iInventory.getClass().getName());
+////                    iInventory.getContents().forEach(itemStack -> System.out.println(itemStack.toString()));
+////                    iInventory.getContents().forEach(itemStack -> System.out.println(itemStack.toString()));
+//
 //                    Inventory inventory = Bukkit.createInventory(null, InventoryType.SMITHING);
+//                    EntityPlayer playerN = (EntityPlayer) ((CraftHumanEntity) player).getHandle();
+//                    Container formerContainer = ((CraftHumanEntity) player).getHandle().bV;
+//                    ITileInventory iinventory = null;
+//                    if (inventory instanceof CraftInventoryDoubleChest) {
+//                        iinventory = ((CraftInventoryDoubleChest)inventory).tile;
+//                    } else if (inventory instanceof CraftInventoryLectern) {
+//                        iinventory = ((CraftInventoryLectern)inventory).tile;
+//                    } else if (inventory instanceof CraftInventory) {
+//                        CraftInventory craft = (CraftInventory)inventory;
+//                        if (craft.getInventory() instanceof ITileInventory) {
+//                            iinventory = (ITileInventory)craft.getInventory();
+//                        }
+//                    }
 //
-//                    System.out.println(result);
-//                    System.out.println(base);
-//                    System.out.println(addition);
+//                    if (iinventory instanceof ITileInventory && iinventory instanceof TileEntity) {
+//                        TileEntity te = (TileEntity)iinventory;
+//                        if (!te.hasWorld()) {
+//                            te.setWorld(((CraftHumanEntity) player).getHandle().t);
+//                        }
+//                    }
 //
-//                    CraftInventory cfi = (CraftInventory) inventory;
-//                    CraftItemStack cis = (CraftItemStack) result;
-//                    net.minecraft.server.v1_16_R3.ItemStack nmsStack = CraftItemStack.asNMSCopy(cis);
-//                    IInventory ii = cfi.getInventory();
-//
-//                    ii.setItem(0, nmsStack);
-//                    ii.setItem(1, nmsStack);
-//                    ii.setItem(2, nmsStack);
-//
-//                    System.out.println(ii.getSize());
-//
-//                    inventory.setMaxStackSize(Integer.MAX_VALUE);
-//                    inventory.setItem(1, result);
 //                    inventory.setItem(2, result);
-//                    inventory.setItem(0, result);
-//                    player.openInventory(inventory);
+//                    inventory.setItem(0, base.getItemStack());
+//                    inventory.setItem(1, addition.getItemStack());
+//
+//                    Containers<?> container = CraftContainer.getNotchInventoryType(inventory);
+//                    if (iinventory instanceof ITileInventory) {
+//                        ((CraftHumanEntity) player).getHandle().openContainer(iinventory);
+//                    } else {
+//                        if (playerN.b != null) {
+//                            Preconditions.checkArgument(container != null, "Unknown windowType");
+//                            Container containerN = new CraftContainer(inventory, playerN, playerN.nextContainerCounter());
+//                            containerN = CraftEventFactory.callInventoryOpenEvent(playerN, containerN);
+//                            System.out.println(containerN.getBukkitView().getItem(0));
+//                            if (containerN != null) {
+//                                String title = containerN.getBukkitView().getTitle();
+//                                playerN.b.sendPacket(new PacketPlayOutOpenWindow(containerN.j, container, CraftChatMessage.fromString(title)[0]));
+//                                playerN.bV = containerN;
+//                                playerN.initMenu(containerN);
+//                            }
+//                        }
+//                    }
+//
+//                    if (((CraftHumanEntity) player).getHandle().bV == formerContainer) {
+//                    } else {
+//                        ((CraftHumanEntity) player).getHandle().bV.checkReachable = false;
+//                        ((CraftHumanEntity) player).getHandle().bV.getBukkitView();
+//                    }
+//
+//                    // player.openInventory(inventory);
 //
 //                    break found;
                 } else if (recipe instanceof CraftComplexRecipe) {

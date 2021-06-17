@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import phonis.survival.Survival;
 import phonis.survival.serializable.Waypoint;
 
 import java.util.List;
@@ -46,5 +47,6 @@ public class CommandWaypointSet extends SubCommand {
                 location.getBlockY() + " " +
                 location.getBlockZ()
         );
+        player.sendPluginMessage(Survival.instance, "rtsurvival:main", new byte[] {1, 2, 3});
     }
 }

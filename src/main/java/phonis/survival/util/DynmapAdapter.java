@@ -15,7 +15,7 @@ public class DynmapAdapter {
 
     public static DynmapCommonAPI getAPI() {
         if (api == null) {
-            Plugin dynmapPlugin = Bukkit.getPluginManager().getPlugin("Dynmap");
+            Plugin dynmapPlugin = Bukkit.getPluginManager().getPlugin("dynmap");
 
             if (dynmapPlugin instanceof DynmapCommonAPI) {
                 DynmapAdapter.api = (DynmapCommonAPI) dynmapPlugin;
