@@ -16,4 +16,18 @@ public class RTChestFindLocation implements Serializable {
         this.z = z;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof RTChestFindLocation) {
+            RTChestFindLocation otherLocation = (RTChestFindLocation) other;
+
+            return this.dimension.equals(otherLocation.dimension) &&
+                this.x == otherLocation.x &&
+                this.y == otherLocation.y &&
+                this.z == otherLocation.z;
+        }
+
+        return false;
+    }
+
 }
