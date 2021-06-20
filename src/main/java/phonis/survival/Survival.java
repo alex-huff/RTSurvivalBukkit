@@ -8,6 +8,7 @@ import phonis.survival.commands.*;
 import phonis.survival.events.*;
 import phonis.survival.misc.ChestFindSession;
 import phonis.survival.misc.TetherSession;
+import phonis.survival.networking.RTManager;
 import phonis.survival.networking.RTSurvivalListener;
 import phonis.survival.serializable.DeathMessage;
 import phonis.survival.serializable.SpectatorLocation;
@@ -45,6 +46,7 @@ public class Survival extends JavaPlugin {
         new GamemodeEvent(this);
         new InventoryLock(this);
         new JoinEvent(this);
+        new LeaveEvent(this);
         new SuffocateEvent(this);
         new BlockEvent(this);
         new FishEvent(this);
@@ -71,8 +73,8 @@ public class Survival extends JavaPlugin {
 
         new Tick(this).start();
 
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "rtsurvival:main", this.rtSurvivalListener);
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "rtsurvival:main");
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, RTManager.RTChannel, this.rtSurvivalListener);
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, RTManager.RTChannel);
 
         File f = new File(Survival.path);
 
@@ -101,8 +103,8 @@ public class Survival extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-        Bukkit.getMessenger().unregisterIncomingPluginChannel(this, "rtsurvival:main", this.rtSurvivalListener);
-        Bukkit.getMessenger().unregisterOutgoingPluginChannel(this, "rtsurvival:main");
+        Bukkit.getMessenger().unregisterIncomingPluginChannel(this, RTManager.RTChannel, this.rtSurvivalListener);
+        Bukkit.getMessenger().unregisterOutgoingPluginChannel(this, RTManager.RTChannel);
 
         //serialize
         this.log.info("Saving waypoints.");

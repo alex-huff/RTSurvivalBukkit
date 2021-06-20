@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import phonis.survival.Survival;
 import phonis.survival.misc.*;
+import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.RTManager;
+import phonis.survival.networking.RTTetherUpdate;
 import phonis.survival.trace.ParticleLocation;
 import phonis.survival.trace.ParticleType;
 
@@ -128,6 +131,12 @@ public class Tick implements Runnable {
 
             for (Tether tether : tetherSession.tethers) {
                 Location target = tether.getLocation();
+
+                if (RTManager.isSubscribed(player.getUniqueId())) {
+                    RTManager.sendToPlayer(player, new RTTetherUpdate(RTAdapter.fromTether(tether)));
+
+                    continue;
+                }
 
                 if (target != null && target.getWorld().equals(player.getWorld())) {
                     PlayerConnection connection = ((CraftPlayer) player).getHandle().b;

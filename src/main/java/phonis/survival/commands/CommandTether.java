@@ -7,7 +7,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import phonis.survival.Survival;
 import phonis.survival.completers.FindCompleter;
+import phonis.survival.misc.Tether;
+import phonis.survival.misc.TetherPlayer;
 import phonis.survival.misc.TetherSession;
+import phonis.survival.misc.TetherWaypoint;
+import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.RTManager;
+import phonis.survival.networking.RTTetherUpdate;
 import phonis.survival.serializable.Waypoint;
 import phonis.survival.util.DirectionUtil;
 
@@ -46,13 +52,13 @@ public class CommandTether extends SubCommand {
             return;
         }
 
-        Object target;
+        Tether target;
         Player playerFind = Bukkit.getServer().getPlayer(args[0]);
         StringBuilder message;
 
         if (playerFind != null) {
             Location location = playerFind.getEyeLocation();
-            target = playerFind;
+            target = new TetherPlayer(playerFind.getUniqueId());
             message = this.getString(player, location, playerFind.getName());
         } else {
             if (!Waypoint.pd.data.containsKey(args[0])) {
@@ -60,14 +66,13 @@ public class CommandTether extends SubCommand {
             }
 
             Waypoint waypoint = Waypoint.pd.data.get(args[0]);
-            target = waypoint;
+            target = new TetherWaypoint(waypoint.getName());
             Location targetLoc = new Location(
                 Bukkit.getWorld(waypoint.getWorld()),
                 waypoint.getXPos(),
                 waypoint.getYPos(),
                 waypoint.getZPos()
             );
-
             message = this.getString(player, targetLoc, waypoint.getName());
         }
 
@@ -80,6 +85,8 @@ public class CommandTether extends SubCommand {
         } else {
             tetherSession.add(target);
         }
+
+        RTManager.sendToPlayerIfSubscribed(player, new RTTetherUpdate(RTAdapter.fromTether(target)));
     }
 
     private StringBuilder getString(Player player, Location target, String name) {

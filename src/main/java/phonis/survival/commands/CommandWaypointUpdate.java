@@ -3,6 +3,9 @@ package phonis.survival.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.RTManager;
+import phonis.survival.networking.RTWaypointUpdate;
 import phonis.survival.serializable.Waypoint;
 
 import java.util.ArrayList;
@@ -50,6 +53,8 @@ public class CommandWaypointUpdate extends SubCommand {
                 yPos + ", " +
                 zPos
         );
+
+        RTManager.sendToSubscribed(new RTWaypointUpdate(RTAdapter.fromWaypoint(Waypoint.pd.data.get(args[0]))));
     }
 
     @Override

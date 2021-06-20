@@ -5,6 +5,9 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import phonis.survival.Survival;
+import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.RTManager;
+import phonis.survival.networking.RTWaypointUpdate;
 import phonis.survival.serializable.Waypoint;
 
 import java.util.List;
@@ -47,6 +50,7 @@ public class CommandWaypointSet extends SubCommand {
                 location.getBlockY() + " " +
                 location.getBlockZ()
         );
-        player.sendPluginMessage(Survival.instance, "rtsurvival:main", new byte[] {1, 2, 3});
+
+        RTManager.sendToSubscribed(new RTWaypointUpdate(RTAdapter.fromWaypoint(Waypoint.pd.data.get(args[0]))));
     }
 }

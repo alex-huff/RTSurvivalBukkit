@@ -1,35 +1,9 @@
 package phonis.survival.misc;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import phonis.survival.serializable.Waypoint;
 
-public class Tether {
-    private final Object target;
+public interface Tether {
 
-    public Tether(Object target) {
-        this.target = target;
-    }
+    Location getLocation();
 
-    public Location getLocation() {
-        if (this.target instanceof Waypoint) {
-            Waypoint waypoint = (Waypoint) this.target;
-
-            Location targetLoc = new Location(
-                Bukkit.getWorld(waypoint.getWorld()),
-                waypoint.getXPos(),
-                waypoint.getYPos(),
-                waypoint.getZPos()
-            );
-
-            return targetLoc;
-        } else if (this.target instanceof Player) {
-            Player player = (Player) this.target;
-
-            return player.getEyeLocation();
-        }
-
-        return null;
-    }
 }

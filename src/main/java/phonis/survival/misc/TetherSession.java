@@ -6,11 +6,11 @@ import java.util.List;
 public class TetherSession {
     public List<Tether> tethers = new ArrayList<>();
 
-    public TetherSession(Object target) {
-        this.add(target);
+    public TetherSession(Tether tether) {
+        this.add(tether);
     }
 
-    public void add(Object target) {
-        this.tethers.add(new Tether(target));
+    public void add(Tether tether) {
+        this.tethers.add(tether);
     }
 }

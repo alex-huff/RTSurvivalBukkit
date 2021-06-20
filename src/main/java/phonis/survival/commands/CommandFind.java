@@ -3,6 +3,7 @@ package phonis.survival.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -73,6 +74,18 @@ public class CommandFind extends SubCommand {
             DirectionUtil.faceDirection(player, target);
 
             message.append(ChatColor.GOLD).append("(").append((int) player.getLocation().distance(target)).append("m) ");
+        } else if (player.getWorld().getEnvironment().equals(World.Environment.NETHER) && target.getWorld().getEnvironment().equals(World.Environment.NORMAL)) {
+            Location translatedLocation = player.getLocation();
+
+            translatedLocation.setX(target.getX());
+            translatedLocation.setZ(target.getZ());
+
+            translatedLocation = translatedLocation.multiply(1/8.0);
+
+            translatedLocation.setY(128);
+            DirectionUtil.faceDirection(player, translatedLocation);
+
+            message.append(ChatColor.RED).append(name).append(" is in a different world then you. ");
         } else {
             message.append(ChatColor.RED).append(name).append(" is in a different world then you. ");
         }

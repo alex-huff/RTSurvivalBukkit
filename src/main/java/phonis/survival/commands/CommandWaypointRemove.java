@@ -3,6 +3,9 @@ package phonis.survival.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.RTManager;
+import phonis.survival.networking.RTWaypointRemove;
 import phonis.survival.serializable.Waypoint;
 
 import java.util.ArrayList;
@@ -41,6 +44,8 @@ public class CommandWaypointRemove extends SubCommand {
                 ChatColor.AQUA + args[0] + ChatColor.WHITE +
                 "' removed."
         );
+
+        RTManager.sendToSubscribed(new RTWaypointRemove(args[0]));
     }
 
     @Override
