@@ -198,6 +198,12 @@ public class Tick implements Runnable {
             }
         }
 
+        if (RTManager.isSubscribed(player.getUniqueId())) {
+            RTManager.sendToPlayer(player, RTAdapter.fromChestFindLocations(closest, best, biggest));
+
+            return;
+        }
+
         if (best != null)
             this.drawCflLine(start, best, connection, ParticleType.PLAYER);
         if (closest != null)

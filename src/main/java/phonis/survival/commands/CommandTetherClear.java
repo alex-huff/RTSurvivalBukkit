@@ -34,6 +34,8 @@ public class CommandTetherClear extends SubCommand {
     public void execute(Player player, String[] args) throws CommandException {
         TetherSession session = this.survival.tetherSessionMap.get(player.getUniqueId());
 
+        player.sendMessage("Cleared tether session.");
+
         if (session == null) return;
 
         for (Tether tether : session.tethers) {

@@ -3,6 +3,8 @@ package phonis.survival.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import phonis.survival.Survival;
+import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.RTManager;
 
 import java.util.List;
 
@@ -28,5 +30,7 @@ public class CommandFindInChestClear extends SubCommand {
     @Override
     public void execute(Player player, String[] args) throws CommandException {
         this.survival.particleMap.put(player.getUniqueId(), null);
+        player.sendMessage("Cleared fic session.");
+        RTManager.sendToPlayerIfSubscribed(player, RTAdapter.fromChestFindLocations(null, null, null));
     }
 }

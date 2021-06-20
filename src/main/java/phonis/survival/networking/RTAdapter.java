@@ -1,8 +1,10 @@
 package phonis.survival.networking;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import phonis.survival.misc.ChestFindLocation;
 import phonis.survival.misc.Tether;
 import phonis.survival.misc.TetherPlayer;
 import phonis.survival.misc.TetherWaypoint;
@@ -82,13 +84,31 @@ public class RTAdapter {
             return new RTTetherPlayer(
                 player.getUniqueId(),
                 RTAdapter.fromWorld(player.getWorld()),
-                player.getLocation().getX(),
-                player.getLocation().getY(),
-                player.getLocation().getZ()
+                player.getEyeLocation().getX(),
+                player.getEyeLocation().getY(),
+                player.getEyeLocation().getZ()
             );
         }
 
         return null;
+    }
+
+    public static RTChestFindLocation fromChestFindLocation(ChestFindLocation cfl) {
+        if (cfl == null) {
+            return null;
+        }
+
+        Location center = cfl.getCenterLocation();
+
+        return new RTChestFindLocation(RTAdapter.fromWorld(center.getWorld()), center.getX(), center.getY(), center.getZ());
+    }
+
+    public static RTChestFindSession fromChestFindLocations(ChestFindLocation closest, ChestFindLocation best, ChestFindLocation most) {
+        return new RTChestFindSession(
+            RTAdapter.fromChestFindLocation(closest),
+            RTAdapter.fromChestFindLocation(best),
+            RTAdapter.fromChestFindLocation(most)
+        );
     }
 
 }
