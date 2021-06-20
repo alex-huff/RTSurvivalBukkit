@@ -25,13 +25,9 @@ public class RTSurvivalListener implements PluginMessageListener {
 
     private void handlePacket(String s, Player player, RTPacket packet) {
         if (packet instanceof RTRegister) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(
-                Survival.instance,
-                () -> RTManager.sendToPlayer(player, RTAdapter.fromWaypoints()),
-                100L
-            );
-            System.out.println(player.getName() + " is using the modded client.");
+            RTManager.sendToPlayer(player, RTAdapter.fromWaypoints());
             RTManager.addToSubscribed(player.getUniqueId());
+            System.out.println(player.getName() + " is using the modded client.");
         } else {
             System.out.println("Unrecognised packet.");
         }
