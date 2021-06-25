@@ -4,10 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import phonis.survival.misc.ChestFindLocation;
-import phonis.survival.misc.Tether;
-import phonis.survival.misc.TetherPlayer;
-import phonis.survival.misc.TetherWaypoint;
+import phonis.survival.misc.*;
 import phonis.survival.serializable.Waypoint;
 
 import java.util.ArrayList;
@@ -17,7 +14,15 @@ import java.util.List;
 public class RTAdapter {
 
     public static RTWaypoint fromWaypoint(Waypoint waypoint) {
-        return new RTWaypoint(waypoint.getName(), waypoint.getWorld(), RTAdapter.fromWorld(Bukkit.getWorld(waypoint.getWorld())), waypoint.getXPos(), waypoint.getYPos(), waypoint.getZPos());
+        return new RTWaypoint(
+            waypoint.getName(),
+            new RTLocation(
+                RTAdapter.fromWorld(Bukkit.getWorld(waypoint.getWorld())),
+                waypoint.getXPos(),
+                waypoint.getYPos(),
+                waypoint.getZPos()
+            )
+        );
     }
 
     public static RTDimension fromWorld(World world) {
@@ -55,18 +60,22 @@ public class RTAdapter {
             if (waypoint == null)
                 return new RTTetherWaypoint(
                     tetherWaypoint.waypoint,
-                    RTDimension.OTHER,
-                    -1,
-                    -1,
-                    -1
+                    new RTLocation(
+                        RTDimension.OTHER,
+                        -1,
+                        -1,
+                        -1
+                    )
                 );
 
             return new RTTetherWaypoint(
                 waypoint.getName(),
-                RTAdapter.fromWorld(Bukkit.getWorld(waypoint.getWorld())),
-                waypoint.getXPos(),
-                waypoint.getYPos(),
-                waypoint.getZPos()
+                new RTLocation(
+                    RTAdapter.fromWorld(Bukkit.getWorld(waypoint.getWorld())),
+                    waypoint.getXPos(),
+                    waypoint.getYPos(),
+                    waypoint.getZPos()
+                )
             );
         } else if (tether instanceof TetherPlayer) {
             TetherPlayer tetherPlayer = (TetherPlayer) tether;
@@ -75,32 +84,35 @@ public class RTAdapter {
             if (player == null)
                 return new RTTetherPlayer(
                     tetherPlayer.uuid,
-                    RTDimension.OTHER,
-                    -1,
-                    -1,
-                    -1
+                    new RTLocation(
+                        RTDimension.OTHER,
+                        -1,
+                        -1,
+                        -1
+                    )
                 );
 
             return new RTTetherPlayer(
                 player.getUniqueId(),
-                RTAdapter.fromWorld(player.getWorld()),
-                player.getEyeLocation().getX(),
-                player.getEyeLocation().getY(),
-                player.getEyeLocation().getZ()
+                RTAdapter.fromLocation(player.getEyeLocation())
+            );
+        } else if (tether instanceof TetherDeathPoint) {
+            return new RTTetherDeathPoint(
+                RTAdapter.fromLocation(tether.getLocation())
             );
         }
 
         return null;
     }
 
-    public static RTChestFindLocation fromChestFindLocation(ChestFindLocation cfl) {
+    public static RTLocation fromChestFindLocation(ChestFindLocation cfl) {
         if (cfl == null) {
             return null;
         }
 
         Location center = cfl.getCenterLocation();
 
-        return new RTChestFindLocation(RTAdapter.fromWorld(center.getWorld()), center.getX(), center.getY(), center.getZ());
+        return new RTLocation(RTAdapter.fromWorld(center.getWorld()), center.getX(), center.getY(), center.getZ());
     }
 
     public static RTChestFindSession fromChestFindLocations(ChestFindLocation closest, ChestFindLocation best, ChestFindLocation most) {
@@ -108,6 +120,15 @@ public class RTAdapter {
             RTAdapter.fromChestFindLocation(closest),
             RTAdapter.fromChestFindLocation(best),
             RTAdapter.fromChestFindLocation(most)
+        );
+    }
+
+    public static RTLocation fromLocation(Location location) {
+        return new RTLocation(
+            RTAdapter.fromWorld(location.getWorld()),
+            location.getX(),
+            location.getY(),
+            location.getZ()
         );
     }
 

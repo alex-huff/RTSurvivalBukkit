@@ -49,3 +49,5 @@ commands:
     description: Dynamically show direction of player or waypoint
   drawimage:
     description: Draw image in blocks
+  td:
+    description: Tether to your last death location

@@ -7,7 +7,9 @@ import org.bukkit.scheduler.BukkitTask;
 import phonis.survival.commands.*;
 import phonis.survival.events.*;
 import phonis.survival.misc.ChestFindSession;
+import phonis.survival.misc.DeathLocation;
 import phonis.survival.misc.TetherSession;
+import phonis.survival.networking.RTLocation;
 import phonis.survival.networking.RTManager;
 import phonis.survival.networking.RTSurvivalListener;
 import phonis.survival.serializable.DeathMessage;
@@ -27,10 +29,11 @@ public class Survival extends JavaPlugin {
     public static final String path = "plugins/Survival/";
     public boolean keepInventory = false;
     public BukkitTask sleeper;
-    public List<SubCommand> commands = new ArrayList<>();
-    public Map<UUID, ChestFindSession> particleMap = new HashMap<>();
-    public Map<UUID, TetherSession> tetherSessionMap = new HashMap<>();
-    public Set<Location> updateQueue = new HashSet<>();
+    public final List<SubCommand> commands = new ArrayList<>();
+    public final Map<UUID, ChestFindSession> particleMap = new HashMap<>();
+    public final Map<UUID, TetherSession> tetherSessionMap = new HashMap<>();
+    public final Map<UUID, DeathLocation> lastDeathMap = new HashMap<>();
+    public final Set<Location> updateQueue = new HashSet<>();
     private Logger log;
     private final RTSurvivalListener rtSurvivalListener = new RTSurvivalListener();
     public static Survival instance;
@@ -70,6 +73,7 @@ public class Survival extends JavaPlugin {
         this.commands.add(new CommandChunk(this));
         this.commands.add(new CommandHelp(this));
         this.commands.add(new CommandTether(this));
+        this.commands.add(new CommandTD(this));
 
         new Tick(this).start();
 

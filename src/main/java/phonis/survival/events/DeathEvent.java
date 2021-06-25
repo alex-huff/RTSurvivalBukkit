@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import phonis.survival.Survival;
+import phonis.survival.misc.DeathLocation;
+import phonis.survival.networking.RTAdapter;
 import phonis.survival.serializable.DeathMessage;
 
 import java.util.List;
@@ -53,6 +55,8 @@ public class DeathEvent implements Listener {
         DeathMessage deathMessage;
         UUID uuid = player.getUniqueId();
 
+        Survival.instance.lastDeathMap.put(player.getUniqueId(), new DeathLocation(location));
+
         if (this.plugin.keepInventory) {
             event.setKeepInventory(true);
             event.getDrops().clear();
@@ -88,7 +92,7 @@ public class DeathEvent implements Listener {
 			deathMessage.getName() + ChatColor.RESET + ChatColor.AQUA + " " +
 			deathMessage.getDeathMessage()
 		);
-		
+		player.sendMessage("Use /td to find your death. /tether clear to remove trace");
 		event.setDeathMessage(null);
 	}
 }

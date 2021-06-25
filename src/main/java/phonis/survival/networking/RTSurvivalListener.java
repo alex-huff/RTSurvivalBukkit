@@ -1,9 +1,7 @@
 package phonis.survival.networking;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
-import phonis.survival.Survival;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -28,6 +26,8 @@ public class RTSurvivalListener implements PluginMessageListener {
             RTManager.sendToPlayer(player, RTAdapter.fromWaypoints());
             RTManager.addToSubscribed(player.getUniqueId());
             System.out.println(player.getName() + " is using the modded client.");
+        } else if (packet instanceof RTSTog) {
+            player.performCommand("s tog");
         } else {
             System.out.println("Unrecognised packet.");
         }

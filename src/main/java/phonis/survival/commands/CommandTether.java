@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommandTether extends SubCommand {
+
     private final Survival survival;
     private final FindCompleter completer;
 
@@ -77,6 +78,7 @@ public class CommandTether extends SubCommand {
         }
 
         player.sendMessage(message.toString());
+        player.sendMessage("Do /tether clear to remove tether");
 
         TetherSession tetherSession = this.survival.tetherSessionMap.get(player.getUniqueId());
 
@@ -104,4 +106,5 @@ public class CommandTether extends SubCommand {
 
         return message;
     }
+
 }
