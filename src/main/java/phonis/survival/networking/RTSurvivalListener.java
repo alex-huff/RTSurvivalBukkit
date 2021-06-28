@@ -28,22 +28,30 @@ public class RTSurvivalListener implements PluginMessageListener {
             System.out.println(player.getName() + " is using the modded client.");
         } else if (packet instanceof RTSTog) {
             player.performCommand("s tog");
+            System.out.println("[RT]: [s tog]: " + player.getName());
         } else if (packet instanceof RTFICClear) {
             player.performCommand("fic clear");
+            System.out.println("[RT]: [fic clear]: " + player.getName());
         } else if (packet instanceof RTTetherClear) {
             player.performCommand("tether clear");
+            System.out.println("[RT]: [tether clear]: " + player.getName());
         } else if (packet instanceof RTFIC) {
-            player.performCommand("fic " + player.getInventory().getItemInMainHand().getType().name());
+            String material = player.getInventory().getItemInMainHand().getType().name();
+
+            player.performCommand("fic " + material);
+            System.out.println("[RT]: [fic]: " + player.getName() + ": " + material);
         } else if (packet instanceof RTTetherOnHoveredWaypoint) {
             RTTetherOnHoveredWaypoint tohw = (RTTetherOnHoveredWaypoint) packet;
 
             player.performCommand("tether " + tohw.waypoint);
+            System.out.println("[RT]: [tether]: " + player.getName() + ": " + tohw.waypoint);
         } else if (packet instanceof RTSTPToHoveredWaypoint) {
             RTSTPToHoveredWaypoint stpthw = (RTSTPToHoveredWaypoint) packet;
 
             player.performCommand("s tp " + stpthw.waypoint);
+            System.out.println("[RT]: [s tp]: " + player.getName() + ": " + stpthw.waypoint);
         } else {
-            System.out.println("Unrecognised packet.");
+            System.out.println("Unrecognised packet from player: " + player.getName() + ".");
         }
     }
 
