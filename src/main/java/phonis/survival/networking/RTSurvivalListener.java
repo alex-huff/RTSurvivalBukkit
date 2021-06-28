@@ -28,6 +28,20 @@ public class RTSurvivalListener implements PluginMessageListener {
             System.out.println(player.getName() + " is using the modded client.");
         } else if (packet instanceof RTSTog) {
             player.performCommand("s tog");
+        } else if (packet instanceof RTFICClear) {
+            player.performCommand("fic clear");
+        } else if (packet instanceof RTTetherClear) {
+            player.performCommand("tether clear");
+        } else if (packet instanceof RTFIC) {
+            player.performCommand("fic " + player.getInventory().getItemInMainHand().getType().name());
+        } else if (packet instanceof RTTetherOnHoveredWaypoint) {
+            RTTetherOnHoveredWaypoint tohw = (RTTetherOnHoveredWaypoint) packet;
+
+            player.performCommand("tether " + tohw.waypoint);
+        } else if (packet instanceof RTSTPToHoveredWaypoint) {
+            RTSTPToHoveredWaypoint stpthw = (RTSTPToHoveredWaypoint) packet;
+
+            player.performCommand("s tp " + stpthw.waypoint);
         } else {
             System.out.println("Unrecognised packet.");
         }
