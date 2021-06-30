@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 public class Survival extends JavaPlugin {
 
+    public static final int protocolVersion = 1;
     public static final String path = "plugins/Survival/";
     public boolean keepInventory = false;
     public BukkitTask sleeper;

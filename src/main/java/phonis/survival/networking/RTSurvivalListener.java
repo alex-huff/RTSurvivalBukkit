@@ -1,7 +1,9 @@
 package phonis.survival.networking;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import phonis.survival.Survival;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -23,9 +25,17 @@ public class RTSurvivalListener implements PluginMessageListener {
 
     private void handlePacket(String s, Player player, RTPacket packet) {
         if (packet instanceof RTRegister) {
-            RTManager.sendToPlayer(player, RTAdapter.fromWaypoints());
-            RTManager.addToSubscribed(player.getUniqueId());
-            System.out.println(player.getName() + " is using the modded client.");
+            RTRegister register = (RTRegister) packet;
+
+            if (register.protocolVersion != Survival.protocolVersion) {
+                RTManager.sendToPlayer(player, new RTUnsupported(Survival.protocolVersion));
+                player.sendMessage("" + ChatColor.RED + ChatColor.BOLD + "You are using an unsupported version of RTSurvival: " + register.protocolVersion + ". Server is on: " + Survival.protocolVersion + ".");
+                System.out.println(player.getName() + " is using an unsupported version.");
+            } else {
+                RTManager.sendToPlayer(player, RTAdapter.fromWaypoints());
+                RTManager.addToSubscribed(player.getUniqueId());
+                System.out.println(player.getName() + " is using the modded client.");
+            }
         } else if (packet instanceof RTSTog) {
             player.performCommand("s tog");
             System.out.println("[RT]: [s tog]: " + player.getName());

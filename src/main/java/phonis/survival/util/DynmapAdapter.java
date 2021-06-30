@@ -3,6 +3,7 @@ package phonis.survival.util;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.dynmap.DynmapCommonAPI;
+import org.dynmap.markers.Marker;
 import org.dynmap.markers.MarkerAPI;
 import org.dynmap.markers.MarkerSet;
 import phonis.survival.serializable.Waypoint;
@@ -54,6 +55,14 @@ public class DynmapAdapter {
     public static void createMarker(String name, Waypoint waypoint) {
         MarkerAPI markerAPI = DynmapAdapter.getAPI().getMarkerAPI();
         MarkerSet markerSet = markerAPI.getMarkerSet("Waypoints");
+
+        Marker current = markerSet.findMarker(name);
+
+        if (current != null) {
+            DynmapAdapter.updateMarker(name, waypoint);
+            
+            return;
+        }
 
         markerSet.createMarker(
             name,
