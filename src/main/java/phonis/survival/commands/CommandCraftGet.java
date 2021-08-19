@@ -68,8 +68,7 @@ public class CommandCraftGet extends SubCommand {
         found:
         {
             for (Recipe recipe : recipes) {
-                if (recipe instanceof ShapedRecipe) {
-                    ShapedRecipe shaped = (ShapedRecipe) recipe;
+                if (recipe instanceof ShapedRecipe shaped) {
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.WORKBENCH);
 
                     inventory.setMaxStackSize(Integer.MAX_VALUE);
@@ -87,8 +86,7 @@ public class CommandCraftGet extends SubCommand {
                     player.openInventory(inventory);
 
                     break found;
-                } else if (recipe instanceof ShapelessRecipe) {
-                    ShapelessRecipe shapeless = (ShapelessRecipe) recipe;
+                } else if (recipe instanceof ShapelessRecipe shapeless) {
                     List<ItemStack> ls = shapeless.getIngredientList();
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.WORKBENCH);
 
@@ -105,8 +103,7 @@ public class CommandCraftGet extends SubCommand {
                     player.openInventory(inventory);
 
                     break found;
-                } else if (recipe instanceof CraftFurnaceRecipe) {
-                    CraftFurnaceRecipe furnace = (CraftFurnaceRecipe) recipe;
+                } else if (recipe instanceof CraftFurnaceRecipe furnace) {
                     ItemStack is = furnace.getInput();
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.FURNACE);
 
@@ -117,8 +114,7 @@ public class CommandCraftGet extends SubCommand {
                     player.openInventory(inventory);
 
                     break found;
-                } else if (recipe instanceof CraftSmokingRecipe) {
-                    CraftSmokingRecipe smoker = (CraftSmokingRecipe) recipe;
+                } else if (recipe instanceof CraftSmokingRecipe smoker) {
                     ItemStack is = smoker.getInput();
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.SMOKER);
 
@@ -129,8 +125,7 @@ public class CommandCraftGet extends SubCommand {
                     player.openInventory(inventory);
 
                     break found;
-                } else if (recipe instanceof CraftBlastingRecipe) {
-                    CraftBlastingRecipe blaster = (CraftBlastingRecipe) recipe;
+                } else if (recipe instanceof CraftBlastingRecipe blaster) {
                     ItemStack is = blaster.getInput();
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.BLAST_FURNACE);
 

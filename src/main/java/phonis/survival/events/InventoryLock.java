@@ -33,27 +33,24 @@ public class InventoryLock implements Listener {
 				event.setCancelled(true);
 			}
 		} else if (!event.isCancelled()) {
-			if (event.getClickedInventory() instanceof CraftInventoryDoubleChest) {
-				CraftInventoryDoubleChest craftInv = (CraftInventoryDoubleChest) event.getClickedInventory();
+			if (event.getClickedInventory() instanceof CraftInventoryDoubleChest craftInv) {
 
-				if (craftInv.getHolder() != null) {
+                if (craftInv.getHolder() != null) {
 					DoubleChest dChest = craftInv.getHolder();
 
 					this.queueChest((CraftChest) Objects.requireNonNull(dChest.getLeftSide()));
 					this.queueChest((CraftChest) Objects.requireNonNull(dChest.getRightSide()));
 				}
-			} else if (event.getInventory() instanceof CraftInventoryDoubleChest) {
-				CraftInventoryDoubleChest craftInv = (CraftInventoryDoubleChest) event.getInventory();
+			} else if (event.getInventory() instanceof CraftInventoryDoubleChest craftInv) {
 
-				if (craftInv.getHolder() != null) {
+                if (craftInv.getHolder() != null) {
 					DoubleChest dChest = craftInv.getHolder();
 
 					this.queueChest((CraftChest) Objects.requireNonNull(dChest.getLeftSide()));
 					this.queueChest((CraftChest) Objects.requireNonNull(dChest.getRightSide()));
 				}
-			} else if (event.getClickedInventory() instanceof CraftInventory) {
-				CraftInventory craftInv = (CraftInventory) event.getClickedInventory();
-				CraftInventory toInv = (CraftInventory) event.getInventory();
+			} else if (event.getClickedInventory() instanceof CraftInventory craftInv) {
+                CraftInventory toInv = (CraftInventory) event.getInventory();
 
 				if (craftInv.getHolder() instanceof CraftChest) {
 					this.queueChest((CraftChest) craftInv.getHolder());

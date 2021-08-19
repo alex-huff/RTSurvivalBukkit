@@ -9,7 +9,6 @@ import phonis.survival.events.*;
 import phonis.survival.misc.ChestFindSession;
 import phonis.survival.misc.DeathLocation;
 import phonis.survival.misc.TetherSession;
-import phonis.survival.networking.RTLocation;
 import phonis.survival.networking.RTManager;
 import phonis.survival.networking.RTSurvivalListener;
 import phonis.survival.serializable.DeathMessage;

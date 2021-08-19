@@ -31,15 +31,13 @@ public class ParticleLocation {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ParticleLocation)) {
+        if (!(obj instanceof final ParticleLocation pl)) {
             return false;
         }
 
         if (obj == this) {
             return true;
         }
-
-        final ParticleLocation pl = (ParticleLocation) obj;
 
         return new EqualsBuilder().
                                       append(this.getLocation(), pl.getLocation()).

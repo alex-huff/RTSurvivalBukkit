@@ -20,15 +20,13 @@ public class ChunkLocation {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ChunkLocation)) {
+        if (!(obj instanceof final ChunkLocation cl)) {
             return false;
         }
 
         if (obj == this) {
             return true;
         }
-
-        final ChunkLocation cl = (ChunkLocation) obj;
 
         return new EqualsBuilder().append(this.x, cl.x).append(this.z, cl.z).isEquals();
     }

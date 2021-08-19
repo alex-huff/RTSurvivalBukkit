@@ -83,8 +83,7 @@ public class CommandTradeGet extends SubCommand {
                 if (resMat == Material.ENCHANTED_BOOK) {
                     ItemMeta meta = result.getItemMeta();
 
-                    if (meta instanceof EnchantmentStorageMeta) {
-                        EnchantmentStorageMeta esm = (EnchantmentStorageMeta) meta;
+                    if (meta instanceof EnchantmentStorageMeta esm) {
                         Map<Enchantment, Integer> enchantmentMap = esm.getStoredEnchants();
 
                         for (Enchantment enchant : enchantmentMap.keySet()) {

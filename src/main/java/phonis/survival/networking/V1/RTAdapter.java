@@ -1,4 +1,4 @@
-package phonis.survival.networking;
+package phonis.survival.networking.V1;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -53,8 +53,7 @@ public class RTAdapter {
     }
 
     public static RTTether fromTether(Tether tether) {
-        if (tether instanceof TetherWaypoint) {
-            TetherWaypoint tetherWaypoint = (TetherWaypoint) tether;
+        if (tether instanceof TetherWaypoint tetherWaypoint) {
             Waypoint waypoint = Waypoint.pd.data.get(tetherWaypoint.waypoint);
 
             if (waypoint == null)
@@ -77,8 +76,7 @@ public class RTAdapter {
                     waypoint.getZPos()
                 )
             );
-        } else if (tether instanceof TetherPlayer) {
-            TetherPlayer tetherPlayer = (TetherPlayer) tether;
+        } else if (tether instanceof TetherPlayer tetherPlayer) {
             Player player = Bukkit.getPlayer(tetherPlayer.uuid);
 
             if (player == null)

@@ -10,7 +10,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import phonis.survival.Survival;
 import phonis.survival.misc.DeathLocation;
-import phonis.survival.networking.RTAdapter;
 import phonis.survival.serializable.DeathMessage;
 
 import java.util.List;

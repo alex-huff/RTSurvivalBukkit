@@ -8,6 +8,8 @@ import phonis.survival.misc.Tether;
 import phonis.survival.misc.TetherDeathPoint;
 import phonis.survival.misc.TetherSession;
 import phonis.survival.networking.*;
+import phonis.survival.networking.V1.RTAdapter;
+import phonis.survival.networking.V1.RTTetherUpdate;
 
 import java.util.List;
 

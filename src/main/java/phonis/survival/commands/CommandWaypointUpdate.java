@@ -3,9 +3,9 @@ package phonis.survival.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.V1.RTAdapter;
 import phonis.survival.networking.RTManager;
-import phonis.survival.networking.RTWaypointUpdate;
+import phonis.survival.networking.V1.RTWaypointUpdate;
 import phonis.survival.serializable.Waypoint;
 
 import java.util.ArrayList;

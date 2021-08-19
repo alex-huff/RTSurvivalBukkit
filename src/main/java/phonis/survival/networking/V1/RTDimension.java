@@ -1,4 +1,4 @@
-package phonis.survival.networking;
+package phonis.survival.networking.V1;
 
 public enum RTDimension {
 

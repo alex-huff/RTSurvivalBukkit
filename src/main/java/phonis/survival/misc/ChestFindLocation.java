@@ -30,9 +30,8 @@ public class ChestFindLocation {
         List<ChestFindLocation> cflList = new ArrayList<>();
 
         for (BlockState bs : chunk.getTileEntities()) {
-            if (bs instanceof CraftChest) {
+            if (bs instanceof CraftChest cc) {
                 Location location = bs.getLocation();
-                CraftChest cc = (CraftChest) bs;
                 ChestFindLocation cfl = null;
 
                 for (ItemStack is : cc.getBlockInventory().getContents()) {
@@ -70,8 +69,7 @@ public class ChestFindLocation {
         BlockState bs = Objects.requireNonNull(this.location.getWorld()).getBlockAt(this.location).getState();
         int amount = 0;
 
-        if (bs instanceof CraftChest) {
-            CraftChest cc = (CraftChest) bs;
+        if (bs instanceof CraftChest cc) {
 
             for (ItemStack is : cc.getBlockInventory().getContents()) {
                 if (is != null && is.getType() == material) {

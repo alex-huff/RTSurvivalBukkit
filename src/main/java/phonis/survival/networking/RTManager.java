@@ -3,10 +3,11 @@ package phonis.survival.networking;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import phonis.survival.Survival;
+import phonis.survival.networking.V1.RTPacket;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -19,10 +20,11 @@ public class RTManager {
     public static void sendToPlayer(Player player, RTPacket packet) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            DataOutputStream das = new DataOutputStream(baos);
 
-            oos.writeObject(packet);
-            oos.flush();
+            das.writeByte(packet.getID());
+            packet.toBytes(das);
+            das.close();
             player.sendPluginMessage(Survival.instance, RTManager.RTChannel, baos.toByteArray());
         } catch (IOException e) {
             e.printStackTrace();

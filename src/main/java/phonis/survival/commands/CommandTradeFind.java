@@ -52,8 +52,7 @@ public class CommandTradeFind extends SubCommand {
         Merchant closestMerchant = null;
 
         for (Entity entity : player.getNearbyEntities(100, 100, 100)) {
-            if (entity instanceof Merchant && entity instanceof LivingEntity) {
-                Merchant merchant = (Merchant) entity;
+            if (entity instanceof Merchant merchant && entity instanceof LivingEntity) {
 
                 for (MerchantRecipe mr : merchant.getRecipes()) {
                     ItemStack result = mr.getResult();
@@ -71,8 +70,7 @@ public class CommandTradeFind extends SubCommand {
                     } else if (resMat == Material.ENCHANTED_BOOK) {
                         ItemMeta meta = result.getItemMeta();
 
-                        if (meta instanceof EnchantmentStorageMeta) {
-                            EnchantmentStorageMeta esm = (EnchantmentStorageMeta) meta;
+                        if (meta instanceof EnchantmentStorageMeta esm) {
                             Map<Enchantment, Integer> enchantmentMap = esm.getStoredEnchants();
 
                             for (Enchantment enchant : enchantmentMap.keySet()) {

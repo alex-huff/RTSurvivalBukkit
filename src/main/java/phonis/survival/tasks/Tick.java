@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import phonis.survival.Survival;
 import phonis.survival.misc.*;
-import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.V1.RTAdapter;
 import phonis.survival.networking.RTManager;
-import phonis.survival.networking.RTTetherUpdate;
+import phonis.survival.networking.V1.RTTetherUpdate;
 import phonis.survival.trace.ParticleLocation;
 import phonis.survival.trace.ParticleType;
 

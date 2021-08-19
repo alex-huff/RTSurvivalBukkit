@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 import phonis.survival.Survival;
 import phonis.survival.misc.Tether;
 import phonis.survival.misc.TetherSession;
-import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.V1.RTAdapter;
 import phonis.survival.networking.RTManager;
-import phonis.survival.networking.RTTetherRemove;
+import phonis.survival.networking.V1.RTTetherRemove;
 
 import java.util.List;
 

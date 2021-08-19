@@ -4,28 +4,39 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import phonis.survival.Survival;
+import phonis.survival.networking.V1.*;
 
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class RTSurvivalListener implements PluginMessageListener {
 
     @Override
-    public void onPluginMessageReceived(String s, Player player, byte[] bytes) {
+    public void onPluginMessageReceived(String s, Player player, byte[] data) {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
-            RTPacket packet = (RTPacket) ois.readObject();
+            DataInputStream dis = new DataInputStream(new ByteArrayInputStream(data));
+            byte packetID = dis.readByte();
+            RTPacket packet = switch (packetID) {
+                case Packets.Out.RTRegisterID -> RTRegister.fromBytes(dis);
+                case Packets.Out.RTSTogID -> RTSTog.fromBytes(dis);
+                case Packets.Out.RTFICClearID -> RTFICClear.fromBytes(dis);
+                case Packets.Out.RTTetherClearID -> RTTetherClear.fromBytes(dis);
+                case Packets.Out.RTFICID -> RTFIC.fromBytes(dis);
+                case Packets.Out.RTTetherOnHoveredWaypointID -> RTTetherOnHoveredWaypoint.fromBytes(dis);
+                case Packets.Out.RTSTPToHoveredWaypointID -> RTSTPToHoveredWaypoint.fromBytes(dis);
+                default -> null;
+            };
 
+            dis.close();
             this.handlePacket(s, player, packet);
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void handlePacket(String s, Player player, RTPacket packet) {
-        if (packet instanceof RTRegister) {
-            RTRegister register = (RTRegister) packet;
+        if (packet instanceof RTRegister register) {
 
             if (register.protocolVersion != Survival.protocolVersion) {
                 RTManager.sendToPlayer(player, new RTUnsupported(Survival.protocolVersion));
@@ -50,13 +61,11 @@ public class RTSurvivalListener implements PluginMessageListener {
 
             player.performCommand("fic " + material);
             System.out.println("[RT]: [fic]: " + player.getName() + ": " + material);
-        } else if (packet instanceof RTTetherOnHoveredWaypoint) {
-            RTTetherOnHoveredWaypoint tohw = (RTTetherOnHoveredWaypoint) packet;
+        } else if (packet instanceof RTTetherOnHoveredWaypoint tohw) {
 
             player.performCommand("tether " + tohw.waypoint);
             System.out.println("[RT]: [tether]: " + player.getName() + ": " + tohw.waypoint);
-        } else if (packet instanceof RTSTPToHoveredWaypoint) {
-            RTSTPToHoveredWaypoint stpthw = (RTSTPToHoveredWaypoint) packet;
+        } else if (packet instanceof RTSTPToHoveredWaypoint stpthw) {
 
             player.performCommand("s tp " + stpthw.waypoint);
             System.out.println("[RT]: [s tp]: " + player.getName() + ": " + stpthw.waypoint);

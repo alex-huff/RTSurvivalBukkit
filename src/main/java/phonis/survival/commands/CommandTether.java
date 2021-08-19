@@ -11,9 +11,9 @@ import phonis.survival.misc.Tether;
 import phonis.survival.misc.TetherPlayer;
 import phonis.survival.misc.TetherSession;
 import phonis.survival.misc.TetherWaypoint;
-import phonis.survival.networking.RTAdapter;
+import phonis.survival.networking.V1.RTAdapter;
 import phonis.survival.networking.RTManager;
-import phonis.survival.networking.RTTetherUpdate;
+import phonis.survival.networking.V1.RTTetherUpdate;
 import phonis.survival.serializable.Waypoint;
 import phonis.survival.util.DirectionUtil;
 
